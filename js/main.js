@@ -43,3 +43,18 @@ function aiAsk(q) {
   if (!input) return;
   input.addEventListener('keydown', function (e) { if (e.key === 'Enter') aiAsk(); });
 })();
+
+// ── '지금 뜨는 울릉 명소' 태그 필터 ──
+(function () {
+  var wrap = document.getElementById('destChips');
+  if (!wrap) return;
+  wrap.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip || !chip.dataset.tag) return;
+    var tag = chip.dataset.tag;
+    wrap.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c === chip); });
+    document.querySelectorAll('.dest-grid').forEach(function (g) {
+      g.classList.toggle('on', g.dataset.tag === tag);
+    });
+  });
+})();
