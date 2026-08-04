@@ -157,10 +157,26 @@ var DOKDO_FORECAST = [['09', 'good'], ['15', 'mid']];
   function apply(region) {
     tabs.forEach(function (t) { t.classList.toggle('on', t.dataset.region === region); });
     document.querySelectorAll('.rg-grid').forEach(function (g) { g.classList.toggle('on', g.dataset.region === region); });
-    document.querySelectorAll('.map-pins > g').forEach(function (g) { g.classList.toggle('dim', g.dataset.region !== region); });
+    document.querySelectorAll('.map-pin').forEach(function (p) { p.classList.toggle('dim', p.dataset.region !== region); });
   }
   tabs.forEach(function (t) { t.addEventListener('click', function () { apply(t.dataset.region); }); });
   apply('eup');
+
+  // 핀 호버 → 레이어 팝업
+  var tip = document.getElementById('mapTip');
+  document.querySelectorAll('.map-pin').forEach(function (p) {
+    function show() {
+      tip.innerHTML = '<img src="' + p.dataset.img + '" alt=""><div><span class="rg-chip">' + p.dataset.rname + '</span><b>' + p.dataset.name + '</b></div>';
+      tip.style.left = p.style.left;
+      tip.style.top = p.style.top;
+      tip.classList.add('show');
+    }
+    p.addEventListener('mouseenter', show);
+    p.addEventListener('focus', show);
+    p.addEventListener('click', function (e) { e.stopPropagation(); show(); apply(p.dataset.region); });
+    p.addEventListener('mouseleave', function () { tip.classList.remove('show'); });
+    p.addEventListener('blur', function () { tip.classList.remove('show'); });
+  });
 })();
 
 // ── '지금 뜨는 울릉 명소' 태그 필터 ──
