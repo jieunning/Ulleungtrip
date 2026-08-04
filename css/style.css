@@ -265,13 +265,14 @@ button.chip{cursor:pointer;font-family:inherit}
 /* ---------- sights map ---------- */
 .sights-map{display:grid;grid-template-columns:1fr 1.25fr;gap:44px;align-items:center}
 .map-left{position:relative}
-.map-left svg{width:100%;height:auto;display:block}
+.map-img{width:100%;height:auto;display:block;border-radius:var(--r-lg)}
 .map-pin-layer{position:absolute;inset:0}
-.map-pin{position:absolute;transform:translate(-50%,-50%);border:none;background:none;cursor:pointer;font-family:inherit;padding:14px 6px 4px;transition:.25s;display:flex;flex-direction:column;align-items:center;gap:3px}
-.map-pin::before{content:"";width:15px;height:15px;border-radius:50%;background:var(--teal);border:3px solid #fff;box-shadow:0 3px 8px rgba(28,37,84,.3);transition:.2s}
+.map-pin{position:absolute;transform:translate(-50%,-50%);border:none;background:none;cursor:pointer;font-family:inherit;padding:10px;transition:.25s}
+.map-pin::before{content:"";display:block;width:16px;height:16px;border-radius:50%;background:var(--teal);border:3px solid #fff;box-shadow:0 3px 10px rgba(28,37,84,.35);transition:.2s}
+.map-pin::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;border:2px solid var(--teal);opacity:0;animation:fabPulse 2s ease-out infinite}
 .map-pin:hover::before{transform:scale(1.35);background:var(--navy)}
-.map-pin span{font-size:10.5px;font-weight:700;color:var(--ink-2);white-space:nowrap}
-.map-pin.dim{opacity:.2}
+.map-pin.dim{opacity:.25}
+.map-pin.dim::after{display:none}
 .map-pin.dim:hover{opacity:1}
 .map-tip{position:absolute;transform:translate(-50%,-130%);background:#fff;border-radius:14px;box-shadow:0 16px 40px rgba(28,37,84,.28);padding:10px;display:flex;gap:10px;align-items:center;min-width:190px;opacity:0;visibility:hidden;transition:.2s;pointer-events:none;z-index:10}
 .map-tip.show{opacity:1;visibility:visible;transform:translate(-50%,-118%)}
