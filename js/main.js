@@ -79,17 +79,75 @@ var DOKDO_FORECAST = [['09', 'good'], ['15', 'mid']];
   });
 })();
 
-// ── 테마 배너 날짜 선택 ──
+// ── 테마 배너 커스텀 드롭다운 & 달력 ──
 (function () {
-  var dep = document.getElementById('depDate'), ret = document.getElementById('retDate');
-  if (!dep || !ret) return;
-  var today = new Date().toISOString().slice(0, 10);
-  dep.min = today; ret.min = today;
-  dep.addEventListener('change', function () {
-    ret.min = dep.value;
-    if (ret.value && ret.value < dep.value) ret.value = dep.value;
-    if (!ret.value) ret.value = dep.value;
+  var dds = document.querySelectorAll('.ux-dd');
+  if (!dds.length) return;
+  function closeAll(except) { dds.forEach(function (d) { if (d !== except) d.classList.remove('open'); }); }
+  document.addEventListener('click', function (e) { if (!e.target.closest('.ux-dd')) closeAll(); });
+  dds.forEach(function (dd) {
+    dd.querySelector('.ux-value').addEventListener('click', function (e) {
+      e.stopPropagation(); closeAll(dd); dd.classList.toggle('open');
+    });
   });
+  // 옵션형 드롭다운 (테마, 인원)
+  document.querySelectorAll('.ux-panel .ux-opt').forEach(function (opt) {
+    opt.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var dd = opt.closest('.ux-dd');
+      dd.querySelectorAll('.ux-opt').forEach(function (o) { o.classList.toggle('on', o === opt); });
+      dd.querySelector('.ux-value span').textContent = opt.textContent;
+      dd.classList.remove('open');
+    });
+  });
+  // 달력 (출발, 도착)
+  var sel = { dep: null, ret: null };
+  function fmt(d) { return d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0'); }
+  function buildCal(key) {
+    var dd = document.querySelector('.ux-dd[data-dd=' + key + ']');
+    if (!dd) return;
+    var panel = dd.querySelector('.ux-cal');
+    var view = new Date(); view.setDate(1);
+    function minDate() {
+      var t = new Date(); t.setHours(0, 0, 0, 0);
+      return (key === 'ret' && sel.dep && sel.dep > t) ? sel.dep : t;
+    }
+    function render() {
+      var y = view.getFullYear(), m = view.getMonth();
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      var html = '<div class="cal-head"><button type="button" class="cal-nav" data-n="-1">‹</button><b>' + y + '년 ' + (m + 1) + '월</b><button type="button" class="cal-nav" data-n="1">›</button></div><div class="cal-grid">';
+      ['일', '월', '화', '수', '목', '금', '토'].forEach(function (w) { html += '<span class="cal-dow">' + w + '</span>'; });
+      var first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate(), mn = minDate();
+      for (var i = 0; i < first; i++) html += '<span></span>';
+      for (var d = 1; d <= days; d++) {
+        var dt = new Date(y, m, d);
+        var dis = dt < mn;
+        var isSel = sel[key] && dt.getTime() === sel[key].getTime();
+        var isToday = dt.getTime() === today.getTime();
+        html += '<button type="button" class="cal-day' + (dis ? ' dis' : '') + (isSel ? ' sel' : '') + (isToday ? ' today' : '') + '" data-d="' + d + '"' + (dis ? ' disabled' : '') + '>' + d + '</button>';
+      }
+      panel.innerHTML = html + '</div>';
+      panel.querySelectorAll('.cal-nav').forEach(function (b) {
+        b.addEventListener('click', function (e) { e.stopPropagation(); view.setMonth(view.getMonth() + parseInt(b.dataset.n, 10)); render(); });
+      });
+      panel.querySelectorAll('.cal-day:not(.dis)').forEach(function (b) {
+        b.addEventListener('click', function (e) {
+          e.stopPropagation();
+          sel[key] = new Date(y, m, parseInt(b.dataset.d, 10));
+          dd.querySelector('.ux-value span').textContent = fmt(sel[key]);
+          if (key === 'dep' && sel.ret && sel.ret < sel.dep) {
+            sel.ret = null;
+            var rv = document.querySelector('.ux-dd[data-dd=ret] .ux-value span');
+            if (rv) rv.textContent = '날짜 선택';
+          }
+          dd.classList.remove('open');
+        });
+      });
+    }
+    dd.querySelector('.ux-value').addEventListener('click', render);
+    render();
+  }
+  buildCal('dep'); buildCal('ret');
 })();
 
 // ── '지금 뜨는 울릉 명소' 태그 필터 ──

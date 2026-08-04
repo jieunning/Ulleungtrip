@@ -57,14 +57,22 @@
 </div>
 </div>
 <div class="tb-search">
-<div class="tbs-field"><label>취향대로 코스를 골라보세요</label>
-<select id="themeSelect">
-<option>자연 생태 코스</option><option>액티브 울릉</option><option>독도 뱃길 코스</option><option>뚜벅이 힐링 코스</option><option>미식 탐방 코스</option><option>인생샷 사진 코스</option>
-</select></div>
-<div class="tbs-field"><label>출발</label><input type="date" id="depDate"></div>
-<div class="tbs-field"><label>도착</label><input type="date" id="retDate"></div>
-<div class="tbs-field" style="border-right:none"><label>인원</label>
-<select id="paxSelect"><option>성인 1</option><option selected>성인 2</option><option>성인 3</option><option>성인 4</option><option>성인 2 · 아이 1</option><option>성인 2 · 아이 2</option></select></div>
+<div class="tbs-field ux-dd" data-dd="theme"><label>취향대로 코스를 골라보세요</label>
+<button type="button" class="ux-value"><span>자연 생태 코스</span><i class="chev">▾</i></button>
+<div class="ux-panel">
+<div class="ux-opt on">자연 생태 코스</div><div class="ux-opt">액티브 울릉</div><div class="ux-opt">독도 뱃길 코스</div><div class="ux-opt">뚜벅이 힐링 코스</div><div class="ux-opt">미식 탐방 코스</div><div class="ux-opt">인생샷 사진 코스</div>
+</div></div>
+<div class="tbs-field ux-dd" data-dd="dep"><label>출발</label>
+<button type="button" class="ux-value"><span>날짜 선택</span><i>📅</i></button>
+<div class="ux-panel ux-cal"></div></div>
+<div class="tbs-field ux-dd" data-dd="ret"><label>도착</label>
+<button type="button" class="ux-value"><span>날짜 선택</span><i>📅</i></button>
+<div class="ux-panel ux-cal"></div></div>
+<div class="tbs-field ux-dd" data-dd="pax" style="border-right:none"><label>인원</label>
+<button type="button" class="ux-value"><span>성인 2</span><i class="chev">▾</i></button>
+<div class="ux-panel">
+<div class="ux-opt">성인 1</div><div class="ux-opt on">성인 2</div><div class="ux-opt">성인 3</div><div class="ux-opt">성인 4</div><div class="ux-opt">성인 2 · 아이 1</div><div class="ux-opt">성인 2 · 아이 2</div>
+</div></div>
 <a class="btn btn-primary" href="courses.html">코스 보기</a>
 </div>
 </div>
