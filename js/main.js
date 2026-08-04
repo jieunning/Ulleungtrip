@@ -44,6 +44,28 @@ function aiAsk(q) {
   input.addEventListener('keydown', function (e) { if (e.key === 'Enter') aiAsk(); });
 })();
 
+// ── 독도 접안정보 위젯 ──
+// 매일 전망을 여기서 수정하세요: 'good'(가능성 높음) / 'mid'(보통) / 'bad'(접안 어려움)
+var DOKDO_FORECAST = [['09', 'good'], ['15', 'mid']];
+(function () {
+  var box = document.getElementById('dokdoSlots');
+  if (!box) return;
+  var LABEL = {
+    good: ['😊', '접안 가능성 높음'],
+    mid:  ['😐', '상황에 따라 가능'],
+    bad:  ['☹️', '접안 어려움'],
+    done: ['🕐', '오늘의 전망 종료']
+  };
+  var nowHour = new Date().getHours();
+  var html = '';
+  DOKDO_FORECAST.forEach(function (pair) {
+    var t = pair[0], state = nowHour >= parseInt(t, 10) + 1 ? 'done' : pair[1];
+    var l = LABEL[state] || LABEL.done;
+    html += '<div class="dl-slot"><b>' + t + '시</b><span class="dl-face">' + l[0] + '</span><span>' + l[1] + '</span></div>';
+  });
+  box.innerHTML = html;
+})();
+
 // ── '지금 뜨는 울릉 명소' 태그 필터 ──
 (function () {
   var wrap = document.getElementById('destChips');
