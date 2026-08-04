@@ -66,6 +66,19 @@ var DOKDO_FORECAST = [['09', 'good'], ['15', 'mid']];
   box.innerHTML = html;
 })();
 
+// ── 독도 접안정보 플로팅 버튼 ──
+(function () {
+  var fab = document.getElementById('dokdoFab'), pop = document.getElementById('dokdoPop');
+  if (!fab || !pop) return;
+  fab.addEventListener('click', function (e) {
+    e.stopPropagation();
+    pop.classList.toggle('open');
+  });
+  document.addEventListener('click', function (e) {
+    if (!pop.contains(e.target)) pop.classList.remove('open');
+  });
+})();
+
 // ── '지금 뜨는 울릉 명소' 태그 필터 ──
 (function () {
   var wrap = document.getElementById('destChips');
