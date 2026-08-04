@@ -79,6 +79,19 @@ var DOKDO_FORECAST = [['09', 'good'], ['15', 'mid']];
   });
 })();
 
+// ── 테마 배너 날짜 선택 ──
+(function () {
+  var dep = document.getElementById('depDate'), ret = document.getElementById('retDate');
+  if (!dep || !ret) return;
+  var today = new Date().toISOString().slice(0, 10);
+  dep.min = today; ret.min = today;
+  dep.addEventListener('change', function () {
+    ret.min = dep.value;
+    if (ret.value && ret.value < dep.value) ret.value = dep.value;
+    if (!ret.value) ret.value = dep.value;
+  });
+})();
+
 // ── '지금 뜨는 울릉 명소' 태그 필터 ──
 (function () {
   var wrap = document.getElementById('destChips');

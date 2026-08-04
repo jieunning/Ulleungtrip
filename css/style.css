@@ -175,7 +175,8 @@ button.chip{cursor:pointer;font-family:inherit}
 .tb-search{position:relative;z-index:2;margin:32px 28px 28px;background:rgba(255,255,255,.97);border-radius:var(--r-lg);box-shadow:var(--shadow);display:flex;align-items:center;padding:10px 14px;flex-wrap:wrap;gap:4px}
 .tbs-field{flex:1;min-width:150px;padding:6px 20px;border-right:1px solid var(--line)}
 .tbs-field label{display:block;font-size:11.5px;font-weight:700;color:var(--ink-3)}
-.tbs-field select{border:none;font-family:inherit;font-size:14.5px;font-weight:800;color:var(--navy);background:transparent;outline:none;width:100%;cursor:pointer}
+.tbs-field select,.tbs-field input[type=date]{border:none;font-family:inherit;font-size:14.5px;font-weight:800;color:var(--navy);background:transparent;outline:none;width:100%;cursor:pointer;padding:0}
+.tbs-field input[type=date]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.55}
 .tbs-field .val{font-size:14.5px;font-weight:800;color:var(--navy)}
 .tb-search .btn{margin-left:12px}
 
