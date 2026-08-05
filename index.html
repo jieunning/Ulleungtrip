@@ -89,8 +89,16 @@
 <div class="panel"><div class="wrap section">
 <div class="act-wrap">
 <div class="act-video">
-<video src="videos/activity.mp4" autoplay muted loop playsinline></video>
+<video id="actPlayer" src="videos/activity.mp4" autoplay muted playsinline></video>
+<div class="act-shade"></div>
 <a class="act-more" href="experience.html">자세히 보기 →</a>
+<div class="act-caption"><b id="actCapT"></b><span id="actCapS"></span></div>
+<div class="act-bar">
+<div class="act-prog"><i id="actProg"></i></div>
+<button class="act-btn" id="actPrev" aria-label="이전 영상">‹</button>
+<button class="act-btn" id="actNext" aria-label="다음 영상">›</button>
+<button class="act-btn" id="actToggle" aria-label="재생/정지">❚❚</button>
+</div>
 </div>
 <div class="act-right">
 <div class="sec-head"><div><h2>이번 주말 추천 액티비티</h2><p>지금 울릉도에서 가장 인기 있는 액티비티예요.</p></div><a class="sec-link" href="experience.html">더 보기 →</a></div>

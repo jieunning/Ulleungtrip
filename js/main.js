@@ -44,6 +44,41 @@ function aiAsk(q) {
   input.addEventListener('keydown', function (e) { if (e.key === 'Enter') aiAsk(); });
 })();
 
+// ── 액티비티 영상 슬라이더 ──
+(function () {
+  var v = document.getElementById('actPlayer');
+  if (!v) return;
+  var VIDEOS = [
+    { src: 'videos/activity.mp4',  t: '여기가 울릉 국민 수영장', s: '바위에서 퐁당! 에메랄드 천연 풀장' },
+    { src: 'videos/activity2.mp4', t: '튜브 하나면 준비 끝',     s: '발 아래가 다 보이는 유리알 바다' },
+    { src: 'videos/activity3.mp4', t: '바닷속은 더 난리남',      s: '수경 쓰고 만나는 울릉 수중 세상' },
+    { src: 'videos/activity4.mp4', t: '3초 망설이고, 풍덩',      s: '심장이 먼저 시원해지는 다이빙 포인트' },
+    { src: 'videos/activity5.mp4', t: '오늘 일정: 둥둥 떠 있기', s: '파도에 맡기는 완벽한 물멍 타임' }
+  ];
+  var i = 0;
+  var capT = document.getElementById('actCapT'), capS = document.getElementById('actCapS');
+  var prog = document.getElementById('actProg'), tog = document.getElementById('actToggle');
+  function setTog(playing) { tog.textContent = playing ? '❚❚' : '▶'; }
+  function load(n) {
+    i = (n + VIDEOS.length) % VIDEOS.length;
+    v.src = VIDEOS[i].src;
+    capT.textContent = VIDEOS[i].t;
+    capS.textContent = VIDEOS[i].s;
+    prog.style.width = '0%';
+    v.play(); setTog(true);
+  }
+  v.addEventListener('timeupdate', function () {
+    if (v.duration) prog.style.width = (v.currentTime / v.duration * 100) + '%';
+  });
+  v.addEventListener('ended', function () { load(i + 1); });
+  document.getElementById('actPrev').addEventListener('click', function () { load(i - 1); });
+  document.getElementById('actNext').addEventListener('click', function () { load(i + 1); });
+  tog.addEventListener('click', function () {
+    if (v.paused) { v.play(); setTog(true); } else { v.pause(); setTog(false); }
+  });
+  load(0);
+})();
+
 // ── 독도 접안정보 위젯 ──
 // 매일 전망을 여기서 수정하세요: 'good'(가능성 높음) / 'mid'(보통) / 'bad'(접안 어려움)
 var DOKDO_FORECAST = [['09', 'good'], ['15', 'mid']];
