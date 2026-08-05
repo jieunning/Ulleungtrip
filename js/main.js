@@ -79,6 +79,53 @@ function aiAsk(q) {
   load(0);
 })();
 
+// ── 울릉 여행 유형 테스트 ──
+(function () {
+  var card = document.getElementById('quizCard');
+  if (!card) return;
+  var QS = [
+    { q: '울릉에 도착하면 제일 먼저 하고 싶은 건?', o: [['🌊 바다로 풍덩! 물놀이부터', 'active'], ['☕ 전망 좋은 곳에서 커피 한 잔', 'heal'], ['🍢 시장 구경하며 주전부리', 'food']] },
+    { q: '여행 사진첩에 제일 많은 건?', o: [['💪 땀나는 액티비티 인증샷', 'active'], ['🌅 하늘·바다·풍경 사진', 'heal'], ['🍽️ 오늘 먹은 음식 사진', 'food']] },
+    { q: '나의 여행 일정 스타일은?', o: [['⏰ 아침부터 꽉 채운 알찬 일정', 'active'], ['🐢 발길 닿는 대로 느긋하게', 'heal'], ['🗺️ 맛집 중심으로 동선 짜기', 'food']] }
+  ];
+  var RESULTS = {
+    active: { e: '🔥', name: '에너지 폭발 액티브 탐험가', desc: '가만히 있으면 좀이 쑤시는 타입! 케이블카·모노레일·해양 체험까지 몸으로 즐기는 울릉이 딱이에요.', course: '액티브 울릉' },
+    heal: { e: '🌿', name: '느긋한 물멍 힐링러', desc: '바다 보며 멍때리는 게 최고의 일정. 행남산책로를 걷고 오션뷰 카페에서 마무리하는 하루를 추천해요.', course: '뚜벅이 힐링 코스' },
+    food: { e: '🍚', name: '맛따라 길따라 미식가', desc: '여행의 기억은 혀끝에 남는 법. 홍합밥부터 저동항 회센터까지, 맛으로 도는 울릉을 추천해요.', course: '미식 탐방 코스' },
+    photo: { e: '📸', name: '인생샷 감성 수집가', desc: '취향이 골고루 균형 잡힌 타입! 어딜 가든 그림이 되는 대풍감·삼선암 사진 코스로 다 담아가세요.', course: '인생샷 사진 코스' }
+  };
+  var step, score;
+  function start() { step = 0; score = { active: 0, heal: 0, food: 0 }; render(); }
+  function render() {
+    if (step < QS.length) {
+      var q = QS[step];
+      var html = '<div class="qz-step">Q' + (step + 1) + ' <span>/ ' + QS.length + '</span></div><h3 class="qz-q">' + q.q + '</h3><div class="qz-opts">';
+      q.o.forEach(function (o, k) { html += '<button type="button" class="qz-opt" data-k="' + k + '">' + o[0] + '</button>'; });
+      html += '</div><div class="qz-dots">' + QS.map(function (_, k) { return '<span class="' + (k <= step ? 'on' : '') + '"></span>'; }).join('') + '</div>';
+      card.innerHTML = html;
+      card.querySelectorAll('.qz-opt').forEach(function (b) {
+        b.addEventListener('click', function () {
+          score[QS[step].o[b.dataset.k][1]]++;
+          step++; render();
+        });
+      });
+    } else {
+      var win = 'photo';
+      if (score.active > score.heal && score.active > score.food) win = 'active';
+      else if (score.heal > score.active && score.heal > score.food) win = 'heal';
+      else if (score.food > score.active && score.food > score.heal) win = 'food';
+      var r = RESULTS[win];
+      card.innerHTML = '<div class="qz-result"><div class="qz-emoji">' + r.e + '</div>'
+        + '<span class="qz-badge">AI 진단 결과</span><h3>' + r.name + '</h3><p>' + r.desc + '</p>'
+        + '<div class="qz-course">추천 테마 · <b>' + r.course + '</b></div>'
+        + '<div class="qz-btns"><a class="btn btn-primary" href="courses.html">추천 코스 보러 가기 →</a>'
+        + '<button type="button" class="btn btn-ghost" id="qzRetry">다시 하기</button></div></div>';
+      document.getElementById('qzRetry').addEventListener('click', start);
+    }
+  }
+  start();
+})();
+
 // ── 독도 접안정보 위젯 ──
 // 매일 전망을 여기서 수정하세요: 'good'(가능성 높음) / 'mid'(보통) / 'bad'(접안 어려움)
 var DOKDO_FORECAST = [['09', 'good'], ['15', 'mid']];
