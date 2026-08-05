@@ -79,6 +79,22 @@ function aiAsk(q) {
   load(0);
 })();
 
+// ── 여행 준비 체크리스트 (브라우저 저장) ──
+(function () {
+  var items = document.querySelectorAll('.prep-item input');
+  if (!items.length) return;
+  var KEY = 'ulleung_prep';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  items.forEach(function (c) {
+    if (saved[c.dataset.prep]) c.checked = true;
+    c.addEventListener('change', function () {
+      saved[c.dataset.prep] = c.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+})();
+
 // ── 울릉 여행 유형 테스트 ──
 (function () {
   var card = document.getElementById('quizCard');

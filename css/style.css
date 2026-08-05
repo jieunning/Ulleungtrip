@@ -322,6 +322,20 @@ button.chip{cursor:pointer;font-family:inherit}
 .rg-chip{display:inline-block;background:var(--amber);color:#fff;border-radius:6px;padding:2px 9px;font-size:11px;font-weight:800;margin-bottom:6px}
 .rg-txt b{display:block;color:#fff;font-size:14.5px;font-weight:800;text-shadow:0 1px 8px rgba(0,0,0,.4)}
 
+/* ---------- prep timeline ---------- */
+.prep-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative;padding-top:22px}
+.prep-row::before{content:"";position:absolute;top:29px;left:9%;right:9%;border-top:2.5px dashed var(--line)}
+.prep-col{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 18px 18px;box-shadow:var(--shadow-sm);transition:.2s}
+.prep-col:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.prep-dot{position:absolute;top:-29px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:var(--teal);border:3.5px solid #fff;box-shadow:0 2px 8px rgba(28,37,84,.25)}
+.prep-d{display:inline-block;background:var(--navy);color:#7fe3ec;border-radius:var(--r-pill);padding:3px 12px;font-size:12px;font-weight:800;margin-bottom:8px}
+.prep-col:last-child .prep-d{background:var(--teal);color:#fff}
+.prep-col h3{font-size:15.5px;font-weight:800;color:var(--navy);margin-bottom:10px}
+.prep-items{display:flex;flex-direction:column;gap:7px}
+.prep-item{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--ink-2);cursor:pointer;line-height:1.5}
+.prep-item input{accent-color:var(--teal);margin-top:2px;cursor:pointer}
+.prep-item:has(input:checked) span{text-decoration:line-through;color:var(--ink-3)}
+
 /* ---------- travel type quiz ---------- */
 .quiz-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:center}
 .quiz-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:34px 38px;min-height:330px;display:flex;flex-direction:column;justify-content:center}
@@ -464,6 +478,9 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
   .thrift-grid{grid-template-columns:repeat(2,1fr)}
   .sights-map{grid-template-columns:1fr;gap:24px}
   .quiz-wrap{grid-template-columns:1fr;gap:26px}
+  .prep-row{grid-template-columns:repeat(2,1fr)}
+  .prep-row::before{display:none}
+  .prep-dot{display:none}
   .mosaic .sight.big{grid-column:span 6}
   .mosaic .sight.small{grid-column:span 2}
   .arch-row{grid-template-columns:repeat(3,1fr)}
@@ -491,6 +508,7 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
   .thrift-grid{grid-template-columns:1fr}
   .rg-grid{grid-template-columns:repeat(2,1fr)}
   .rg-tabs{grid-template-columns:repeat(2,1fr)}
+  .prep-row{grid-template-columns:1fr}
   .mosaic .sight.small{grid-column:span 3}
   .arch-row{grid-template-columns:repeat(2,1fr)}
   .tb-cards{flex-wrap:wrap}
