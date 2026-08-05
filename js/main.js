@@ -185,6 +185,35 @@ var DOKDO_FORECAST = [['09', 'good'], ['15', 'mid']];
   buildCal('dep'); buildCal('ret');
 })();
 
+// ── AI 추천 받기 (테마 배너) ──
+// 실시간 현황 값과 추천 문구는 여기서 수정하세요.
+var AI_RECO = {
+  '자연 생태 코스': '나리분지 → 성인봉 초입 숲길 → 예림원 동선을 추천해요. 지금 북면 혼잡도가 낮아 여유롭게 둘러보기 좋아요.',
+  '액티브 울릉': '케이블카 → 행남해안산책로 → 해양 체험 순서를 추천해요. 오후 바람 예보가 있어 해양 체험은 오전에 배치했어요.',
+  '독도 뱃길 코스': '오늘 파고 기준 독도 접안 가능성이 양호해요. 오전 독도 왕복 후 오후 봉래폭포 일정을 추천해요.',
+  '뚜벅이 힐링 코스': '행남해안산책로 → 도동 골목 → 오션뷰 카페 동선이에요. 혼잡도 45%, 걷기 딱 좋은 날이에요.',
+  '미식 탐방 코스': '점심 홍합밥 → 저녁 저동항 회센터 동선을 추천해요. 나리분지 산채식당은 재료 소진 전 이른 방문 추천!',
+  '인생샷 사진 코스': '역광을 피해 오전 대풍감 → 오후 삼선암·거북바위 순서로 추천해요. 흐린 날엔 파스텔톤 사진이 잘 나와요.'
+};
+(function () {
+  var btn = document.getElementById('aiRecBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var get = function (dd) { var el = document.querySelector('.ux-dd[data-dd=' + dd + '] .ux-value span'); return el ? el.textContent : ''; };
+    var theme = get('theme'), dep = get('dep'), ret = get('ret'), pax = get('pax');
+    var box = document.getElementById('tbResult');
+    var title = document.getElementById('tbrTitle'), text = document.getElementById('tbrText');
+    box.classList.add('show');
+    title.textContent = 'AI가 실시간 변수를 분석하고 있어요...';
+    text.textContent = '날씨 · 혼잡도 · 선박 운항 정보를 확인하는 중';
+    setTimeout(function () {
+      var when = (dep !== '날짜 선택') ? dep + ' 출발 · ' : '';
+      title.textContent = '「' + theme + '」 ' + when + pax + ' 기준 추천 동선';
+      text.textContent = AI_RECO[theme] || AI_RECO['자연 생태 코스'];
+    }, 900);
+  });
+})();
+
 // ── 권역별 절경 탭 (지도 연동) ──
 (function () {
   var tabs = document.querySelectorAll('.rg-tab');

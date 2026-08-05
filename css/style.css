@@ -166,7 +166,23 @@ button.chip{cursor:pointer;font-family:inherit}
 .tb-content>p{margin-top:10px;font-size:15px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:12px}
 .tb-arrow{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--ink-2);display:grid;place-items:center;font-size:14px;transition:.18s;background:rgba(255,255,255,.6)}
 .tb-arrow:hover{background:var(--teal);border-color:var(--teal);color:#fff}
-.tb-cards{display:flex;gap:16px;margin-top:24px}
+.tb-live{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tbl-item{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--r-pill);padding:7px 13px;font-size:12px;font-weight:600;color:var(--ink-2);box-shadow:var(--shadow-sm)}
+.tbl-item b{color:var(--navy);font-weight:800}
+.tbl-item i{font-style:normal;border-radius:6px;padding:1px 7px;font-size:10.5px;font-weight:800;color:#fff}
+.tbl-item i.ok{background:var(--green)}
+.tbl-item i.mid{background:var(--amber)}
+.tbl-item i.bad{background:#e0685f}
+.tb-match{position:absolute;top:16px;left:16px;z-index:2;background:var(--navy);color:#7fe3ec;border-radius:var(--r-pill);padding:4px 10px;font-size:10.5px;font-weight:800;box-shadow:var(--shadow-sm)}
+.tb-card{position:relative}
+.tb-result{display:none;position:relative;z-index:2;margin:14px 28px 0;background:rgba(255,255,255,.97);border:1.5px solid var(--teal);border-radius:var(--r-lg);padding:16px 20px;box-shadow:var(--shadow)}
+.tb-result.show{display:flex;gap:14px;align-items:flex-start;animation:destFade .3s ease}
+.tbr-bot{flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:var(--teal-soft);display:grid;place-items:center;font-size:20px}
+.tbr-body b{display:block;font-size:14.5px;font-weight:800;color:var(--navy)}
+.tbr-body p{font-size:13.5px;color:var(--ink-2);margin-top:4px;line-height:1.6}
+.tbr-link{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:800;color:var(--teal-dark)}
+.tbr-link:hover{text-decoration:underline}
+.tb-cards{display:flex;gap:16px;margin-top:18px}
 .tb-card{background:rgba(255,255,255,.96);border-radius:14px;padding:10px 10px 12px;box-shadow:var(--shadow-sm);width:158px;transition:.2s}
 .tb-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .tb-card img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px}

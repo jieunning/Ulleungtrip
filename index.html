@@ -47,13 +47,18 @@
 <img class="tb-bg" src="images/hero3.jpg" alt="울릉 바다" loading="lazy">
 <div class="tb-overlay"></div>
 <div class="tb-content">
-<div class="kicker">Theme Courses</div>
+<div class="kicker">AI Custom Curation</div>
 <h2>취향대로 떠나는 <em>울릉</em></h2>
-<p>여행 스타일에 따라 골라 떠나는 테마별 코스 보기 <a class="tb-arrow" href="courses.html">→</a></p>
+<p>AI가 날씨·혼잡도·뱃길을 분석해 딱 맞는 코스를 추천해드려요 <a class="tb-arrow" href="courses.html">→</a></p>
+<div class="tb-live" id="tbLive">
+<span class="tbl-item">🌤️ 울릉 날씨 <b>20°C 흐림</b><i class="ok">양호</i></span>
+<span class="tbl-item">👥 관광지 혼잡도 <b>보통 45%</b><i class="mid">보통</i></span>
+<span class="tbl-item">⛴️ 선박 운항 <b>정상 운항</b><i class="ok">정상</i></span>
+</div>
 <div class="tb-cards">
-<a class="tb-card" href="courses.html"><img src="images/kids-cablecar.jpg" alt="액티브 울릉"><h4>액티브 울릉</h4><span>1박 2일 | 인기</span></a>
-<a class="tb-card" href="courses.html"><img src="images/food-honghap.jpg" alt="미식 탐방 코스"><h4>미식 탐방 코스</h4><span>당일 | 인기</span></a>
-<a class="tb-card" href="courses.html"><img src="images/hero2.jpg" alt="독도 뱃길 코스"><h4>독도 뱃길 코스</h4><span>1박 2일 | 추천</span></a>
+<a class="tb-card" href="courses.html"><span class="tb-match">🤖 매칭 94%</span><img src="images/kids-cablecar.jpg" alt="액티브 울릉"><h4>액티브 울릉</h4><span>1박 2일 | 인기</span></a>
+<a class="tb-card" href="courses.html"><span class="tb-match">🤖 매칭 91%</span><img src="images/food-honghap.jpg" alt="미식 탐방 코스"><h4>미식 탐방 코스</h4><span>당일 | 인기</span></a>
+<a class="tb-card" href="courses.html"><span class="tb-match">🤖 매칭 88%</span><img src="images/hero2.jpg" alt="독도 뱃길 코스"><h4>독도 뱃길 코스</h4><span>1박 2일 | 추천</span></a>
 </div>
 </div>
 <div class="tb-search">
@@ -73,7 +78,15 @@
 <div class="ux-panel">
 <div class="ux-opt">성인 1</div><div class="ux-opt on">성인 2</div><div class="ux-opt">성인 3</div><div class="ux-opt">성인 4</div><div class="ux-opt">성인 2 · 아이 1</div><div class="ux-opt">성인 2 · 아이 2</div>
 </div></div>
-<a class="btn btn-primary" href="courses.html">코스 보기</a>
+<button class="btn btn-primary" id="aiRecBtn" type="button">✨ AI 추천 받기</button>
+</div>
+<div class="tb-result" id="tbResult">
+<div class="tbr-bot">🤖</div>
+<div class="tbr-body">
+<b id="tbrTitle"></b>
+<p id="tbrText"></p>
+<a href="courses.html" class="tbr-link">추천 코스 자세히 보기 →</a>
+</div>
 </div>
 </div>
 </div>
