@@ -79,6 +79,72 @@ function aiAsk(q) {
   load(0);
 })();
 
+// ── 여행자 콘텐츠 큐레이션 캐러셀 ──
+// 카드 추가/수정은 이 목록에서 하세요. yt: 유튜브ID / blog·insta: url
+var CURATION = [
+  { type: 'yt', id: 'cNJbW8zefxk', t: '울릉도 EP1. 울릉도민과 함께하는 울렁울렁 울릉도 여행!', a: '89헤르츠 89HERTZ' },
+  { type: 'blog', url: 'https://blog.naver.com/hyang7845/224282528030', t: '울릉도 여행 후기', a: '@hyang7845' },
+  { type: 'insta', url: 'https://www.instagram.com/p/DaSQV_TD91H/', t: '사진으로 보는 울릉의 순간', a: 'Instagram 포토' },
+  { type: 'yt', id: 'Jr_ju4HWs0E', t: '올여름 최고의 여행지, 울릉도 백패킹·스노클링·맛집', a: '장쌤생 jangteacher' },
+  { type: 'blog', url: 'https://blog.naver.com/younineagain/224367739268', t: '울릉도 여행 코스 기록', a: '@younineagain' },
+  { type: 'insta', url: 'https://www.instagram.com/reel/C-DLPN4Rm22/', t: '릴스로 보는 울릉 바다', a: 'Instagram 릴스' },
+  { type: 'yt', id: 'THpli2pRQ5E', t: '빛나는 울릉도 바닷속으로, 프리다이빙과 야생 돌고래', a: '촉촉한 초록칩' },
+  { type: 'blog', url: 'https://blog.naver.com/goil2005/224366816550', t: '울릉도 먹고 보고 걷기', a: '@goil2005' },
+  { type: 'insta', url: 'https://www.instagram.com/reel/DZuRMhYpor2/', t: '울릉 여행 하이라이트', a: 'Instagram 릴스' },
+  { type: 'yt', id: 'KF7vFuuh1e8', t: '울릉도 여행 브이로그', a: 'YouTube' },
+  { type: 'blog', url: 'https://blog.naver.com/all_kiki/224361105067', t: '울릉도 여행 일기', a: '@all_kiki' },
+  { type: 'insta', url: 'https://www.instagram.com/p/DMezCjpv2Tv/', t: '울릉 감성 한 컷', a: 'Instagram 포토' },
+  { type: 'yt', id: 'cJKmZb7EqUg', t: '오랜만에 울릉도를 다시 찾아간 두 남자 【울릉도 1】', a: '빠니보틀 Pani Bottle' },
+  { type: 'insta', url: 'https://www.instagram.com/reel/DI_CiRxRbqR/', t: '울릉의 순간들', a: 'Instagram 릴스' }
+];
+(function () {
+  var stage = document.getElementById('cvStage');
+  if (!stage) return;
+  var N = CURATION.length, active = 0;
+  var dotsBox = document.getElementById('cvDots');
+  CURATION.forEach(function (c, i) {
+    var el = document.createElement('div');
+    el.className = 'cv-slide cv-' + c.type;
+    el.dataset.i = i;
+    if (c.type === 'yt') {
+      el.dataset.url = 'https://youtu.be/' + c.id;
+      el.innerHTML = '<div class="cv-thumb"><img src="https://i.ytimg.com/vi/' + c.id + '/hqdefault.jpg" alt="" loading="lazy"><span class="cv-play">▶</span></div>'
+        + '<div class="cv-info"><span class="cv-badge b-yt">▶ YouTube</span><b>' + c.t + '</b><span class="cv-author">' + c.a + '</span></div>';
+    } else {
+      el.dataset.url = c.url;
+      el.innerHTML = '<div class="cv-quote">' + (c.type === 'blog' ? '“' : '📷') + '</div>'
+        + '<div class="cv-fill"><span class="cv-badge ' + (c.type === 'blog' ? 'b-blog">✍️ 네이버 블로그' : 'b-insta">📷 Instagram') + '</span>'
+        + '<b>' + c.t + '</b><span class="cv-author">' + c.a + '</span></div>'
+        + '<span class="cv-go">보러 가기 →</span>';
+    }
+    el.addEventListener('click', function () {
+      if (parseInt(el.dataset.i, 10) === active) window.open(el.dataset.url, '_blank');
+      else { active = parseInt(el.dataset.i, 10); render(); }
+    });
+    stage.appendChild(el);
+    var d = document.createElement('span');
+    d.addEventListener('click', function () { active = i; render(); });
+    dotsBox.appendChild(d);
+  });
+  function render() {
+    var slides = stage.children;
+    for (var i = 0; i < N; i++) {
+      var d = i - active;
+      if (d > N / 2) d -= N;
+      if (d < -N / 2) d += N;
+      var cls = 'cv-slide cv-' + CURATION[i].type + ' ';
+      cls += (Math.abs(d) > 2) ? 'p-hide' : 'p' + (d < 0 ? 'm' : '') + Math.abs(d);
+      slides[i].className = cls;
+    }
+    Array.prototype.forEach.call(dotsBox.children, function (dot, k) {
+      dot.className = k === active ? 'on' : '';
+    });
+  }
+  document.getElementById('cvPrev').addEventListener('click', function () { active = (active - 1 + N) % N; render(); });
+  document.getElementById('cvNext').addEventListener('click', function () { active = (active + 1) % N; render(); });
+  render();
+})();
+
 // ── 여행 준비 체크리스트 (브라우저 저장) ──
 (function () {
   var items = document.querySelectorAll('.prep-item input');
