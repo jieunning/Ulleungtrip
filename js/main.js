@@ -79,6 +79,20 @@ function aiAsk(q) {
   load(0);
 })();
 
+// ── 숙소 지역 탭 필터 ──
+(function () {
+  var wrap = document.getElementById('stayChips');
+  if (!wrap) return;
+  wrap.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip || !chip.dataset.stay) return;
+    wrap.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c === chip); });
+    document.querySelectorAll('.stay-grid').forEach(function (g) {
+      g.classList.toggle('on', g.dataset.stay === chip.dataset.stay);
+    });
+  });
+})();
+
 // ── 여행자 콘텐츠 큐레이션 캐러셀 ──
 // 카드 추가/수정은 이 목록에서 하세요. yt: 유튜브ID / blog·insta: url
 var CURATION = [

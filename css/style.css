@@ -322,6 +322,12 @@ button.chip{cursor:pointer;font-family:inherit}
 .rg-chip{display:inline-block;background:var(--amber);color:#fff;border-radius:6px;padding:2px 9px;font-size:11px;font-weight:800;margin-bottom:6px}
 .rg-txt b{display:block;color:#fff;font-size:14.5px;font-weight:800;text-shadow:0 1px 8px rgba(0,0,0,.4)}
 
+/* ---------- stay region tabs ---------- */
+.stay-grid{display:none;grid-template-columns:repeat(3,1fr);gap:20px}
+.stay-grid.on{display:grid;animation:destFade .3s ease}
+@media (max-width:960px){.stay-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.stay-grid{grid-template-columns:1fr}}
+
 /* ---------- curation carousel ---------- */
 .cv-stage{position:relative;height:430px;margin-top:10px}
 .cv-slide{position:absolute;left:50%;top:10px;width:300px;height:400px;margin-left:-150px;border-radius:18px;overflow:hidden;background:#fff;box-shadow:var(--shadow);cursor:pointer;transition:transform .45s ease,opacity .45s ease;display:flex;flex-direction:column}
