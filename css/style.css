@@ -783,3 +783,15 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 /* crs CTA 강조 (그라데이션 바 + 화살표 애니메이션 유지) */
 .crs-cta{background:linear-gradient(115deg,var(--teal),#3a72e0);color:#fff;border-radius:14px;padding:17px 26px;border-top:none;margin-top:24px;box-shadow:0 10px 26px rgba(0,174,189,.35);transition:transform .2s,box-shadow .2s,color .25s}
 .crs-cta:hover{color:#fff;transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,174,189,.45)}
+
+/* 플래너 페이지: 히어로 확대 + 마법사 중앙 정렬 */
+.planner-hero.pl-big{padding:108px 24px 92px}
+.pl-big h1{font-size:clamp(34px,5vw,56px)}
+.pl-big p{font-size:17px;margin-top:18px}
+.pl-card{max-width:820px;padding:36px 44px}
+.pl-head{flex-direction:column;align-items:center;gap:14px;margin-bottom:26px}
+.pl-sub,.pl-q{text-align:center}
+.pl-q{font-size:26px}
+.pl-opts{justify-content:center}
+.pl-themes{margin:0 auto}
+@media (max-width:640px){.planner-hero.pl-big{padding:72px 20px 60px}.pl-q{font-size:22px}}
