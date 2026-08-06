@@ -229,7 +229,7 @@ var CURATION = [
       card.innerHTML = '<div class="qz-result"><div class="qz-emoji">' + r.e + '</div>'
         + '<span class="qz-badge">AI 진단 결과</span><h3>' + r.name + '</h3><p>' + r.desc + '</p>'
         + '<div class="qz-course">추천 테마 · <b>' + r.course + '</b></div>'
-        + '<div class="qz-btns"><a class="btn btn-primary" href="courses.html">추천 코스 보러 가기 →</a>'
+        + '<div class="qz-btns"><a class="btn btn-primary" href="planner.html">AI 플래너로 내 코스 만들기 →</a>'
         + '<button type="button" class="btn btn-ghost" id="qzRetry">다시 하기</button></div></div>';
       document.getElementById('qzRetry').addEventListener('click', start);
     }
@@ -414,4 +414,186 @@ var AI_RECO = {
       g.classList.toggle('on', g.dataset.tag === tag);
     });
   });
+})();
+
+// ── AI 동선 플래너 ──
+(function () {
+  var body = document.getElementById('plBody');
+  if (!body) return;
+  var stepsEl = document.getElementById('plSteps'), prevBtn = document.getElementById('plPrev'), nextBtn = document.getElementById('plNext');
+  var card = document.getElementById('plCard'), resultEl = document.getElementById('plResult');
+
+  var DUR = [{ t: '1박 2일', n: 1, e: '🗓️' }, { t: '2박 3일', n: 2, e: '📅', hot: true }, { t: '3박 4일', n: 3, e: '🗓️' }];
+  var COMP = [{ k: 'solo', t: '혼자', e: '🧍' }, { k: 'couple', t: '둘이서', e: '💑' }, { k: 'family', t: '아이와 가족', e: '👨‍👩‍👧' }, { k: 'friends', t: '친구들과', e: '🎒' }];
+  var THEMES = [
+    { k: '산', t: '산·자연', img: 'images/spot-nari.jpg' },
+    { k: '바다', t: '바다·해안', img: 'images/walk-haengnam.jpg' },
+    { k: '액티비티', t: '액티비티', img: 'images/hero3.jpg' },
+    { k: '미식', t: '미식', img: 'images/food-honghap.jpg' },
+    { k: '카페', t: '카페', img: 'images/kids-yerimwon.jpg' },
+    { k: '사진', t: '사진 스팟', img: 'images/drive-samseonam.jpg' },
+    { k: '섬', t: '섬 속의 섬', img: 'images/hero2.jpg' },
+    { k: '가족', t: '가족 체험', img: 'images/kids-cablecar.jpg' }
+  ];
+  var POIS = [
+    { n: '태하향목 모노레일 · 대풍감', type: 'spot', area: '서면', x: 20, y: 41.5, th: ['사진', '바다', '산'], img: 'images/spot-monorail.jpg', fam: 1 },
+    { n: '독도전망대 케이블카', type: 'spot', area: '울릉읍 도동', x: 62, y: 64.5, th: ['액티비티', '사진', '가족'], img: 'images/spot-cablecar.jpg', fam: 1 },
+    { n: '행남해안산책로', type: 'spot', area: '도동 ↔ 저동', x: 79, y: 61, th: ['바다', '산', '사진'], img: 'images/walk-haengnam.jpg' },
+    { n: '관음도', type: 'spot', area: '북면', x: 84.5, y: 19, th: ['섬', '바다', '가족'], img: 'images/spot-gwaneumdo.jpg', fam: 1 },
+    { n: '나리분지', type: 'spot', area: '북면', x: 53, y: 41, th: ['산', '가족'], img: 'images/spot-nari.jpg' },
+    { n: '성인봉 등반', type: 'spot', area: '나리분지 출발', x: 50, y: 50, th: ['산', '액티비티'], img: 'images/walk-seonginbong.jpg' },
+    { n: '봉래폭포', type: 'spot', area: '울릉읍 사동', x: 57.5, y: 52, th: ['산', '가족'], img: 'images/kids-bongnae.jpg', fam: 1 },
+    { n: '예림원', type: 'spot', area: '북면', x: 36, y: 36, th: ['사진', '가족'], img: 'images/kids-yerimwon.jpg', fam: 1 },
+    { n: '삼선암', type: 'spot', area: '북면', x: 60.5, y: 20.5, th: ['사진', '바다'], img: 'images/drive-samseonam.jpg' },
+    { n: '통구미 거북바위', type: 'spot', area: '서면', x: 46.5, y: 79.5, th: ['사진', '바다'], img: 'images/drive-geobuk.jpg' },
+    { n: '해양 체험 (스노클링·카약)', type: 'spot', area: '저동 · 천부', x: 72, y: 40, th: ['액티비티', '바다'], img: 'images/hero3.jpg' },
+    { n: '독도 (여객선 왕복)', type: 'spot', area: '저동항 출발', x: 87.5, y: 84.5, th: ['섬', '바다'], img: 'images/hero2.jpg', dokdo: 1 },
+    { n: '홍합밥 골목', type: 'food', area: '도동', x: 63, y: 66, th: ['미식'], img: 'images/food-honghap.jpg' },
+    { n: '따개비칼국수집', type: 'food', area: '저동', x: 74, y: 57, th: ['미식'], img: 'images/food-ttagaebi.jpg' },
+    { n: '울릉 약소불고기', type: 'food', area: '도동', x: 61, y: 68, th: ['미식'], img: 'images/food-yakso.jpg' },
+    { n: '나리분지 산채식당', type: 'food', area: '나리', x: 52, y: 43, th: ['미식', '산'], img: 'images/food-sanchae.jpg' },
+    { n: '저동항 회센터', type: 'food', area: '저동', x: 75.5, y: 58.5, th: ['미식', '바다'] },
+    { n: '오션뷰 카페', type: 'cafe', area: '북면 해안', x: 40, y: 24, th: ['카페', '바다', '사진'] },
+    { n: '도동 골목 카페', type: 'cafe', area: '도동', x: 62.5, y: 66.5, th: ['카페'] }
+  ];
+  var STAY_BY = {
+    solo: { n: '살로메스테이', type: 'stay', area: '도동', x: 63, y: 65 },
+    couple: { n: '코스모스 울릉도', type: 'stay', area: '북면', x: 33, y: 22 },
+    family: { n: '울릉 대아리조트', type: 'stay', area: '사동', x: 55, y: 72 },
+    friends: { n: '상일펜션', type: 'stay', area: '사동', x: 56, y: 70 }
+  };
+  var DAY_COLORS = ['#00aebd', '#1c2554', '#f5a623', '#18a558'];
+  var TYPE_LABEL = { spot: '여행지', food: '음식점', cafe: '카페', stay: '숙소', port: '항구' };
+
+  var step = 0, sel = { dur: 1, comp: 'couple', themes: [] };
+
+  function renderSteps() {
+    stepsEl.innerHTML = [0, 1, 2].map(function (i) {
+      return '<b class="' + (i === step ? 'on' : (i < step ? 'done' : '')) + '">0' + (i + 1) + '</b>' + (i < 2 ? '<i></i>' : '');
+    }).join('');
+  }
+  function render() {
+    renderSteps();
+    prevBtn.style.visibility = step === 0 ? 'hidden' : 'visible';
+    nextBtn.textContent = step === 2 ? '완료' : '다음';
+    var html = '';
+    if (step === 0) {
+      html = '<p class="pl-sub">일정이 길수록 섬을 더 깊게 볼 수 있어요.</p><h3 class="pl-q">여행 기간을<br>선택해 주세요.</h3><div class="pl-opts">'
+        + DUR.map(function (d, i) {
+          return '<button type="button" class="pl-opt' + (sel.dur === i ? ' on' : '') + '" data-i="' + i + '"><span>' + d.e + '</span><b>' + d.t + '</b>' + (d.hot ? '<em>인기</em>' : '') + '</button>';
+        }).join('') + '</div>';
+    } else if (step === 1) {
+      html = '<p class="pl-sub">동행에 따라 동선과 숙소가 달라져요.</p><h3 class="pl-q">누구와 함께<br>떠나시나요?</h3><div class="pl-opts">'
+        + COMP.map(function (c) {
+          return '<button type="button" class="pl-opt' + (sel.comp === c.k ? ' on' : '') + '" data-k="' + c.k + '"><span>' + c.e + '</span><b>' + c.t + '</b></button>';
+        }).join('') + '</div>';
+    } else {
+      html = '<p class="pl-sub">마지막으로 이번 여행의 테마를 정해볼까요?</p><h3 class="pl-q">원하는 여행 테마를 2개 이상<br>선택해 주세요. (최대 4개)</h3><div class="pl-themes">'
+        + THEMES.map(function (t) {
+          return '<button type="button" class="pl-theme' + (sel.themes.indexOf(t.k) >= 0 ? ' on' : '') + '" data-k="' + t.k + '"><img src="' + t.img + '" alt="" loading="lazy"><b>' + t.t + '</b></button>';
+        }).join('') + '</div>';
+    }
+    body.innerHTML = html;
+    body.querySelectorAll('.pl-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (step === 0) sel.dur = parseInt(b.dataset.i, 10);
+        else sel.comp = b.dataset.k;
+        render();
+      });
+    });
+    body.querySelectorAll('.pl-theme').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.k, idx = sel.themes.indexOf(k);
+        if (idx >= 0) sel.themes.splice(idx, 1);
+        else if (sel.themes.length < 4) sel.themes.push(k);
+        render();
+      });
+    });
+  }
+  prevBtn.addEventListener('click', function () { if (step > 0) { step--; render(); } });
+  nextBtn.addEventListener('click', function () {
+    if (step < 2) { step++; render(); return; }
+    if (sel.themes.length < 2) { alertMsg(); return; }
+    showResult();
+  });
+  function alertMsg() {
+    var q = body.querySelector('.pl-q');
+    q.innerHTML = '테마를 <em style="color:#e0685f;font-style:normal">2개 이상</em> 선택해 주세요! (최대 4개)';
+  }
+
+  function buildCourse() {
+    var nights = DUR[sel.dur].n, days = nights + 1, themes = sel.themes, comp = sel.comp;
+    var used = {};
+    function score(p) {
+      var s = 0;
+      p.th.forEach(function (t) { if (themes.indexOf(t) >= 0) s += 2; });
+      if (comp === 'family' && p.fam) s += 2;
+      if (comp === 'couple' && p.th.indexOf('사진') >= 0) s += 1;
+      if (comp === 'friends' && p.th.indexOf('액티비티') >= 0) s += 1;
+      if (comp === 'solo' && p.th.indexOf('산') >= 0) s += 1;
+      return s;
+    }
+    function pick(type) {
+      var c = POIS.filter(function (p) { return p.type === type && !used[p.n] && !p.dokdo; })
+        .sort(function (a, b) { return score(b) - score(a); });
+      if (c.length) { used[c[0].n] = 1; return c[0]; }
+      return null;
+    }
+    var stay = STAY_BY[comp], plan = [];
+    for (var d = 1; d <= days; d++) {
+      var items = [];
+      if (d === 1) items.push({ n: '도동항 · 사동항 도착', type: 'port', area: '울릉도 입도' });
+      if (d === 2 && themes.indexOf('섬') >= 0) {
+        var dk = POIS.filter(function (p) { return p.dokdo; })[0];
+        used[dk.n] = 1; items.push(dk);
+      } else {
+        var s1 = pick('spot'); if (s1) items.push(s1);
+      }
+      var f = pick('food'); if (f) items.push(f);
+      var s2 = pick('spot'); if (s2) items.push(s2);
+      if (themes.indexOf('카페') >= 0) { var cf = pick('cafe'); if (cf) items.push(cf); }
+      if (d <= nights) items.push(Object.assign({}, stay));
+      if (d === days) items.push({ n: '도동항 · 사동항 출항', type: 'port', area: '여행 마무리' });
+      plan.push(items);
+    }
+    return plan;
+  }
+
+  function showResult() {
+    card.style.display = 'none';
+    resultEl.innerHTML = '<div class="pl-loading">🤖 AI가 취향과 실시간 변수를 분석해 동선을 계산하고 있어요...</div>';
+    setTimeout(function () {
+      var plan = buildCourse();
+      var compT = COMP.filter(function (c) { return c.k === sel.comp; })[0].t;
+      var total = 0;
+      plan.forEach(function (day) { day.forEach(function (it) { if (it.type !== 'port') total++; }); });
+      var pins = '', daysHtml = '';
+      plan.forEach(function (day, di) {
+        var color = DAY_COLORS[di % DAY_COLORS.length], num = 0;
+        daysHtml += '<div class="pl-day"><h4><i style="background:' + color + '"></i>Day ' + (di + 1) + '</h4>';
+        day.forEach(function (it) {
+          var thumb = it.img ? '<img src="' + it.img + '" alt="">' : '<span class="pl-noimg">' + (it.type === 'port' ? '⛴️' : it.type === 'stay' ? '🛏️' : it.type === 'cafe' ? '☕' : '🍚') + '</span>';
+          daysHtml += '<div class="pl-item">' + thumb + '<div><span class="pl-type t-' + it.type + '">' + TYPE_LABEL[it.type] + '</span><b>' + it.n + '</b><span class="pl-area">' + it.area + '</span></div></div>';
+          if (it.x != null && it.type !== 'port') {
+            num++;
+            pins += '<span class="pl-pin" style="left:' + it.x + '%;top:' + it.y + '%;background:' + color + '">' + num + '</span>';
+          }
+        });
+        daysHtml += '</div>';
+      });
+      resultEl.innerHTML =
+        '<div class="pl-sum"><div><span class="pl-sum-badge">' + DUR[sel.dur].t + '</span><h3>당신을 위한 울릉 여행코스</h3>'
+        + '<p>' + compT + ' · 테마 ' + sel.themes.map(function (t) { return '#' + t; }).join(' ') + ' · 총 ' + total + '곳 추천</p></div>'
+        + '<button class="btn btn-ghost" id="plRetry" type="button">다시 만들기</button></div>'
+        + '<div class="pl-res"><div class="pl-days">' + daysHtml + '</div>'
+        + '<div class="pl-map"><img src="images/map.jpg" alt="울릉도 지도">' + pins
+        + '<div class="pl-legend">' + plan.map(function (_, i) { return '<span><i style="background:' + DAY_COLORS[i % DAY_COLORS.length] + '"></i>Day ' + (i + 1) + '</span>'; }).join('') + '</div></div></div>'
+        + '<div class="notice">본 동선은 프로토타입 데모입니다. 실제 서비스에서는 날씨·운항·혼잡도 실시간 데이터가 반영됩니다.</div>';
+      document.getElementById('plRetry').addEventListener('click', function () {
+        card.style.display = ''; resultEl.innerHTML = ''; step = 0; sel.themes = []; render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }, 1100);
+  }
+  render();
 })();
