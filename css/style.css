@@ -744,3 +744,9 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .crs-stats span{background:var(--teal-soft);color:var(--teal-dark);border-radius:var(--r-pill);padding:6px 14px;font-size:12.5px;font-weight:800}
 @media (max-width:960px){.crs-cards{grid-template-columns:repeat(2,1fr)}.crs-detail{grid-template-columns:1fr}.crs-photo{min-height:220px}}
 @media (max-width:640px){.crs-cards{grid-template-columns:repeat(2,1fr)}.crs-card img{height:96px}.crs-info{padding:22px 20px}}
+
+/* crs 보완: 클릭 힌트 + 사진 크롭 */
+.crs-hint{display:block;font-size:11.5px;color:var(--teal-dark);font-weight:800;margin-top:6px;font-style:normal;position:relative}
+.crs-card.on .crs-hint{color:transparent}
+.crs-card.on .crs-hint::after{content:"✓ 지금 보는 중";position:absolute;left:0;top:0;color:var(--ink-3)}
+.crs-photo img{object-position:50% 42%}
