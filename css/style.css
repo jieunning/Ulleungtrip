@@ -322,6 +322,35 @@ button.chip{cursor:pointer;font-family:inherit}
 .rg-chip{display:inline-block;background:var(--amber);color:#fff;border-radius:6px;padding:2px 9px;font-size:11px;font-weight:800;margin-bottom:6px}
 .rg-txt b{display:block;color:#fff;font-size:14.5px;font-weight:800;text-shadow:0 1px 8px rgba(0,0,0,.4)}
 
+/* ---------- restaurant chart ---------- */
+.chart-banner{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:26px;background:linear-gradient(120deg,var(--teal-soft),#eef4ff 60%,#f3eefe);border:1px solid #cdeef2;border-radius:var(--r-lg);padding:20px 28px;transition:.2s;flex-wrap:wrap}
+.chart-banner:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.cb-left{display:flex;align-items:center;gap:16px}
+.cb-ico{width:52px;height:52px;border-radius:14px;background:#fff;display:grid;place-items:center;font-size:24px;box-shadow:var(--shadow-sm)}
+.cb-left b{display:block;font-size:17px;font-weight:800;color:var(--navy)}
+.cb-left span{font-size:13px;color:var(--ink-2)}
+.mc-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.mc-col{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:22px 24px}
+.mc-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.mc-badge{border-radius:var(--r-pill);padding:7px 16px;font-size:13.5px;font-weight:800;color:#fff}
+.mc-badge.local{background:var(--teal)}
+.mc-badge.tour{background:var(--navy)}
+.mc-title p{font-size:12.5px;color:var(--ink-3);font-weight:600}
+.mc-row{display:flex;align-items:center;gap:14px;padding:12px 6px;border-bottom:1px solid var(--band)}
+.mc-row:last-child{border-bottom:none}
+.mc-rank{flex:0 0 30px;text-align:center;font-size:17px;font-weight:800;color:var(--ink-3)}
+.mc-rank.top{color:var(--teal-dark);font-size:19px}
+.mc-name{flex:1}
+.mc-name b{display:block;font-size:15px;font-weight:800;color:var(--ink)}
+.mc-name span{font-size:12px;color:var(--ink-3);font-weight:600}
+.mc-delta{font-size:12.5px;font-weight:800;flex:0 0 auto}
+.mc-delta.up{color:#e0685f}
+.mc-delta.down{color:#3b82c4}
+.mc-delta.same{color:var(--ink-3)}
+.mc-delta.new{background:var(--teal-soft);color:var(--teal-dark);border-radius:6px;padding:2px 8px;font-size:11px}
+.mc-insight{margin-top:22px;background:#fff;border:1.5px solid var(--teal);border-radius:var(--r-md);padding:16px 22px;font-size:14px;color:var(--ink-2)}
+.mc-insight b{color:var(--navy)}
+
 /* ---------- stay region tabs ---------- */
 .stay-grid{display:none;grid-template-columns:repeat(3,1fr);gap:20px}
 .stay-grid.on{display:grid;animation:destFade .3s ease}

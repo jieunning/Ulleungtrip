@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>울릉 맛집차트 — 울릉트립</title>
+<meta name="description" content="빅데이터 기반 현지인 vs 여행자 인기 맛집 차트.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap nav">
+<a class="logo" href="index.html"><img src="images/logo.png" alt="울릉트립"></a>
+<nav class="nav-links" id="navLinks"><a href="index.html" class="">홈</a><a href="places.html" class="">볼거리</a><a href="courses.html" class="">추천 코스</a><a href="experience.html" class="">즐길거리</a><a href="food.html" class="active">먹거리·특산물</a><a href="stay.html" class="">숙박</a><a href="info.html" class="">여행 정보</a></nav>
+<div class="nav-side"><span class="chip-sm">₩ KRW</span><span class="chip-sm">한국어</span><span class="avatar">지</span>
+<button class="menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button></div>
+</div></header>
+
+<section class="page-hero"><div class="wrap">
+<div class="kicker">Big Data Chart</div>
+<h1>울릉 맛집차트</h1>
+<p>빅데이터가 알려주는 현지인 픽 vs 여행자 픽. 같은 섬, 다른 입맛을 비교해 보세요.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+<div class="mc-head">
+<span class="pill blue">기준 : 2026년 7월</span>
+<div class="chips" id="mcChips" style="margin-bottom:0">
+<button class="chip on" data-cat="전체">전체</button>
+<button class="chip" data-cat="식사">🍚 식사</button>
+<button class="chip" data-cat="카페·간식">☕ 카페·간식</button>
+</div>
+</div>
+<div class="grid c2" style="margin-top:22px;align-items:start">
+<div class="mc-col">
+<div class="mc-title"><span class="mc-badge local">🏠 현지인 PICK</span><p>울릉 주민들이 자주 찾는 곳</p></div>
+<div class="mc-row" data-cat="식사"><span class="mc-rank top">1</span><div class="mc-name"><b>따개비칼국수집</b><span>저동 · 식사</span></div><span class="mc-delta up">▲1</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank top">2</span><div class="mc-name"><b>도동 약소불고기</b><span>도동 · 식사</span></div><span class="mc-delta down">▼1</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank top">3</span><div class="mc-name"><b>나리분지 산채식당</b><span>나리 · 식사</span></div><span class="mc-delta same">—</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank">4</span><div class="mc-name"><b>저동항 물회집</b><span>저동 · 식사</span></div><span class="mc-delta new">NEW</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank">5</span><div class="mc-name"><b>도동 골목 백반집</b><span>도동 · 식사</span></div><span class="mc-delta up">▲2</span></div><div class="mc-row" data-cat="카페·간식"><span class="mc-rank">6</span><div class="mc-name"><b>호박막걸리 주막</b><span>나리 · 카페·간식</span></div><span class="mc-delta down">▼1</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank">7</span><div class="mc-name"><b>오징어내장탕 골목</b><span>저동 · 식사</span></div><span class="mc-delta down">▼1</span></div>
+</div>
+<div class="mc-col">
+<div class="mc-title"><span class="mc-badge tour">🧳 여행자 PICK</span><p>여행자들이 많이 방문한 곳</p></div>
+<div class="mc-row" data-cat="식사"><span class="mc-rank top">1</span><div class="mc-name"><b>홍합밥 골목</b><span>도동 · 식사</span></div><span class="mc-delta same">—</span></div><div class="mc-row" data-cat="카페·간식"><span class="mc-rank top">2</span><div class="mc-name"><b>오션뷰 카페 더함</b><span>북면 · 카페·간식</span></div><span class="mc-delta up">▲1</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank top">3</span><div class="mc-name"><b>저동항 회센터</b><span>저동 · 식사</span></div><span class="mc-delta down">▼1</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank">4</span><div class="mc-name"><b>따개비칼국수집</b><span>저동 · 식사</span></div><span class="mc-delta up">▲2</span></div><div class="mc-row" data-cat="카페·간식"><span class="mc-rank">5</span><div class="mc-name"><b>울릉 젤라또</b><span>도동 · 카페·간식</span></div><span class="mc-delta new">NEW</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank">6</span><div class="mc-name"><b>약소불고기 명가</b><span>사동 · 식사</span></div><span class="mc-delta down">▼2</span></div><div class="mc-row" data-cat="식사"><span class="mc-rank">7</span><div class="mc-name"><b>산채비빔밥집</b><span>나리 · 식사</span></div><span class="mc-delta down">▼1</span></div>
+</div>
+</div>
+<div class="mc-insight">💡 <b>이번 달 인사이트</b> — 따개비칼국수집이 양쪽 차트에 모두 올랐어요. 현지인은 국물 요리에, 여행자는 홍합밥·카페에 지갑을 열었습니다.</div>
+<div class="notice">본 차트는 서비스 컨셉을 보여주기 위한 데모 데이터입니다. 실제 서비스에서는 내비게이션·카드 결제 빅데이터 기반으로 집계됩니다.</div>
+</div></section>
+
+<footer class="site-footer"><div class="wrap">
+<div class="footer-inner">
+<div class="about"><div class="footer-logo"><img src="images/logo.png" alt="울릉트립"></div>
+<p>울릉도 여행의 정보·일정·현장을 한곳에서. 명소, 코스, 맛집, 뱃길 정보를 모은 여행 플랫폼입니다.</p>
+<div class="store-row"><span class="store-btn">📱 App Store</span><span class="store-btn">▶ Google Play</span></div></div>
+<div class="footer-col"><h4>둘러보기</h4><a href="places.html">볼거리</a><a href="courses.html">추천 코스</a><a href="experience.html">즐길거리</a><a href="food.html">먹거리·특산물</a><a href="stay.html">숙박</a><a href="info.html">여행 정보</a></div>
+<div class="footer-col"><h4>공식 정보</h4><a href="https://www.ulleung.go.kr" target="_blank" rel="noopener">울릉군청</a><a href="https://www.ulcruise.co.kr" target="_blank" rel="noopener">울릉크루즈 (포항)</a><a href="https://korean.visitkorea.or.kr" target="_blank" rel="noopener">대한민국 구석구석</a></div>
+<div class="footer-col"><h4>고객 지원</h4><a href="info.html">자주 묻는 질문</a><a href="info.html">뱃길 안내</a><a href="info.html">준비물 체크리스트</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 울릉트립. 비공식 여행 정보 사이트입니다.</span><span>요금·운항 정보는 변동될 수 있으니 예약 전 공식 채널에서 확인하세요.</span></div>
+</div></footer>
+<script src="js/main.js"></script>
+</body>
+</html>

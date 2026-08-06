@@ -79,6 +79,21 @@ function aiAsk(q) {
   load(0);
 })();
 
+// ── 맛집차트 카테고리 필터 ──
+(function () {
+  var wrap = document.getElementById('mcChips');
+  if (!wrap) return;
+  wrap.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    var cat = chip.dataset.cat;
+    wrap.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c === chip); });
+    document.querySelectorAll('.mc-row').forEach(function (r) {
+      r.style.display = (cat === '전체' || r.dataset.cat === cat) ? '' : 'none';
+    });
+  });
+})();
+
 // ── 숙소 지역 탭 필터 ──
 (function () {
   var wrap = document.getElementById('stayChips');
