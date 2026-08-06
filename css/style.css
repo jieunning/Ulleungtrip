@@ -323,8 +323,17 @@ button.chip{cursor:pointer;font-family:inherit}
 .rg-txt b{display:block;color:#fff;font-size:14.5px;font-weight:800;text-shadow:0 1px 8px rgba(0,0,0,.4)}
 
 /* ---------- planner hero (추천 코스 상단) ---------- */
-.planner-hero{position:relative;overflow:hidden;text-align:center;color:#fff;padding:92px 24px 84px;background:linear-gradient(155deg,#16205a 0%,#1c2554 45%,#0d6b7a 100%)}
-.planner-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.3) 1.5px,transparent 1.5px),radial-gradient(circle,rgba(127,227,236,.4) 2px,transparent 2px);background-size:120px 120px,210px 210px;background-position:0 0,50px 70px;opacity:.7}
+.planner-hero{position:relative;overflow:hidden;text-align:center;color:#fff;padding:92px 24px 84px;background:linear-gradient(155deg,#131c44 0%,#1c2554 50%,#0d5c6b 100%)}
+.planner-hero::before{content:"";position:absolute;inset:0;z-index:1;background-image:radial-gradient(circle,rgba(255,255,255,.3) 1.5px,transparent 1.5px),radial-gradient(circle,rgba(127,227,236,.4) 2px,transparent 2px);background-size:120px 120px,210px 210px;background-position:0 0,50px 70px;opacity:.6}
+.ph-blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;will-change:transform}
+.ph-blob.b1{width:640px;height:640px;background:#0aa5b8;opacity:.5;top:-25%;left:-12%;animation:phDrift1 16s ease-in-out infinite alternate}
+.ph-blob.b2{width:560px;height:560px;background:#2a63c9;opacity:.42;bottom:-35%;right:-10%;animation:phDrift2 20s ease-in-out infinite alternate}
+.ph-blob.b3{width:380px;height:380px;background:#9fe870;opacity:.22;top:22%;right:16%;animation:phDrift3 18s ease-in-out infinite alternate}
+.ph-blob.b4{width:300px;height:300px;background:#7fe3ec;opacity:.25;bottom:0;left:22%;animation:phDrift2 14s ease-in-out infinite alternate-reverse}
+@keyframes phDrift1{0%{transform:translate(0,0) scale(1)}100%{transform:translate(140px,90px) scale(1.18)}}
+@keyframes phDrift2{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-120px,-80px) scale(1.12)}}
+@keyframes phDrift3{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-90px,110px) scale(1.25)}}
+@media (prefers-reduced-motion:reduce){.ph-blob{animation:none}}
 .ph-inner{position:relative;z-index:2}
 .ph-eyebrow{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(127,227,236,.4);color:#7fe3ec;border-radius:var(--r-pill);padding:8px 20px;font-size:13px;font-weight:800;letter-spacing:.08em;margin-bottom:22px}
 .planner-hero h1{font-size:clamp(30px,4.2vw,46px);font-weight:800;line-height:1.3;letter-spacing:-.02em}
