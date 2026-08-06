@@ -626,9 +626,9 @@ var AI_RECO = {
           lines += '<line x1="' + a.x + '" y1="' + a.y + '" x2="' + b.x + '" y2="' + b.y + '"/>';
           var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
           var ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
-          arrows += '<g transform="translate(' + mx + ',' + my + ') rotate(' + ang + ')"><path d="M-1.6,-1.4 L1.6,0 L-1.6,1.4 Z" fill="' + color + '"/></g>';
+          arrows += '<g transform="translate(' + mx + ',' + my + ') rotate(' + ang + ')"><path d="M-0.9,-0.7 L0.7,0 L-0.9,0.7" fill="none" stroke="' + color + '" stroke-width="0.38" stroke-linecap="round" stroke-linejoin="round"/></g>';
         }
-        svg.innerHTML = '<g stroke="' + color + '" stroke-width="0.7" stroke-dasharray="1.8 1.4" fill="none" class="pl-routeline">' + lines + '</g>' + arrows;
+        svg.innerHTML = '<g stroke="' + color + '" stroke-width="0.42" stroke-dasharray="1.3 1.1" opacity="0.85" fill="none" class="pl-routeline">' + lines + '</g>' + arrows;
         pinBox.innerHTML = pts.map(function (p, k) {
           return '<span class="pl-pin" style="left:' + p.x + '%;top:' + p.y + '%;background:' + color + '">' + (k + 1) + '</span>';
         }).join('');
