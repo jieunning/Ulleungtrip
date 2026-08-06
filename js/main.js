@@ -565,30 +565,81 @@ var AI_RECO = {
     setTimeout(function () {
       var plan = buildCourse();
       var compT = COMP.filter(function (c) { return c.k === sel.comp; })[0].t;
-      var total = 0;
-      plan.forEach(function (day) { day.forEach(function (it) { if (it.type !== 'port') total++; }); });
-      var pins = '', daysHtml = '';
+      var total = 0, dist = 0;
+      plan.forEach(function (day) {
+        var prev = null;
+        day.forEach(function (it) {
+          if (it.type !== 'port') total++;
+          if (it.x != null && it.type !== 'port') {
+            if (prev) dist += Math.sqrt(Math.pow(it.x - prev.x, 2) + Math.pow(it.y - prev.y, 2));
+            prev = it;
+          }
+        });
+      });
+      var km = Math.max(10, Math.round(dist * 0.11 + plan.length * 3));
+      // 예상 경비 비중 (데모)
+      var ex = { t: 40, s: 35, f: 25 };
+      if (sel.comp === 'family') { ex.s += 6; ex.t -= 3; ex.f -= 3; }
+      if (sel.themes.indexOf('미식') >= 0) { ex.f += 8; ex.t -= 4; ex.s -= 4; }
+      if (sel.themes.indexOf('액티비티') >= 0) { ex.t += 6; ex.s -= 3; ex.f -= 3; }
+
+      var daysHtml = '', dayTabs = '';
       plan.forEach(function (day, di) {
-        var color = DAY_COLORS[di % DAY_COLORS.length], num = 0;
-        daysHtml += '<div class="pl-day"><h4><i style="background:' + color + '"></i>Day ' + (di + 1) + '</h4>';
+        var color = DAY_COLORS[di % DAY_COLORS.length];
+        dayTabs += '<button type="button" class="pl-daytab' + (di === 0 ? ' on' : '') + '" data-d="' + di + '" style="--dc:' + color + '"><i></i>Day ' + (di + 1) + '</button>';
+        daysHtml += '<div class="pl-day" data-d="' + di + '"><h4><i style="background:' + color + '"></i>Day ' + (di + 1) + '</h4>';
         day.forEach(function (it) {
           var thumb = it.img ? '<img src="' + it.img + '" alt="">' : '<span class="pl-noimg">' + (it.type === 'port' ? '⛴️' : it.type === 'stay' ? '🛏️' : it.type === 'cafe' ? '☕' : '🍚') + '</span>';
           daysHtml += '<div class="pl-item">' + thumb + '<div><span class="pl-type t-' + it.type + '">' + TYPE_LABEL[it.type] + '</span><b>' + it.n + '</b><span class="pl-area">' + it.area + '</span></div></div>';
-          if (it.x != null && it.type !== 'port') {
-            num++;
-            pins += '<span class="pl-pin" style="left:' + it.x + '%;top:' + it.y + '%;background:' + color + '">' + num + '</span>';
-          }
         });
         daysHtml += '</div>';
       });
+
       resultEl.innerHTML =
         '<div class="pl-sum"><div><span class="pl-sum-badge">' + DUR[sel.dur].t + '</span><h3>당신을 위한 울릉 여행코스</h3>'
         + '<p>' + compT + ' · 테마 ' + sel.themes.map(function (t) { return '#' + t; }).join(' ') + ' · 총 ' + total + '곳 추천</p></div>'
         + '<button class="btn btn-ghost" id="plRetry" type="button">다시 만들기</button></div>'
+        + '<div class="pl-stats">'
+        + '<div class="pl-stat"><span>여행 기간</span><b>' + DUR[sel.dur].t + '</b><small>여객선 일정에 맞춰 조정 가능</small></div>'
+        + '<div class="pl-stat"><span>동행</span><b>' + compT + '</b><small>동행 맞춤 숙소 포함</small></div>'
+        + '<div class="pl-stat"><span>총 이동 거리</span><b>약 ' + km + 'km</b><small>섬 내 이동 기준</small></div>'
+        + '<div class="pl-stat pl-exp"><span>예상 경비 비중</span><div class="pl-bubbles">'
+        + '<i class="bb1" style="width:' + (ex.t + 40) + 'px;height:' + (ex.t + 40) + 'px">' + ex.t + '%</i>'
+        + '<i class="bb2" style="width:' + (ex.s + 40) + 'px;height:' + (ex.s + 40) + 'px">' + ex.s + '%</i>'
+        + '<i class="bb3" style="width:' + (ex.f + 40) + 'px;height:' + (ex.f + 40) + 'px">' + ex.f + '%</i></div>'
+        + '<small><em class="l1"></em>교통 <em class="l2"></em>숙박 <em class="l3"></em>식사</small></div>'
+        + '</div>'
         + '<div class="pl-res"><div class="pl-days">' + daysHtml + '</div>'
-        + '<div class="pl-map"><img src="images/map.jpg" alt="울릉도 지도">' + pins
-        + '<div class="pl-legend">' + plan.map(function (_, i) { return '<span><i style="background:' + DAY_COLORS[i % DAY_COLORS.length] + '"></i>Day ' + (i + 1) + '</span>'; }).join('') + '</div></div></div>'
+        + '<div class="pl-mapwrap"><div class="pl-daytabs">' + dayTabs + '</div>'
+        + '<div class="pl-map"><img src="images/map.jpg" alt="울릉도 지도"><svg class="pl-routes" viewBox="0 0 100 100" preserveAspectRatio="none"></svg><div id="plPins"></div></div>'
+        + '<p class="pl-maphint">Day 탭을 누르면 그날의 이동 동선이 지도에 표시돼요.</p></div></div>'
         + '<div class="notice">본 동선은 프로토타입 데모입니다. 실제 서비스에서는 날씨·운항·혼잡도 실시간 데이터가 반영됩니다.</div>';
+
+      // ── 지도: 선택한 Day의 동선 라인 + 화살표 ──
+      var svg = resultEl.querySelector('.pl-routes'), pinBox = document.getElementById('plPins');
+      function drawDay(di) {
+        var color = DAY_COLORS[di % DAY_COLORS.length];
+        var pts = plan[di].filter(function (it) { return it.x != null && it.type !== 'port'; });
+        var lines = '', arrows = '';
+        for (var i = 0; i < pts.length - 1; i++) {
+          var a = pts[i], b = pts[i + 1];
+          lines += '<line x1="' + a.x + '" y1="' + a.y + '" x2="' + b.x + '" y2="' + b.y + '"/>';
+          var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+          var ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+          arrows += '<g transform="translate(' + mx + ',' + my + ') rotate(' + ang + ')"><path d="M-1.6,-1.4 L1.6,0 L-1.6,1.4 Z" fill="' + color + '"/></g>';
+        }
+        svg.innerHTML = '<g stroke="' + color + '" stroke-width="0.7" stroke-dasharray="1.8 1.4" fill="none" class="pl-routeline">' + lines + '</g>' + arrows;
+        pinBox.innerHTML = pts.map(function (p, k) {
+          return '<span class="pl-pin" style="left:' + p.x + '%;top:' + p.y + '%;background:' + color + '">' + (k + 1) + '</span>';
+        }).join('');
+        resultEl.querySelectorAll('.pl-daytab').forEach(function (t) { t.classList.toggle('on', parseInt(t.dataset.d, 10) === di); });
+        resultEl.querySelectorAll('.pl-day').forEach(function (d) { d.classList.toggle('dim', parseInt(d.dataset.d, 10) !== di); });
+      }
+      resultEl.querySelectorAll('.pl-daytab').forEach(function (t) {
+        t.addEventListener('click', function () { drawDay(parseInt(t.dataset.d, 10)); });
+      });
+      drawDay(0);
+
       document.getElementById('plRetry').addEventListener('click', function () {
         card.style.display = ''; resultEl.innerHTML = ''; step = 0; sel.themes = []; render();
         window.scrollTo({ top: 0, behavior: 'smooth' });
