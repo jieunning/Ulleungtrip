@@ -329,6 +329,15 @@ button.chip{cursor:pointer;font-family:inherit}
 @media (max-width:640px){.stay-grid{grid-template-columns:1fr}}
 
 /* ---------- curation carousel ---------- */
+.cv-panel{background:linear-gradient(160deg,#141d45 0%,#1c2554 55%,#1e3a5c 100%)}
+.cv-panel .sec-head h2{color:#fff}
+.cv-panel .sec-head p{color:#aeb6d6}
+.cv-panel .kicker{color:#7fe3ec}
+.cv-panel .cv-nav{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#fff}
+.cv-panel .cv-nav:hover{background:var(--teal);border-color:var(--teal)}
+.cv-panel .cv-dots span{background:rgba(255,255,255,.25)}
+.cv-panel .cv-dots span.on{background:#7fe3ec}
+.cv-panel .cv-slide{box-shadow:0 24px 60px rgba(0,0,0,.4)}
 .cv-stage{position:relative;height:430px;margin-top:10px}
 .cv-slide{position:absolute;left:50%;top:10px;width:300px;height:400px;margin-left:-150px;border-radius:18px;overflow:hidden;background:#fff;box-shadow:var(--shadow);cursor:pointer;transition:transform .45s ease,opacity .45s ease;display:flex;flex-direction:column}
 .cv-slide.p0{transform:translateX(0) scale(1);z-index:5}
