@@ -661,3 +661,19 @@ var AI_RECO = {
     document.querySelectorAll('.crs-detail').forEach(function (d) { d.classList.toggle('on', d.dataset.c === c); });
   });
 })();
+
+// ── 검증된 추천 코스: 지도 위치 보기 토글 ──
+(function () {
+  document.querySelectorAll('.crs-detail').forEach(function (d) {
+    var btn = d.querySelector('.crs-mapbtn');
+    var box = d.querySelector('.crs-mapbox');
+    if (!btn || !box) return;
+    btn.addEventListener('click', function () {
+      var open = !box.classList.contains('on');
+      box.classList.toggle('on', open);
+      btn.classList.toggle('on', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.querySelector('em').textContent = open ? '지도 닫기' : '지도로 위치 보기';
+    });
+  });
+})();

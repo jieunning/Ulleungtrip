@@ -759,15 +759,26 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .crs-cta:hover .cta-arrow{width:240px}
 @media (max-width:640px){.cta-arrow{width:70px}.crs-cta:hover .cta-arrow{width:120px}}
 
-/* crs: 사진+지도 사이드 컬럼 */
-.crs-side{display:flex;flex-direction:column}
-.crs-side .crs-photo{height:250px;min-height:0}
-.crs-map{position:relative;aspect-ratio:1/1;border-top:1px solid var(--line)}
-.crs-map>img{width:100%;height:100%;object-fit:fill;display:block}
+/* crs: 지도 위치 보기 토글 */
+.crs-ihead{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.crs-mapbtn{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--teal);color:var(--teal-dark);border-radius:var(--r-pill);padding:9px 16px;font-size:13px;font-weight:800;font-style:normal;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.crs-mapbtn em{font-style:normal}
+.crs-mapbtn:hover{background:var(--teal);color:#fff;box-shadow:0 6px 16px rgba(0,174,189,.28)}
+.crs-mapbtn.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.crs-mapbox{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.22,.61,.36,1),margin-top .3s,opacity .3s;opacity:0;margin-top:0}
+.crs-mapbox.on{max-height:560px;opacity:1;margin-top:20px}
+.crs-mapbox-in{display:flex;gap:22px;background:var(--band);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px}
+.crs-map{position:relative;flex:0 0 340px;aspect-ratio:1/1;border-radius:var(--r-md);overflow:hidden;background:#dbe7ec}
+.crs-map>img{width:100%;height:100%;object-fit:cover;display:block}
 .crs-map svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .crs-pin{position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;border:2.5px solid #fff;box-shadow:0 3px 8px rgba(28,37,84,.3);font-style:normal}
-.crs-map-cap{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);border-radius:var(--r-pill);padding:4px 12px;font-size:11px;font-weight:800;color:var(--ink-2)}
-@media (max-width:960px){.crs-side .crs-photo{height:200px}}
+.crs-mpside{flex:1;min-width:0;display:flex;flex-direction:column}
+.crs-mptitle{font-size:12px;font-weight:800;color:var(--teal-dark);letter-spacing:.02em;margin-bottom:10px}
+.crs-mplist{list-style:none;display:flex;flex-wrap:wrap;gap:8px 10px;align-content:flex-start}
+.crs-mplist li{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:var(--r-pill);padding:6px 13px 6px 6px;font-size:13px;font-weight:700;color:var(--ink)}
+.crs-mplist i{width:20px;height:20px;border-radius:50%;background:var(--teal-soft);color:var(--teal-dark);font-size:11px;font-weight:800;font-style:normal;display:grid;place-items:center;flex:0 0 auto}
+.crs-mpnote{margin-top:auto;padding-top:12px;font-size:12px;color:var(--ink-3);line-height:1.5}
+@media (max-width:960px){.crs-mapbox.on{max-height:900px}.crs-mapbox-in{flex-direction:column}.crs-map{flex:none;width:100%;max-width:340px}}
 
 /* crs CTA 강조 (그라데이션 바 + 화살표 애니메이션 유지) */
 .crs-cta{background:linear-gradient(115deg,var(--teal),#3a72e0);color:#fff;border-radius:14px;padding:17px 26px;border-top:none;margin-top:24px;box-shadow:0 10px 26px rgba(0,174,189,.35);transition:transform .2s,box-shadow .2s,color .25s}
