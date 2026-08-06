@@ -648,3 +648,16 @@ var AI_RECO = {
   }
   render();
 })();
+
+// ── 검증된 추천 코스: 카드 선택 전환 ──
+(function () {
+  var wrap = document.getElementById('crsCards');
+  if (!wrap) return;
+  wrap.addEventListener('click', function (e) {
+    var card = e.target.closest('.crs-card');
+    if (!card) return;
+    var c = card.dataset.c;
+    wrap.querySelectorAll('.crs-card').forEach(function (x) { x.classList.toggle('on', x === card); });
+    document.querySelectorAll('.crs-detail').forEach(function (d) { d.classList.toggle('on', d.dataset.c === c); });
+  });
+})();

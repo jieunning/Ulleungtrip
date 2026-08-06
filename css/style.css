@@ -720,3 +720,27 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
   .hero-overlay{padding-bottom:70px}
   .testi .av{display:none}
 }
+
+/* ---------- curated courses v3 (card selector + featured) ---------- */
+.crs-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.crs-card{border:2.5px solid transparent;background:#fff;border-radius:var(--r-lg);overflow:hidden;cursor:pointer;font-family:inherit;text-align:left;box-shadow:var(--shadow-sm);transition:.18s;padding:0}
+.crs-card img{width:100%;height:130px;object-fit:cover;display:block}
+.crs-card div{padding:12px 16px}
+.crs-card b{display:block;font-size:14.5px;font-weight:800;color:var(--navy)}
+.crs-card span{font-size:12px;color:var(--ink-3);font-weight:700}
+.crs-card span i{font-style:normal;color:var(--amber)}
+.crs-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.crs-card.on{border-color:var(--teal);box-shadow:var(--shadow)}
+.crs-detail{display:none;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden;grid-template-columns:400px 1fr}
+.crs-detail.on{display:grid;animation:destFade .3s ease}
+.crs-photo{position:relative;min-height:340px}
+.crs-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.crs-fbadge{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.94);color:var(--navy);border-radius:var(--r-pill);padding:5px 14px;font-size:12.5px;font-weight:800}
+.crs-info{padding:30px 34px}
+.crs-info h3{font-size:22px;font-weight:800;color:var(--teal-dark)}
+.crs-loc{font-size:13.5px;color:var(--ink-2);font-weight:700;margin-top:6px}
+.crs-desc{font-size:14px;color:var(--ink-2);margin-top:10px}
+.crs-stats{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 6px}
+.crs-stats span{background:var(--teal-soft);color:var(--teal-dark);border-radius:var(--r-pill);padding:6px 14px;font-size:12.5px;font-weight:800}
+@media (max-width:960px){.crs-cards{grid-template-columns:repeat(2,1fr)}.crs-detail{grid-template-columns:1fr}.crs-photo{min-height:220px}}
+@media (max-width:640px){.crs-cards{grid-template-columns:repeat(2,1fr)}.crs-card img{height:96px}.crs-info{padding:22px 20px}}
