@@ -952,3 +952,12 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .card-meta{font-size:12.5px}
 .sec-head h2{letter-spacing:-.025em}
 .info-card{border-radius:18px}
+
+/* 명소 상세: 갤러리 그리드 (호텔형 레이아웃) */
+.sp-gallery{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;height:560px}
+.sp-g-main,.sp-g-side img{border-radius:16px;overflow:hidden}
+.sp-g-main{overflow:hidden;box-shadow:var(--shadow-sm)}
+.sp-g-main img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block}
+.sp-g-side{display:grid;grid-template-rows:1fr 1fr;gap:12px;min-height:0}
+.sp-g-side img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block;box-shadow:var(--shadow-sm)}
+@media (max-width:640px){.sp-gallery{height:300px;grid-template-columns:1.4fr 1fr;gap:8px}.sp-g-side{gap:8px}}

@@ -944,11 +944,11 @@ var SPOT_DB = {
     '<div class="sp-crumb">📍 경상북도 울릉군 · ' + (s.region === '섬밖' ? '섬 속의 섬' : s.region) + '</div>' +
     '<div class="sp-headrow"><div><h1>' + s.n + '</h1><span class="sp-eng">' + s.eng + '</span></div>' +
     '<div class="sp-meta"><span class="rating big">★ ' + s.r + '</span>' + s.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div></div>' +
-    '<div class="sp-hero"><img src="' + s.img + '" alt="' + s.n + '"></div>' +
+    '<div class="sp-gallery"><div class="sp-g-main"><img src="' + s.img + '" alt="' + s.n + '"></div>' + '<div class="sp-g-side"><img src="' + s.gal[0] + '" alt=""><img src="' + s.gal[1] + '" alt=""></div></div>' +
     '<div class="sp-grid"><div class="sp-maincol">' +
     '<div class="sp-card"><h3>명소 소개</h3><p>' + s.desc + '</p>' +
     '<div class="sp-feats">' + s.feats.map(function (x) { return '<span>' + x + '</span>'; }).join('') + '</div>' +
-    '<div class="sp-gal"><img src="' + s.img + '" alt=""><img src="' + s.gal[0] + '" alt=""><img src="' + s.gal[1] + '" alt=""></div></div>' +
+    '</div>' +
     '<div class="sp-card"><h3>방문 팁 & 리뷰</h3><ul class="sp-tips">' + s.tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' +
     (s.revs || []).map(function (rv) { return '<blockquote class="sp-rev"><span>★★★★★</span>' + rv[0] + '<b>— ' + rv[1] + '</b></blockquote>'; }).join('') + '</div>' +
     '</div><aside class="sp-sidecol">' +
