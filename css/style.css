@@ -987,3 +987,29 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .ne-pk.on{background:var(--teal-soft);color:var(--teal-dark)}
 .sp-sub{font-size:14px}
 .sp-mapmodal iframe{width:100%;height:70vh;border:0;border-radius:14px;display:block}
+
+/* ---------- 즐길거리 개편 (waug st.) ---------- */
+.xc-row{display:flex;gap:26px;margin-top:26px;flex-wrap:wrap}
+.xc-row a{display:flex;flex-direction:column;align-items:center;gap:8px}
+.xc-row span{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);font-size:26px;transition:.2s}
+.xc-row a:hover span{transform:translateY(-4px);border-color:var(--teal);box-shadow:0 10px 24px rgba(0,174,189,.2)}
+.xc-row b{font-size:13px;font-weight:800;color:var(--ink-2)}
+.xm-grid{grid-template-columns:repeat(4,1fr)}
+@media (max-width:960px){.xm-grid{grid-template-columns:repeat(2,1fr)}}
+.xp-banner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:linear-gradient(115deg,var(--navy),#0d5c6b 55%,var(--teal));border-radius:var(--r-xl);padding:38px 44px;color:#fff;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.xp-banner:hover{transform:translateY(-3px);box-shadow:0 20px 48px rgba(28,37,84,.3)}
+.xp-eyebrow{display:inline-block;background:rgba(255,255,255,.15);border-radius:var(--r-pill);padding:5px 14px;font-size:12px;font-weight:800;color:#7fe3ec;margin-bottom:10px}
+.xp-banner h2{font-size:24px;font-weight:800}
+.xp-banner p{margin-top:8px;font-size:14px;color:#c6cdea}
+.xp-btn{background:#fff;color:var(--navy);font-weight:800;border-radius:var(--r-pill);padding:14px 28px}
+.fest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.fest-card{border-radius:var(--r-lg);padding:26px 24px;color:#fff;position:relative;overflow:hidden}
+.fest-card span{font-size:34px;display:block;margin-bottom:12px}
+.fest-card b{display:inline-block;background:rgba(255,255,255,.22);border-radius:var(--r-pill);padding:4px 12px;font-size:11.5px;font-weight:800;margin-bottom:10px}
+.fest-card h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.fest-card p{font-size:12.5px;line-height:1.6;opacity:.92}
+.fest-card.f1{background:linear-gradient(135deg,#0a8fa6,#00aebd)}
+.fest-card.f2{background:linear-gradient(135deg,#4a6fd8,#7fa8ec)}
+.fest-card.f3{background:linear-gradient(135deg,#1c2554,#3a4a8c)}
+.fest-card.f4{background:linear-gradient(135deg,#e0885f,#f5a623)}
+@media (max-width:960px){.fest-grid{grid-template-columns:repeat(2,1fr)}.xp-banner{padding:28px 26px}}
