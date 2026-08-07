@@ -830,3 +830,50 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .pl-foot{margin-top:40px}
 .pl-card{padding:44px 48px}
 @media (max-width:640px){.pl-q{font-size:23px;margin-bottom:28px}.pl-opt{width:calc(50% - 15px)}.pl-opt span{width:96px;height:96px;font-size:36px}.pl-theme img{width:88px;height:88px}.pl-card{padding:26px 20px}}
+
+/* ---------- 리얼 코스 리뷰 섹션 (구석구석 st.) ---------- */
+.rv-band{background:linear-gradient(105deg,#fbe4ee 0%,#e9e7fb 35%,#dceefb 68%,#defaf4 100%)}
+.rv-band .kicker{color:var(--teal-dark)}
+.rv-row{display:flex;gap:24px;overflow-x:auto;scroll-behavior:smooth;padding:14px 4px 26px;-ms-overflow-style:none;scrollbar-width:none}
+.rv-row::-webkit-scrollbar{display:none}
+.rv-card{flex:0 0 258px;border:none;font-family:inherit;cursor:pointer;background:#fff;border-radius:150px 150px 20px 20px;overflow:hidden;box-shadow:0 14px 34px rgba(28,37,84,.12);text-align:center;transition:transform .25s,box-shadow .25s;padding:0}
+.rv-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(28,37,84,.2)}
+.rv-card img{width:100%;height:280px;object-fit:cover;display:block}
+.rv-card-txt{padding:20px 18px 22px}
+.rv-card-txt b{display:block;font-size:15.5px;font-weight:800;color:var(--ink);line-height:1.45}
+.rv-card-txt span{display:inline-block;margin-top:9px;font-size:12px;font-weight:700;color:var(--ink-3)}
+.rv-badge{position:absolute}
+.rv-ctrl{display:flex;align-items:center;justify-content:space-between}
+.rv-count{background:#1c2554;color:#fff;border-radius:var(--r-pill);padding:6px 16px;font-size:12.5px;font-weight:800}
+.rv-nav{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:20px;color:var(--ink);cursor:pointer;margin-left:8px;transition:.2s}
+.rv-nav:hover{background:var(--navy);color:#fff}
+/* 모달 */
+.rv-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:26px;background:rgba(15,20,44,.55);backdrop-filter:blur(4px)}
+.rv-modal.on{display:flex}
+.rv-box{position:relative;background:#fff;border-radius:22px;max-width:1080px;width:100%;max-height:92vh;overflow:auto;padding:34px 38px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.rv-close{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;border:none;background:var(--band);font-size:15px;color:var(--ink-2);cursor:pointer;z-index:5}
+.rv-close:hover{background:var(--navy);color:#fff}
+.rv-head{margin-bottom:20px;padding-right:44px}
+.rv-head .pill{margin-bottom:10px}
+.rv-head h3{font-size:23px;font-weight:800;color:var(--navy);line-height:1.35}
+.rv-head a{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:800;color:var(--teal-dark)}
+.rv-head a:hover{text-decoration:underline}
+.rv-grid{display:grid;grid-template-columns:400px 1fr;gap:28px;align-items:start}
+.rv-mapcol{position:sticky;top:0}
+.rv-days{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.rv-day{border:1.5px solid var(--line);background:#fff;border-radius:var(--r-pill);padding:7px 16px;font-size:13px;font-weight:800;color:var(--ink-2);cursor:pointer;font-family:inherit;transition:.15s}
+.rv-day.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.rv-map{position:relative;aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:#dbe7ec;border:1px solid var(--line)}
+.rv-map>img{width:100%;height:100%;object-fit:cover;display:block}
+.rv-map svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.rv-mapnote{margin-top:10px;font-size:12px;color:var(--ink-3)}
+.rv-cont h4{font-size:14.5px;font-weight:800;color:var(--teal-dark);margin:20px 0 10px}
+.rv-cont h4:first-child{margin-top:0}
+.rv-list{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.rv-list li{background:var(--band);border:1px solid var(--line);border-radius:var(--r-pill);padding:6px 14px;font-size:13px;font-weight:700;color:var(--ink)}
+.rv-steps{list-style:none}
+.rv-steps li{position:relative;padding:0 0 14px 26px;font-size:13.5px;color:var(--ink-2)}
+.rv-steps li b{color:var(--ink);font-weight:800}
+.rv-steps li::before{content:"";position:absolute;left:6px;top:6px;width:9px;height:9px;border-radius:50%;border:2.5px solid var(--teal);background:#fff}
+.rv-steps li:not(:last-child)::after{content:"";position:absolute;left:10px;top:18px;bottom:0;border-left:1.5px dashed var(--line)}
+@media (max-width:960px){.rv-grid{grid-template-columns:1fr}.rv-mapcol{position:static}.rv-card{flex-basis:225px}.rv-card img{height:235px}.rv-box{padding:24px 20px}}

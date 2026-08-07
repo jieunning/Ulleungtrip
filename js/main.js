@@ -677,3 +677,143 @@ var AI_RECO = {
     });
   });
 })();
+
+// ── 홈: 다녀온 사람들의 리얼 코스 (카드 + 지도 모달) ──
+// 후기 추가/수정은 RVWS 목록에서 하세요. url: 원본 인스타그램 링크
+var RVWS = [
+  {
+    url: 'https://www.instagram.com/p/DaSQV_TD91H/', badge: 'PLACE PICK', img: 'images/drive-samseonam.jpg',
+    t: '삼선암부터 꽈배기까지<br>몽땅 추천 리스트', a: 'Instagram 후기',
+    pins: [['삼선암',60.5,20.5],['관음도',84.5,19],['천부해중전망대',52,15],['행남해안산책로',79,61]],
+    secs: [
+      ['👀 가볼만한 곳', ['삼선암','관음도','천부해중전망대','행남해안산책로']],
+      ['🍴 맛집 PICK', ['신비섬횟집','아리랑식당','울릉오징어회타운','마루통닭','아리랑김밥','카페울라']],
+      ['🍩 간식 PICK', ['행복한꽈배기','명품찹살꽈배기','다와호떡']]
+    ]
+  },
+  {
+    url: 'https://www.instagram.com/reel/DZxcrYshGEK/', badge: '입문 가이드', img: 'images/spot-gwaneumdo.jpg',
+    t: '배편부터 숙소까지<br>울릉 입문 A to Z', a: 'Instagram 후기',
+    pins: [['관음도',84.5,19],['독도전망대',62,64.5],['태하향목 모노레일',20,41.5],['행남해안산책로',79,61],['나리분지',53,41],['내수전 몽돌해변',86,45]],
+    secs: [
+      ['⛴️ 배편 꿀팁', ['묵호항 — 배가 작아 날씨 영향 큼','포항항 — 큰 배·크루즈, 차량 선적 가능','울릉공항 개항 전엔 배편만 가능 (26년 기준)']],
+      ['🗺️ 지역 감 잡기', ['관광은 북면·울릉읍에 집중','서면은 캠핑파 추천']],
+      ['🍚 맛집', ['신비섬횟집','나리촌식당','숲크닉커피','현포 교동반점','카페울라','아리랑김밥','카페글림','다애식당','울릉국화','카페너와']],
+      ['🏨 숙소', ['스테이너와','휘월','스테이토닥','차경울릉']]
+    ]
+  },
+  {
+    url: 'https://www.instagram.com/reel/C-DLPN4Rm22/', badge: '2박 3일', img: 'images/spot-monorail.jpg',
+    t: '부모님과 2박3일<br>모노레일·독도 완전정복', a: 'Instagram 후기',
+    days: [
+      { d: 'DAY 1', stops: [['사동항 도착',55,72],['태하향목 모노레일',20,41.5],['학포해변 스노클링',15,48],['천부 숙소',49,16]] },
+      { d: 'DAY 2', stops: [['도동항',75,65],['독도 왕복',87.5,84.5],['행남해안산책로',79,61],['남서일몰전망대',30,74],['통구미 버섯바위',46,79],['저동 오징어회타운',76,55]] },
+      { d: 'DAY 3', stops: [['카페울라',50,17],['나리분지',53,41],['독도전망대',62,64.5],['사동항 출항',55,72]] }
+    ],
+    secs: [
+      ['💰 경비 (4인 기준)', ['크루즈 왕복 56만','차량 선적 17.8만','숙소 38만','외식 28만','주유 5만']],
+      ['🌇 석양 명소', ['남서일몰전망대','버섯바위','태하등대 향목전망대','천부항']],
+      ['✅ 꿀팁', ['입도 전 항구 근처에서 주유 (섬 기름값 비쌈)','주방 있는 숙소 추천','배 탑승 시 신분증 필수','독도 체류는 20~30분','관광지 운영 여부는 울릉알리미 앱 확인']]
+    ]
+  },
+  {
+    url: 'https://www.instagram.com/reel/DZuRMhYpor2/', badge: '3박 4일', img: 'images/hero3.jpg',
+    t: '117만원으로 둘이서<br>알뜰 3박4일 코스', a: 'Instagram 후기',
+    days: [
+      { d: 'DAY 1', stops: [['울릉도 도착',55,72],['동백식당',74,65],['학포항 스노클링',15,48],['호텔 체크인',58,70]] },
+      { d: 'DAY 2', stops: [['아리랑식당',75,65],['촛대바위',79,57],['저동커피 · 독도문방구',76,56],['행남해안산책로',79,61],['독도 왕복',87.5,84.5]] },
+      { d: 'DAY 3', stops: [['관음도',84.5,19],['삼선암',60.5,20.5],['선창선착장 스노클링',57,13]] },
+      { d: 'DAY 4', stops: [['독도관리사무소 — 명예주민증 발급',75,64],['사동항 출항',55,72]] }
+    ],
+    secs: [
+      ['💰 경비 (2인 · 총 117만)', ['배 왕복(차량 포함) 38만','숙소 21만','식비 40만','카페·군것질 3만','주유 5만','간식·기념품 10만']],
+      ['🍴 들른 맛집', ['동백식당','우진이네','아리랑식당','명가','울릉가','우리식당']]
+    ]
+  },
+  {
+    url: 'https://www.instagram.com/reel/DI_CiRxRbqR/', badge: 'BEST 10', img: 'images/walk-haengnam.jpg',
+    t: '2박3일 여행지<br>BEST 10 총정리', a: 'Instagram 후기',
+    pins: [['관음도',84.5,19],['남서일몰전망대',30,74],['신비섬횟집',59,71],['봉래폭포',57.5,52],['나리분지',53,41],['독도전망대',62,64.5],['카페울라',50,17],['독도문방구',76,56],['삼선암',60.5,20.5],['행남해안산책로',79,61]],
+    secs: [
+      ['⭐ 별점 5점', ['남서일몰전망대 — 모노레일 4,000원','신비섬횟집 — 물회+전복죽','독도전망대 — 모노레일 7,500원','행남해안산책로 — 날씨 좋을 때 미리']],
+      ['⭐ 별점 4점', ['관음도 — 입장 4,000원, 연도교 사진 맛집']],
+      ['⭐ 별점 3점', ['봉래폭포 — 입장 2,000원','나리분지 — 6월까지 설산 뷰','독도문방구 — 유일한 소품샵','삼선암 — 차로 지나며 감상']],
+      ['✅ 팁', ['울릉도는 5월부터가 최고 시즌','날씨 통제 잦으니 산책로는 맑은 날 먼저']]
+    ]
+  }
+];
+(function () {
+  var row = document.getElementById('rvRow');
+  if (!row) return;
+  var modal = document.getElementById('rvModal'), body = document.getElementById('rvBody');
+  var countEl = document.getElementById('rvCount');
+
+  RVWS.forEach(function (r, i) {
+    var c = document.createElement('button');
+    c.type = 'button'; c.className = 'rv-card'; c.dataset.i = i;
+    c.innerHTML = '<img src="' + r.img + '" alt="" loading="lazy"><div class="rv-card-txt"><b>' + r.t + '</b><span>' + (r.badge ? '#' + r.badge + ' · ' : '') + r.a + '</span></div>';
+    row.appendChild(c);
+  });
+
+  function pinsHtml(stops) {
+    var poly = stops.map(function (s) { return s[1] + ',' + s[2]; }).join(' ');
+    var h = '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="' + poly + '" fill="none" stroke="#008a97" stroke-width="0.6" stroke-dasharray="2 1.6" opacity="0.8"/></svg>';
+    stops.forEach(function (s, k) {
+      h += '<b class="crs-pin" style="left:' + s[1] + '%;top:' + s[2] + '%" title="' + s[0] + '">' + (k + 1) + '</b>';
+    });
+    return h;
+  }
+  function open(i) {
+    var r = RVWS[i];
+    var h = '<div class="rv-head"><span class="pill blue">' + (r.badge || '후기') + '</span><h3>' + r.t + '</h3>' +
+      '<a href="' + r.url + '" target="_blank" rel="noopener">원본 후기 보기 ↗</a></div><div class="rv-grid"><div class="rv-mapcol">';
+    if (r.days) {
+      h += '<div class="rv-days">' + r.days.map(function (d, k) {
+        return '<button type="button" class="rv-day' + (k === 0 ? ' on' : '') + '" data-d="' + k + '">' + d.d + '</button>';
+      }).join('') + '</div>';
+    }
+    h += '<div class="rv-map"><img src="images/map.jpg" alt="울릉도 지도"><span id="rvLayer"></span></div>' +
+      '<p class="rv-mapnote">' + (r.days ? 'DAY를 누르면 그날의 동선이 지도에 표시돼요.' : '후기 속 장소를 지도에 표시했어요.') + '</p></div><div class="rv-cont">';
+    if (r.days) {
+      r.days.forEach(function (d) {
+        h += '<h4>' + d.d + '</h4><ul class="rv-steps">' + d.stops.map(function (s) { return '<li><b>' + s[0] + '</b></li>'; }).join('') + '</ul>';
+      });
+    }
+    (r.secs || []).forEach(function (sec) {
+      h += '<h4>' + sec[0] + '</h4><ul class="rv-list">' + sec[1].map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+    });
+    h += '</div></div>';
+    body.innerHTML = h;
+    var layer = document.getElementById('rvLayer');
+    layer.innerHTML = pinsHtml(r.days ? r.days[0].stops : r.pins);
+    body.querySelectorAll('.rv-day').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        body.querySelectorAll('.rv-day').forEach(function (x) { x.classList.toggle('on', x === btn); });
+        layer.innerHTML = pinsHtml(r.days[parseInt(btn.dataset.d, 10)].stops);
+      });
+    });
+    modal.classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() { modal.classList.remove('on'); document.body.style.overflow = ''; }
+
+  row.addEventListener('click', function (e) {
+    var c = e.target.closest('.rv-card');
+    if (c) open(parseInt(c.dataset.i, 10));
+  });
+  document.getElementById('rvClose').addEventListener('click', close);
+  modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+  var step = 282;
+  document.getElementById('rvPrev').addEventListener('click', function () { row.scrollBy({ left: -step * 2, behavior: 'smooth' }); });
+  document.getElementById('rvNext').addEventListener('click', function () { row.scrollBy({ left: step * 2, behavior: 'smooth' }); });
+  if (countEl) {
+    var upd = function () {
+      var max = row.scrollWidth - row.clientWidth;
+      var idx = max > 0 ? Math.min(RVWS.length, 1 + Math.round(row.scrollLeft / max * (RVWS.length - 1))) : 1;
+      countEl.textContent = idx + ' / ' + RVWS.length;
+    };
+    row.addEventListener('scroll', upd); upd();
+  }
+})();
