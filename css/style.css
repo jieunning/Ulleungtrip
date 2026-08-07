@@ -1048,3 +1048,57 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .inf-thumb i{position:absolute;left:10px;bottom:10px;width:30px;height:30px;border-radius:8px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-style:normal;display:grid;place-items:center}
 .inf-card>p{font-size:13.5px;font-weight:700;color:var(--ink);margin-top:12px;line-height:1.5}
 @media (max-width:960px){.inf-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- 날씨 대시보드 ---------- */
+.wx-top{display:grid;grid-template-columns:1.5fr 1fr;gap:22px;margin-bottom:22px}
+.wx-now{position:relative;overflow:hidden;background:linear-gradient(120deg,#e2f7f9,#e8f0fd 55%,#fdf3e6);border:1px solid var(--line);border-radius:var(--r-lg);padding:34px 38px}
+.wx-loc{display:inline-block;background:#fff;border-radius:var(--r-pill);padding:7px 16px;font-size:13px;font-weight:800;color:var(--navy);box-shadow:var(--shadow-sm)}
+.wx-main{display:flex;align-items:center;gap:20px;margin:24px 0}
+.wx-emoji{font-size:72px;line-height:1}
+.wx-main b{font-size:64px;font-weight:800;color:var(--navy);letter-spacing:-.03em;line-height:1}
+.wx-main span{display:block;margin-top:6px;font-size:15px;font-weight:700;color:var(--ink-2)}
+.wx-chips{display:flex;gap:10px;flex-wrap:wrap}
+.wx-chips span{background:rgba(255,255,255,.85);border-radius:var(--r-pill);padding:9px 16px;font-size:13px;font-weight:800;color:var(--ink)}
+.wx-ship{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:24px 26px;display:flex;flex-direction:column}
+.wx-ship h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:14px}
+.wx-ship ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.wx-ship li{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--band);border-radius:11px;padding:11px 15px}
+.wx-ship li b{font-size:14px;font-weight:800;color:var(--ink)}
+.wx-ship li span{display:block;font-size:11.5px;color:var(--ink-3);font-weight:600}
+.wx-ship em,.wx-strip .ok,.wx-strip .mid{font-style:normal;font-weight:800;font-size:12px;border-radius:var(--r-pill);padding:5px 12px}
+.wx-ship em.ok{background:var(--green-soft);color:var(--green)}
+.wx-ship em.mid{background:#fdf3d8;color:#b47d0e}
+.wx-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:26px 30px;margin-bottom:22px}
+.wx-card h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:18px}
+.wx-week{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.wx-day{text-align:center;background:var(--band);border-radius:14px;padding:16px 6px;border:1.5px solid transparent}
+.wx-day.on{background:var(--teal-soft);border-color:var(--teal)}
+.wx-day b{display:block;font-size:13px;font-weight:800;color:var(--ink-2)}
+.wx-day .e{display:block;font-size:30px;margin:10px 0}
+.wx-day i{display:block;font-style:normal;font-size:13.5px;font-weight:800;color:var(--ink)}
+.wx-day em{display:block;font-style:normal;font-size:11px;font-weight:700;color:var(--ink-3);margin-top:4px}
+.wx-note{margin-top:14px;font-size:13px;font-weight:700;color:var(--ink-2);background:var(--band);border-radius:10px;padding:11px 16px}
+.wx-grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.wx-hours{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.wx-hours>div{text-align:center;background:var(--band);border-radius:14px;padding:18px 8px}
+.wx-hours .e{display:block;font-size:26px;margin-bottom:8px}
+.wx-hours b{display:block;font-size:18px;font-weight:800;color:var(--navy)}
+.wx-hours i{display:block;font-style:normal;font-size:12px;font-weight:700;color:var(--ink-3);margin-top:3px}
+.wx-region{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.wx-region>div{background:var(--band);border-radius:14px;padding:20px 18px}
+.wx-region .e{font-size:30px;display:block;margin-bottom:10px}
+.wx-region b{display:block;font-size:15px;font-weight:800;color:var(--ink)}
+.wx-region i{display:block;font-style:normal;font-size:13px;font-weight:700;color:var(--teal-dark);margin-top:4px}
+.wx-region em{display:block;font-style:normal;font-size:11.5px;font-weight:600;color:var(--ink-3);margin-top:6px}
+@media (max-width:960px){.wx-top,.wx-grid2{grid-template-columns:1fr}.wx-week{grid-template-columns:repeat(4,1fr)}.wx-region{grid-template-columns:repeat(2,1fr)}}
+/* 홈 날씨 스트립 */
+.wx-strip{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:var(--r-pill);box-shadow:var(--shadow-sm);padding:13px 24px;margin:18px 0 70px;transition:.2s}
+.wx-strip:hover{border-color:var(--teal);box-shadow:0 10px 26px rgba(0,174,189,.16);transform:translateY(-2px)}
+.wxs-item{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--ink-2)}
+.wxs-item i{font-style:normal;font-size:16px}
+.wxs-item b{font-weight:800;color:var(--ink)}
+.wx-strip .ok{background:var(--green-soft);color:var(--green)}
+.wx-strip .mid{background:#fdf3d8;color:#b47d0e}
+.wxs-div{width:1px;height:16px;background:var(--line)}
+.wxs-more{margin-left:auto;font-size:13px;font-weight:800;color:var(--teal-dark)}
+@media (max-width:640px){.wxs-div{display:none}.wxs-more{margin-left:0}}

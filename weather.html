@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>울릉 날씨 대시보드 — 울릉트립</title>
+<meta name="description" content="울릉도 날씨·해상·여객선 운항 정보를 한눈에.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap nav">
+<a class="logo" href="index.html"><img src="images/logo.png" alt="울릉트립"></a>
+<nav class="nav-links" id="navLinks"><a href="index.html" class="">홈</a><a href="courses.html" class=""><em class="nav-ai">AI</em>추천 코스</a><a href="places.html" class="">볼거리</a><a href="experience.html" class="">즐길거리</a><a href="food.html" class="">먹거리·특산물</a><a href="stay.html" class="">숙박</a><a href="info.html" class="">여행 정보</a></nav>
+<div class="nav-side"><span class="chip-sm">₩ KRW</span><span class="chip-sm">한국어</span><span class="avatar">지</span>
+<button class="menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button></div>
+</div></header>
+
+<section class="page-hero"><div class="wrap">
+<div class="kicker">Weather Dashboard</div>
+<h1>울릉 날씨 대시보드</h1>
+<p>날씨가 곧 일정인 섬 — 오늘의 하늘과 바다, 뱃길 상태를 한눈에 확인하세요.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+<div class="wx-top">
+<div class="wx-now">
+<div class="wx-loc">📍 경상북도 울릉군 · 오늘</div>
+<div class="wx-main"><span class="wx-emoji">⛅</span><div><b>26°</b><span>구름 조금 · 체감 27°</span></div></div>
+<div class="wx-chips"><span>💨 풍속 4m/s</span><span>💧 습도 78%</span><span>🌊 파고 0.8m</span><span>👁️ 시정 10km</span></div>
+</div>
+<div class="wx-ship">
+<h3>⛴️ 여객선 운항 현황</h3>
+<ul>
+<li><div><b>포항 → 사동</b><span>크루즈 · 대형선</span></div><em class="ok">정상 운항</em></li>
+<li><div><b>묵호 → 도동</b><span>쾌속선</span></div><em class="ok">정상 운항</em></li>
+<li><div><b>독도 접안 지수</b><span>저동항 출발 기준</span></div><em class="mid">보통</em></li>
+</ul>
+<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="https://www.ulleung.go.kr/forecast/index.do">실시간 해상 정보 확인 →</a>
+</div>
+</div>
+
+<div class="wx-card">
+<h3>주간 예보</h3>
+<div class="wx-week">
+<div class="wx-day on"><b>오늘</b><span class="e">⛅</span><i>23° / 27°</i><em>강수 20%</em></div>
+<div class="wx-day"><b>토</b><span class="e">☀️</span><i>24° / 28°</i><em>강수 10%</em></div>
+<div class="wx-day"><b>일</b><span class="e">☀️</span><i>24° / 29°</i><em>강수 0%</em></div>
+<div class="wx-day"><b>월</b><span class="e">🌧️</span><i>22° / 25°</i><em>강수 80%</em></div>
+<div class="wx-day"><b>화</b><span class="e">⛈️</span><i>21° / 24°</i><em>강수 90%</em></div>
+<div class="wx-day"><b>수</b><span class="e">⛅</span><i>22° / 26°</i><em>강수 30%</em></div>
+<div class="wx-day"><b>목</b><span class="e">☀️</span><i>23° / 27°</i><em>강수 10%</em></div>
+</div>
+<p class="wx-note">💡 월·화요일은 강수 확률이 높아 여객선 결항 가능성이 있어요. 일정에 예비일을 두세요.</p>
+</div>
+
+<div class="wx-grid2">
+<div class="wx-card">
+<h3>시간대별 기온</h3>
+<div class="wx-hours">
+<div><span class="e">🌅</span><b>21°</b><i>아침</i></div>
+<div><span class="e">☀️</span><b>27°</b><i>낮</i></div>
+<div><span class="e">🌇</span><b>25°</b><i>저녁</i></div>
+<div><span class="e">🌙</span><b>22°</b><i>밤</i></div>
+</div>
+</div>
+<div class="wx-card">
+<h3>일출 · 일몰 & 바다</h3>
+<div class="wx-hours">
+<div><span class="e">🌄</span><b>05:32</b><i>일출</i></div>
+<div><span class="e">🌆</span><b>19:28</b><i>일몰</i></div>
+<div><span class="e">🌡️</span><b>24°</b><i>수온</i></div>
+<div><span class="e">🌊</span><b>0.8m</b><i>파고</i></div>
+</div>
+</div>
+</div>
+
+<div class="wx-card">
+<h3>지역별 날씨 <small style="font-weight:600;color:var(--ink-3)">— 고도와 방향에 따라 같은 날에도 날씨가 달라요</small></h3>
+<div class="wx-region">
+<div><span class="e">⛅</span><b>도동 · 저동</b><i>26° · 구름 조금</i><em>해안가 · 산책로 양호</em></div>
+<div><span class="e">🌫️</span><b>나리분지</b><i>23° · 안개</i><em>고지 분지 · 오전 안개 잦음</em></div>
+<div><span class="e">🌬️</span><b>성인봉</b><i>19° · 바람 강함</i><em>984m · 방풍 옷 필수</em></div>
+<div><span class="e">☀️</span><b>독도</b><i>25° · 맑음</i><em>접안 지수 보통</em></div>
+</div>
+</div>
+
+<div class="notice">이 대시보드는 데모 데이터로 구성된 프로토타입이에요. 실제 서비스에서는 기상청·해양수산부 API와 연동해 실시간 정보를 제공합니다.</div>
+</div></section>
+
+<footer class="site-footer"><div class="wrap">
+<div class="footer-inner">
+<div class="about"><div class="footer-logo"><img src="images/logo.png" alt="울릉트립"></div>
+<p>울릉도 여행의 정보·일정·현장을 한곳에서. 명소, 코스, 맛집, 뱃길 정보를 모은 여행 플랫폼입니다.</p></div>
+<div class="footer-col"><h4>둘러보기</h4><a href="courses.html">AI 추천 코스</a><a href="places.html">볼거리</a><a href="experience.html">즐길거리</a><a href="food.html">먹거리·특산물</a><a href="stay.html">숙박</a><a href="info.html">여행 정보</a><a href="chart.html">울릉 맛집차트</a></div>
+<div class="footer-col"><h4>공식 정보</h4><a href="https://www.ulleung.go.kr" target="_blank" rel="noopener">울릉군청</a><a href="https://www.ulleung.go.kr/tour/index.do" target="_blank" rel="noopener">울릉군 문화관광</a><a href="https://www.ulcruise.co.kr" target="_blank" rel="noopener">울릉크루즈 (포항)</a></div>
+<div class="footer-col"><h4>고객 지원</h4><a href="info.html">자주 묻는 질문</a><a href="info.html">뱃길 안내</a><a href="info.html">준비물 체크리스트</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 Ulleungtrip</span><span>요금·운항 정보는 변동될 수 있으니 예약 전 공식 채널에서 확인하세요.</span></div>
+</div></footer>
+<script src="js/main.js"></script>
+</body>
+</html>
