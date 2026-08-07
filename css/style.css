@@ -961,3 +961,23 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .sp-g-side{display:grid;grid-template-rows:1fr 1fr;gap:12px;min-height:0}
 .sp-g-side img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block;box-shadow:var(--shadow-sm)}
 @media (max-width:640px){.sp-gallery{height:300px;grid-template-columns:1.4fr 1fr;gap:8px}.sp-g-side{gap:8px}}
+
+/* 명소 상세: 실제 지도 임베드 · 예매 · 주변 맛집 */
+.sp-gmap{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:var(--band)}
+.sp-gmap iframe{width:100%;height:100%;border:0;display:block}
+.sp-map-zoom{position:absolute;right:10px;top:10px;width:38px;height:38px;border-radius:10px;border:none;background:rgba(255,255,255,.95);box-shadow:0 4px 14px rgba(28,37,84,.28);font-size:17px;color:var(--navy);cursor:pointer;transition:.15s}
+.sp-map-zoom:hover{background:var(--navy);color:#fff}
+.sp-maplinks{display:flex;gap:8px;margin-top:12px}
+.sp-maplinks a{flex:1;text-align:center;border:1.5px solid var(--line);border-radius:10px;padding:9px 0;font-size:12.5px;font-weight:800;color:var(--ink-2);transition:.15s}
+.sp-maplinks a:hover{border-color:var(--teal);color:var(--teal-dark)}
+.sp-price{display:flex;align-items:center;justify-content:space-between;background:var(--teal-soft);border-radius:12px;padding:13px 17px;margin-bottom:10px}
+.sp-price b{font-size:16.5px;font-weight:800;color:var(--teal-dark)}
+.sp-price span{font-size:11.5px;font-weight:800;color:#fff;background:var(--teal);border-radius:var(--r-pill);padding:3px 10px}
+.sp-book{margin-bottom:10px}
+.sp-sub{font-size:13px;font-weight:800;color:var(--ink-3);margin:16px 0 9px}
+.sp-sub:first-of-type{margin-top:0}
+.sp-near{list-style:none;display:flex;flex-direction:column;gap:8px}
+.sp-near li{display:flex;align-items:center;justify-content:space-between;background:var(--band);border:1px solid var(--line);border-radius:11px;padding:10px 15px}
+.sp-near li b{font-size:13.5px;font-weight:800;color:var(--ink)}
+.sp-near li span{font-size:12px;font-weight:600;color:var(--ink-3)}
+.sp-mapmodal iframe{width:100%;height:70vh;border:0;border-radius:14px;display:block}

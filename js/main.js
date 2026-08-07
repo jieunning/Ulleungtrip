@@ -932,6 +932,16 @@ var SPOT_DB = {
   apply();
 })();
 
+// ── 명소 상세: 예매·지도검색어·주변 맛집 데이터 ──
+var SPOT_BOOK = { monorail:1, cablecar:1, gwaneumdo:1, bongnae:1, yerimwon:1, jukdo:1 };
+var SPOT_MQ = { monorail:'태하향목관광모노레일', cablecar:'울릉도 독도전망대케이블카', haengnam:'행남해안산책로', gwaneumdo:'관음도', nari:'나리분지', seonginbong:'성인봉', bongnae:'봉래폭포', yerimwon:'예림원', samseonam:'울릉 삼선암', geobuk:'울릉 거북바위', jukdo:'울릉 죽도', museum:'독도박물관' };
+var NEAR_EAT = {
+  '울릉읍': { food:[['신비섬횟집','물회 · 전복죽'],['태양식당','따개비칼국수'],['아리랑김밥','간편 한 끼']], cafe:[['카페글림','도동'],['저동커피','독도문방구 옆'],['울릉 젤라또','도동']] },
+  '북면': { food:[['나리촌식당','산채비빔밥'],['현포 교동반점','중화요리'],['가송식당','오징어내장탕']], cafe:[['카페울라','오션뷰 대형카페'],['카페너와','천부'],['숲크닉커피','현포']] },
+  '서면': { food:[['다애식당','남양'],['동백식당','현지 백반'],['우진이네','가정식']], cafe:[['카페울라','천부 방면'],['숲크닉커피','현포 방면']] },
+  '섬밖': { food:[['저동항 회센터','물회 · 활어회'],['태양식당','따개비칼국수']], cafe:[['저동커피','저동항'],['독도문방구','굿즈 소품샵']] }
+};
+
 // ── 명소 상세 페이지 렌더 ──
 (function () {
   var box = document.getElementById('spotPage');
@@ -951,14 +961,31 @@ var SPOT_DB = {
     '</div>' +
     '<div class="sp-card"><h3>방문 팁 & 리뷰</h3><ul class="sp-tips">' + s.tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' +
     (s.revs || []).map(function (rv) { return '<blockquote class="sp-rev"><span>★★★★★</span>' + rv[0] + '<b>— ' + rv[1] + '</b></blockquote>'; }).join('') + '</div>' +
-    '</div><aside class="sp-sidecol">' +
+    (function(){ var e = NEAR_EAT[s.region] || NEAR_EAT['울릉읍']; var li = function(x){ return '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>'; }; return '<div class="sp-card"><h3>함께 가볼만한 맛집 · 카페</h3>' + '<h4 class="sp-sub">🍚 함께 가볼만한 맛집</h4><ul class="sp-near">' + e.food.map(li).join('') + '</ul>' + '<h4 class="sp-sub">☕ 함께 가볼만한 카페</h4><ul class="sp-near">' + e.cafe.map(li).join('') + '</ul>' + '<p class="rv-mapnote">' + (s.region === '섬밖' ? '저동' : s.region) + ' 근처 인기 리스트예요.</p></div>'; })() + '</div><aside class="sp-sidecol">' +
     '<div class="sp-card"><h3>운영 정보</h3><ul class="sp-info">' +
     '<li><i>⏰</i><div><b>운영 시간</b><span>' + s.hours + '</span></div></li>' +
     '<li><i>🗓️</i><div><b>휴무</b><span>' + s.closed + '</span></div></li>' +
     '<li><i>💶</i><div><b>요금</b><span>' + s.fee + '</span></div></li>' +
     '<li><i>📍</i><div><b>주소</b><span>' + s.addr + '</span></div></li></ul>' +
-    '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="' + (s.nv || 'https://map.naver.com/p/search/' + encodeURIComponent('울릉도 ' + s.n)) + '">네이버 지도 길찾기 →</a></div>' +
-    '<div class="sp-card"><h3>위치</h3><div class="sp-map"><img src="images/map.jpg" alt="울릉도 지도"><b class="crs-pin" style="left:' + s.x + '%;top:' + s.y + '%">📍</b></div><p class="rv-mapnote">지도의 위치는 대략적인 표기예요.</p></div>' +
+    (SPOT_BOOK[id] ? '<div class="sp-price"><b>' + s.fee + '</b><span>예매 필요</span></div><button type="button" class="btn btn-navy sp-book" style="width:100%">예매하기</button>' : '') + '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="' + (s.nv || 'https://map.naver.com/p/search/' + encodeURIComponent('울릉도 ' + s.n)) + '">네이버 지도 길찾기 →</a></div>' +
+    (function(){ var mq = SPOT_MQ[id] || ('울릉군 ' + s.n); var emb = 'https://maps.google.com/maps?q=' + encodeURIComponent(mq) + '&z=15&hl=ko&output=embed'; return '<div class="sp-card"><h3>위치</h3><div class="sp-gmap"><iframe src="' + emb + '" loading="lazy" allowfullscreen title="지도"></iframe>' + '<button type="button" class="sp-map-zoom" id="spMapZoom" aria-label="지도 크게 보기" title="크게 보기">⛶</button></div>' + '<div class="sp-maplinks"><a target="_blank" rel="noopener" href="' + (s.nv || 'https://map.naver.com/p/search/' + encodeURIComponent(mq)) + '">네이버 지도 ↗</a>' + '<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mq) + '">구글 지도 ↗</a></div></div>'; })() +
     '</aside></div>';
   box.innerHTML = h;
+  var bookBtn = box.querySelector('.sp-book');
+  if (bookBtn) bookBtn.addEventListener('click', function () { alert('아직 준비 중입니다.'); });
+  var zoomBtn = document.getElementById('spMapZoom');
+  if (zoomBtn) zoomBtn.addEventListener('click', function () {
+    var mq = SPOT_MQ[id] || ('울릉군 ' + s.n);
+    var m = document.createElement('div');
+    m.className = 'rv-modal on sp-mapmodal';
+    m.innerHTML = '<div class="rv-box" style="max-width:1020px"><button type="button" class="rv-close" aria-label="닫기">✕</button>' +
+      '<h3 style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:14px">📍 ' + s.n + '</h3>' +
+      '<iframe src="https://maps.google.com/maps?q=' + encodeURIComponent(mq) + '&z=16&hl=ko&output=embed" allowfullscreen title="지도 크게 보기"></iframe></div>';
+    document.body.appendChild(m);
+    document.body.style.overflow = 'hidden';
+    function cl() { m.remove(); document.body.style.overflow = ''; }
+    m.addEventListener('click', function (e) { if (e.target === m) cl(); });
+    m.querySelector('.rv-close').addEventListener('click', cl);
+    document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { cl(); document.removeEventListener('keydown', esc); } });
+  });
 })();
