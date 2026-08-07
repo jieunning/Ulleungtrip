@@ -936,10 +936,10 @@ var SPOT_DB = {
 var SPOT_BOOK = { monorail:1, cablecar:1, gwaneumdo:1, bongnae:1, yerimwon:1, jukdo:1 };
 var SPOT_MQ = { monorail:'태하향목관광모노레일', cablecar:'울릉도 독도전망대케이블카', haengnam:'행남해안산책로', gwaneumdo:'관음도', nari:'나리분지', seonginbong:'성인봉', bongnae:'봉래폭포', yerimwon:'예림원', samseonam:'울릉 삼선암', geobuk:'울릉 거북바위', jukdo:'울릉 죽도', museum:'독도박물관' };
 var NEAR_EAT = {
-  '울릉읍': { food:[['신비섬횟집','물회 · 전복죽'],['태양식당','따개비칼국수'],['아리랑김밥','간편 한 끼']], cafe:[['카페글림','도동'],['저동커피','독도문방구 옆'],['울릉 젤라또','도동']] },
-  '북면': { food:[['나리촌식당','산채비빔밥'],['현포 교동반점','중화요리'],['가송식당','오징어내장탕']], cafe:[['카페울라','오션뷰 대형카페'],['카페너와','천부'],['숲크닉커피','현포']] },
-  '서면': { food:[['다애식당','남양'],['동백식당','현지 백반'],['우진이네','가정식']], cafe:[['카페울라','천부 방면'],['숲크닉커피','현포 방면']] },
-  '섬밖': { food:[['저동항 회센터','물회 · 활어회'],['태양식당','따개비칼국수']], cafe:[['저동커피','저동항'],['독도문방구','굿즈 소품샵']] }
+  '울릉읍': { food:[['신비섬횟집','물회 · 전복죽 · 도동','4.6',1],['태양식당','따개비칼국수 · 저동','4.5',0],['아리랑김밥','간편 한 끼 · 도동','4.3',0]], cafe:[['카페글림','디저트 카페 · 도동','4.5',0],['저동커피','독도문방구 옆 · 저동','4.4',1],['울릉 젤라또','수제 젤라또 · 도동','4.4',0]] },
+  '북면': { food:[['나리촌식당','산채비빔밥 · 나리분지','4.7',1],['현포 교동반점','중화요리 · 현포','4.4',1],['가송식당','오징어내장탕 · 천부','4.5',1]], cafe:[['카페울라','오션뷰 대형카페 · 천부','4.5',1],['카페너와','베이커리 · 천부','4.4',1],['숲크닉커피','피크닉 카페 · 현포','4.3',1]] },
+  '서면': { food:[['다애식당','백반 · 남양','4.4',1],['동백식당','현지 가정식 · 남양','4.3',0],['우진이네','생선구이 · 남양','4.4',0]], cafe:[['카페울라','오션뷰 대형카페 · 천부 방면','4.5',1],['숲크닉커피','피크닉 카페 · 현포 방면','4.3',1]] },
+  '섬밖': { food:[['저동항 회센터','물회 · 활어회 · 저동','4.4',1],['태양식당','따개비칼국수 · 저동','4.5',0]], cafe:[['저동커피','저동항','4.4',1],['독도문방구','굿즈 소품샵 · 저동','4.6',0]] }
 };
 
 // ── 명소 상세 페이지 렌더 ──
@@ -961,7 +961,7 @@ var NEAR_EAT = {
     '</div>' +
     '<div class="sp-card"><h3>방문 팁 & 리뷰</h3><ul class="sp-tips">' + s.tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' +
     (s.revs || []).map(function (rv) { return '<blockquote class="sp-rev"><span>★★★★★</span>' + rv[0] + '<b>— ' + rv[1] + '</b></blockquote>'; }).join('') + '</div>' +
-    (function(){ var e = NEAR_EAT[s.region] || NEAR_EAT['울릉읍']; var li = function(x){ return '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>'; }; return '<div class="sp-card"><h3>함께 가볼만한 맛집 · 카페</h3>' + '<h4 class="sp-sub">🍚 함께 가볼만한 맛집</h4><ul class="sp-near">' + e.food.map(li).join('') + '</ul>' + '<h4 class="sp-sub">☕ 함께 가볼만한 카페</h4><ul class="sp-near">' + e.cafe.map(li).join('') + '</ul>' + '<p class="rv-mapnote">' + (s.region === '섬밖' ? '저동' : s.region) + ' 근처 인기 리스트예요.</p></div>'; })() + '</div><aside class="sp-sidecol">' +
+    (function(){ var e = NEAR_EAT[s.region] || NEAR_EAT['울릉읍']; var li = function(x){ return '<li><div class="ne-l"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>' + '<div class="ne-r"><i>★ ' + x[2] + '</i><em class="ne-pk' + (x[3] ? ' on' : '') + '">' + (x[3] ? '🅿️ 주차 가능' : '🚫 주차 불가') + '</em></div></li>'; }; return '<div class="sp-card"><h3>주변 맛집 · 카페</h3>' + '<h4 class="sp-sub">🍚 여행자들이 함께 찾은 맛집</h4><ul class="sp-near">' + e.food.map(li).join('') + '</ul>' + '<h4 class="sp-sub">☕ 이 주변 많이 가는 카페</h4><ul class="sp-near">' + e.cafe.map(li).join('') + '</ul>' + '<p class="rv-mapnote">' + (s.region === '섬밖' ? '저동' : s.region) + ' 근처 인기 리스트예요. 주차 정보는 방문 전 한 번 더 확인을 권장해요.</p></div>'; })() + '</div><aside class="sp-sidecol">' +
     '<div class="sp-card"><h3>운영 정보</h3><ul class="sp-info">' +
     '<li><i>⏰</i><div><b>운영 시간</b><span>' + s.hours + '</span></div></li>' +
     '<li><i>🗓️</i><div><b>휴무</b><span>' + s.closed + '</span></div></li>' +
