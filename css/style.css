@@ -877,3 +877,78 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .rv-steps li::before{content:"";position:absolute;left:6px;top:6px;width:9px;height:9px;border-radius:50%;border:2.5px solid var(--teal);background:#fff}
 .rv-steps li:not(:last-child)::after{content:"";position:absolute;left:10px;top:18px;bottom:0;border-left:1.5px dashed var(--line)}
 @media (max-width:960px){.rv-grid{grid-template-columns:1fr}.rv-mapcol{position:static}.rv-card{flex-basis:225px}.rv-card img{height:235px}.rv-box{padding:24px 20px}}
+
+/* ---------- 볼거리 개편 (리스팅 + 검색 사이드) ---------- */
+.pv-layout{display:grid;grid-template-columns:1fr 372px;gap:30px;align-items:start}
+.pv-side{position:sticky;top:86px;display:flex;flex-direction:column;gap:18px}
+.pv-count{font-size:13.5px;font-weight:800;color:var(--ink-3);margin-bottom:12px}
+.pv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.pv-card{display:block;color:inherit}
+.pv-empty{text-align:center;color:var(--ink-3);font-weight:700;padding:60px 0}
+.pv-search-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:18px}
+.pv-input{display:flex;align-items:center;gap:10px;background:var(--band);border-radius:12px;padding:12px 16px}
+.pv-input input{border:none;background:none;font-family:inherit;font-size:14.5px;font-weight:600;color:var(--ink);width:100%;outline:none}
+.pv-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.pv-filters .ux-dd{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;position:relative}
+.pv-filters .ux-dd.open{border-color:var(--teal)}
+.ux-down .ux-panel{top:calc(100% + 10px);bottom:auto;left:0;right:0;min-width:0}
+.pv-featured{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:18px;overflow:hidden}
+.pv-f-media{display:block;position:relative;border-radius:12px;overflow:hidden}
+.pv-f-media img{width:100%;height:190px;object-fit:cover;transition:transform .35s}
+.pv-f-media:hover img{transform:scale(1.05)}
+.pv-f-head{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.pv-f-head h3{font-size:19px;font-weight:800;color:var(--navy)}
+.pv-f-body p{font-size:13.5px;color:var(--ink-2);margin-top:8px}
+.pv-f-feats{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.pv-f-feats span{background:var(--teal-soft);color:var(--teal-dark);border-radius:var(--r-pill);padding:6px 12px;font-size:12px;font-weight:800}
+.pv-f-info{list-style:none;margin:14px 0;display:flex;flex-direction:column;gap:7px}
+.pv-f-info li{font-size:12.5px;color:var(--ink-2);font-weight:600}
+@media (max-width:960px){.pv-layout{grid-template-columns:1fr}.pv-side{position:static;order:-1}}
+@media (max-width:640px){.pv-grid{grid-template-columns:1fr}}
+
+/* ---------- 명소 상세 페이지 ---------- */
+.sp-back{display:inline-block;font-size:13.5px;font-weight:800;color:var(--ink-3);margin-bottom:18px}
+.sp-back:hover{color:var(--teal-dark)}
+.sp-crumb{display:inline-block;background:var(--navy);color:#fff;border-radius:var(--r-pill);padding:6px 16px;font-size:12.5px;font-weight:800;margin-bottom:14px;margin-left:12px}
+.sp-headrow{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.sp-headrow h1{font-size:clamp(28px,3.6vw,40px);font-weight:800;color:var(--navy);letter-spacing:-.025em}
+.sp-eng{display:block;font-size:14px;font-weight:700;color:var(--ink-3);margin-top:4px}
+.sp-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rating.big{font-size:16px;font-weight:800;color:var(--amber)}
+.sp-hero{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.sp-hero img{width:100%;height:400px;object-fit:cover;display:block}
+.sp-grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;margin-top:24px}
+.sp-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:26px 28px;margin-bottom:20px}
+.sp-card h3{font-size:16px;font-weight:800;color:var(--teal-dark);margin-bottom:14px}
+.sp-card>p{font-size:14.5px;color:var(--ink-2);line-height:1.75}
+.sp-feats{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sp-feats span{background:var(--band);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:13px;font-weight:800;color:var(--ink)}
+.sp-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.sp-gal img{width:100%;height:110px;object-fit:cover;border-radius:10px}
+.sp-tips{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.sp-tips li{position:relative;padding-left:24px;font-size:13.5px;color:var(--ink-2);font-weight:600}
+.sp-tips li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:800}
+.sp-rev{background:var(--band);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--ink-2);margin-top:10px}
+.sp-rev span{display:block;color:var(--amber);font-size:11px;letter-spacing:2px;margin-bottom:5px}
+.sp-rev b{display:block;margin-top:6px;font-size:12px;color:var(--ink-3)}
+.sp-info{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:18px}
+.sp-info li{display:flex;gap:12px;align-items:flex-start}
+.sp-info i{font-style:normal;font-size:17px;margin-top:1px}
+.sp-info b{display:block;font-size:12px;font-weight:800;color:var(--ink-3)}
+.sp-info span{font-size:13.5px;font-weight:700;color:var(--ink)}
+.sp-map{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1/1}
+.sp-map img{width:100%;height:100%;object-fit:cover;display:block}
+.sp-map .crs-pin{width:auto;height:auto;background:none;border:none;box-shadow:none;font-size:22px}
+@media (max-width:960px){.sp-grid{grid-template-columns:1fr}.sp-hero img{height:260px}}
+
+/* ---------- 전체 컴포넌트 폴리시 (v58) ---------- */
+.card{border-radius:18px}
+.card .thumb{overflow:hidden}
+.card .thumb img{transition:transform .35s ease}
+.card:hover .thumb img{transform:scale(1.06)}
+.card:hover{box-shadow:var(--shadow)}
+.card-body h3{font-size:16.5px}
+.card-body p{font-size:13.5px}
+.card-meta{font-size:12.5px}
+.sec-head h2{letter-spacing:-.025em}
+.info-card{border-radius:18px}

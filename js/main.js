@@ -817,3 +817,148 @@ var RVWS = [
     row.addEventListener('scroll', upd); upd();
   }
 })();
+
+// ── 볼거리: 명소 DB (카드·검색·상세 공용) — 수정은 이 목록에서 ──
+var SPOT_DB = {
+  monorail: { n:'태하향목 모노레일 & 대풍감', eng:'Taeha Monorail & Daepunggam', region:'서면', type:'탈것·체험', img:'images/spot-monorail.jpg', gal:['images/drive-taeha.jpg','images/kids-monorail.jpg'], r:'4.8', tags:['#스카이워크','#인생샷','#필수코스'], x:20, y:41.5,
+    desc:'모노레일을 타고 향목 정상에 오르면 스카이워크 전망대가 이어집니다. 천연기념물 대풍감 향나무 자생지와 북서 해안 절벽이 만드는 울릉도 대표 절경을 한눈에 담을 수 있어요.',
+    feats:['🚞 모노레일 탑승','🌉 스카이워크 전망대','🌲 향나무 자생지(천연기념물)'],
+    hours:'09:00 – 18:00', closed:'기상 악화 시 운행 중단', fee:'모노레일 왕복 4,000원', addr:'경북 울릉군 서면 태하리',
+    tips:['오전 일찍 가면 대기 없이 탑승할 수 있어요','바람이 강한 날은 스카이워크가 통제될 수 있어요'],
+    revs:[['스카이워크에서 본 대풍감은 말이 안 나오는 절경이에요.','여행자 J']] },
+  cablecar: { n:'독도일출전망대 케이블카', eng:'Dokdo Observatory Cable Car', region:'울릉읍', type:'탈것·체험', img:'images/spot-cablecar.jpg', gal:['images/kids-cablecar.jpg','images/hero1.jpg'], r:'4.7', tags:['#독도조망','#일몰맛집','#가족추천'], x:62, y:64.5,
+    desc:'약수공원에서 케이블카를 타고 해발 250m 전망대로 오릅니다. 맑은 날엔 87.4km 떨어진 독도가 수평선 위로 보이고, 발아래로는 도동항 전경이 펼쳐져요.',
+    feats:['🚡 케이블카 왕복','🔭 독도 조망(맑은 날)','🌇 일몰 명소'],
+    hours:'09:00 – 일몰 후(성수기 연장)', closed:'악천후 시 운휴', fee:'성인 왕복 7,500원', addr:'경북 울릉군 울릉읍 약수터길 일대',
+    tips:['일몰 1시간 전 탑승이 가장 아름다워요','해무가 끼면 독도 조망이 어려우니 오전도 좋아요'],
+    revs:[['해질녘 도동항 야경까지 보고 내려왔어요. 강추!','여행자 K']] },
+  haengnam: { n:'행남해안산책로', eng:'Haengnam Coastal Walk', region:'울릉읍', type:'산책·등산', img:'images/walk-haengnam.jpg', gal:['images/crs-stroll.jpg','images/hero1.jpg'], r:'4.8', tags:['#해안절벽','#무료','#도동↔저동'], x:79, y:61,
+    desc:'도동항과 저동항을 잇는 약 2.6km 해안 절벽 산책로. 터널과 다리를 지나며 에메랄드빛 바다를 바로 옆에 두고 걷습니다. 국내 최고 수준의 해안 산책로로 꼽혀요.',
+    feats:['🌊 절벽 해안 트레일','🌉 해상 다리·터널','📷 포토 스팟 다수'],
+    hours:'상시 개방', closed:'풍랑·야간 시 출입 통제', fee:'무료', addr:'경북 울릉군 울릉읍 도동리 ~ 저동리',
+    tips:['파도가 높은 날은 통제되니 맑은 날 먼저 다녀오세요','도동 → 저동 방향이 덜 힘들어요'],
+    revs:[['바다 위를 걷는 기분! 울릉도 1순위로 추천해요.','여행자 A']] },
+  gwaneumdo: { n:'관음도', eng:'Gwaneumdo Island', region:'북면', type:'자연·전망', img:'images/spot-gwaneumdo.jpg', gal:['images/drive-samseonam.jpg','images/hero4.jpg'], r:'4.6', tags:['#섬속의섬','#연도교','#산책'], x:84.5, y:19,
+    desc:'울릉도 동북쪽 끝, 보행 연도교를 건너 들어가는 무인도. 동백나무와 억새가 우거진 산책로를 따라 걸으면 죽도와 삼선암 조망이 시원하게 열립니다.',
+    feats:['🌉 보행 연도교','🥾 순환 산책로(약 1시간)','🐚 원시 자연'],
+    hours:'09:00 – 18:00 (입장 마감 17:00)', closed:'풍랑 시 통제', fee:'입장 4,000원', addr:'경북 울릉군 북면 천부리',
+    tips:['다리 위에서 찍는 사진이 특히 예뻐요','그늘이 적으니 여름엔 모자·물 필수'],
+    revs:[['다리 건너는 순간부터 그림이에요.','여행자 P']] },
+  nari: { n:'나리분지', eng:'Nari Basin', region:'북면', type:'자연·전망', img:'images/spot-nari.jpg', gal:['images/food-sanchae.jpg','images/walk-seonginbong.jpg'], r:'4.7', tags:['#화산분지','#산채요리','#무료'], x:53, y:41,
+    desc:'울릉도 유일의 평지이자 화산 칼데라 분지. 너와집·투막집 등 전통 가옥과 울릉국화·섬백리향 군락지가 있으며, 산채비빔밥의 본고장으로도 유명합니다.',
+    feats:['🌋 칼데라 분지 지형','🏠 너와집·투막집','🌼 천연기념물 군락지'],
+    hours:'상시 개방', closed:'연중무휴', fee:'무료', addr:'경북 울릉군 북면 나리',
+    tips:['산채비빔밥·호박막걸리 점심 코스로 최고예요','성인봉 등반 출발점으로도 좋아요'],
+    revs:[['6월에도 설산이 보이는 신기한 곳!','여행자 L']] },
+  seonginbong: { n:'성인봉', eng:'Seonginbong Peak', region:'북면', type:'산책·등산', img:'images/walk-seonginbong.jpg', gal:['images/spot-nari.jpg','images/hero1.jpg'], r:'4.7', tags:['#최고봉984m','#원시림','#등산'], x:50, y:50,
+    desc:'울릉도 최고봉(984m). 원시림 보호구역을 지나 정상에 서면 섬 전체와 동해가 한눈에 들어옵니다. 나리분지 코스와 KBS중계소 코스가 대표적이에요.',
+    feats:['⛰️ 정상 파노라마','🌳 원시림 보호구역','🥾 왕복 4~6시간'],
+    hours:'상시 개방(일몰 전 하산 권장)', closed:'기상 악화 시 통제', fee:'무료', addr:'나리분지 · KBS중계소 코스 출발',
+    tips:['등산화 필수, 물 넉넉히 챙기세요','나리분지 출발 코스가 경사가 완만해요'],
+    revs:[['정상에서 본 울릉도 전경, 평생 기억에 남을 거예요.','여행자 S']] },
+  bongnae: { n:'봉래폭포', eng:'Bongnae Falls', region:'울릉읍', type:'자연·전망', img:'images/kids-bongnae.jpg', gal:['images/spot-nari.jpg','images/walk-naesujeon.jpg'], r:'4.6', tags:['#3단폭포','#천연에어컨','#가족추천'], x:57.5, y:52,
+    desc:'낙차 약 30m, 3단으로 떨어지는 울릉도 대표 폭포. 가는 길의 풍혈(천연 에어컨)은 한여름에도 시원한 바람이 나와 아이들과 함께 가기 좋아요.',
+    feats:['💧 3단 폭포','❄️ 풍혈(천연 에어컨)','🚶 매표소에서 도보 10분'],
+    hours:'08:00 – 18:00', closed:'기상 악화 시 통제', fee:'입장 2,000원', addr:'경북 울릉군 울릉읍 사동',
+    tips:['호박식혜 파는 휴게소도 들러보세요','산책로가 완만해서 부모님과 가기 좋아요'],
+    revs:[['풍혈 앞은 진짜 에어컨보다 시원해요.','여행자 M']] },
+  yerimwon: { n:'예림원', eng:'Yerimwon Garden', region:'북면', type:'자연·전망', img:'images/kids-yerimwon.jpg', gal:['images/drive-taeha.jpg','images/hero1.jpg'], r:'4.5', tags:['#절벽정원','#오션뷰','#문자조각공원'], x:36, y:36,
+    desc:'절벽 위에 조성된 식물원 겸 문자조각공원. 잘 가꾼 정원 너머로 북면 바다가 파노라마로 펼쳐져 사진 찍기 좋은 곳이에요.',
+    feats:['🌺 식물원·조각공원','🌊 절벽 오션뷰','📷 포토존'],
+    hours:'09:00 – 18:00', closed:'동절기 단축 운영', fee:'입장 5,000원', addr:'경북 울릉군 북면 울릉순환로',
+    tips:['전망 카페에서 쉬어가기 좋아요','드라이브 코스 중간에 들르기 딱이에요'],
+    revs:[['정원도 바다도 다 예뻐서 사진이 잘 나와요.','여행자 H']] },
+  samseonam: { n:'삼선암', eng:'Samseonam Rocks', region:'북면', type:'자연·전망', img:'images/drive-samseonam.jpg', gal:['images/spot-gwaneumdo.jpg','images/drive-iljudoro.jpg'], r:'4.6', tags:['#기암괴석','#드라이브','#무료'], x:60.5, y:20.5,
+    desc:'하늘에서 내려온 세 선녀가 바위가 되었다는 전설의 기암. 북면 해안도로에서 차를 세우고 바로 감상할 수 있는 드라이브 명소입니다.',
+    feats:['🪨 전설의 3형제 바위','🚗 해안도로 뷰포인트','🅿️ 주차 가능'],
+    hours:'상시 개방', closed:'연중무휴', fee:'무료', addr:'경북 울릉군 북면 해안도로',
+    tips:['관음도와 묶어서 동선을 짜면 좋아요','오전 순광 때 사진이 잘 나와요'],
+    revs:[['지나가다 멈출 수밖에 없는 풍경.','여행자 C']] },
+  geobuk: { n:'통구미 거북바위', eng:'Geobuk Rock', region:'서면', type:'자연·전망', img:'images/drive-geobuk.jpg', gal:['images/drive-iljudoro.jpg','images/hero3.jpg'], r:'4.5', tags:['#거북바위','#향나무자생지','#몽돌해변'], x:46.5, y:79.5,
+    desc:'거북이가 기어가는 모습을 닮은 바위와 통구미 향나무 자생지(천연기념물)가 함께 있는 남서 해안 명소. 주변 몽돌해변에서 물놀이도 즐길 수 있어요.',
+    feats:['🐢 거북 모양 기암','🌲 향나무 자생지','🏖️ 몽돌해변'],
+    hours:'상시 개방', closed:'연중무휴', fee:'무료', addr:'경북 울릉군 서면 남양리 통구미',
+    tips:['일주도로 드라이브 중 쉬어가기 좋아요','스노클링 포인트로도 인기예요'],
+    revs:[['바위 모양이 진짜 거북이! 아이가 좋아했어요.','여행자 Y']] },
+  jukdo: { n:'죽도', eng:'Jukdo Island', region:'섬밖', type:'자연·전망', img:'images/hero4.jpg', gal:['images/spot-gwaneumdo.jpg','images/hero2.jpg'], r:'4.4', tags:['#섬속의섬','#더덕','#나선계단'], x:88, y:31,
+    desc:'저동항에서 배로 20분, 대나무가 많아 죽도라 불리는 섬. 365개 나선형 계단을 올라 만나는 섬 한 바퀴 산책로와 더덕밭이 명물입니다.',
+    feats:['⛴️ 도선 20분','🌀 나선형 계단(365개)','🌿 더덕 재배지'],
+    hours:'도선 운항 시간에 따름', closed:'기상 악화 시 결항', fee:'도선 왕복 유료(선사별 상이) · 입장 무료', addr:'저동항 출발',
+    tips:['체류 시간이 배 시간에 묶이니 미리 확인하세요','더덕주스 꼭 마셔보세요'],
+    revs:[['계단은 힘들지만 위에서 본 울릉도가 최고예요.','여행자 B']] },
+  museum: { n:'독도박물관', eng:'Dokdo Museum', region:'울릉읍', type:'실내·문화', img:'images/hero2.jpg', gal:['images/hero2.jpg','images/spot-cablecar.jpg'], r:'4.5', tags:['#명소소개','#실내관람','#아이·가족추천'], x:63, y:66,
+    desc:'독도의 역사·지리·생태 정보를 한눈에 볼 수 있는 울릉도 대표 박물관입니다. 다양한 전시와 영상, 체험 프로그램을 통해 독도의 가치를 쉽고 재미있게 배울 수 있어요. 케이블카를 타는 약수공원 안에 있어 함께 둘러보기 좋습니다.',
+    feats:['🏛️ 독도 역사 전시','🎬 미디어 & 영상관','🧩 체험 프로그램'],
+    hours:'09:00 – 18:00 (입장 마감 17:30)', closed:'매주 월요일 · 1월 1일 · 설/추석 당일', fee:'관람 무료', addr:'경북 울릉군 울릉읍 약수터길 90-17',
+    nv:'https://map.naver.com/p/entry/place/20431449',
+    tips:['케이블카·향토사료관과 묶어 반나절 코스로 좋아요','비 오는 날 실내 일정으로 최고예요'],
+    revs:[['전시 구성이 잘 되어 있어 아이와 함께 배우기 좋았어요.','Anna'],['독도의 역사를 이해하는 데 큰 도움이 되었습니다.','John']] }
+};
+
+// ── 볼거리: 리스팅 + 검색/필터 ──
+(function () {
+  var grid = document.getElementById('pvGrid');
+  if (!grid) return;
+  var q = document.getElementById('pvQ'), countEl = document.getElementById('pvCount'), emptyEl = document.getElementById('pvEmpty');
+  var f = { region: '', type: '' };
+  var keys = Object.keys(SPOT_DB);
+  keys.forEach(function (k) {
+    var s = SPOT_DB[k];
+    var a = document.createElement('a');
+    a.className = 'card pv-card'; a.href = 'spot.html?id=' + k; a.dataset.k = k;
+    a.innerHTML = '<div class="thumb"><div class="badge">' + s.type + '</div><img src="' + s.img + '" alt="' + s.n + '" loading="lazy"></div>' +
+      '<div class="card-body"><h3>' + s.n + '</h3><p>' + s.desc.split('다.')[0] + '다.</p>' +
+      '<div class="card-meta"><span>' + (s.region === '섬밖' ? '섬 속의 섬' : s.region) + '</span><span class="rating">★ ' + s.r + '</span></div></div>';
+    grid.appendChild(a);
+  });
+  function apply() {
+    var kw = (q.value || '').trim(), shown = 0;
+    grid.querySelectorAll('.pv-card').forEach(function (c) {
+      var s = SPOT_DB[c.dataset.k];
+      var ok = (!f.region || s.region === f.region) && (!f.type || s.type === f.type) && (!kw || s.n.indexOf(kw) > -1);
+      c.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    countEl.textContent = '총 ' + shown + '곳';
+    emptyEl.style.display = shown ? 'none' : '';
+  }
+  q.addEventListener('input', apply);
+  document.querySelectorAll('.pv-filters .ux-opt').forEach(function (o) {
+    o.addEventListener('click', function () {
+      f[o.closest('.ux-dd').dataset.f] = o.dataset.v || '';
+      apply();
+    });
+  });
+  apply();
+})();
+
+// ── 명소 상세 페이지 렌더 ──
+(function () {
+  var box = document.getElementById('spotPage');
+  if (!box) return;
+  var id = new URLSearchParams(location.search).get('id');
+  var s = SPOT_DB[id];
+  if (!s) { location.replace('places.html'); return; }
+  document.title = s.n + ' — 울릉트립';
+  var h = '<a class="sp-back" href="places.html">← 볼거리 목록으로</a>' +
+    '<div class="sp-crumb">📍 경상북도 울릉군 · ' + (s.region === '섬밖' ? '섬 속의 섬' : s.region) + '</div>' +
+    '<div class="sp-headrow"><div><h1>' + s.n + '</h1><span class="sp-eng">' + s.eng + '</span></div>' +
+    '<div class="sp-meta"><span class="rating big">★ ' + s.r + '</span>' + s.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div></div>' +
+    '<div class="sp-hero"><img src="' + s.img + '" alt="' + s.n + '"></div>' +
+    '<div class="sp-grid"><div class="sp-maincol">' +
+    '<div class="sp-card"><h3>명소 소개</h3><p>' + s.desc + '</p>' +
+    '<div class="sp-feats">' + s.feats.map(function (x) { return '<span>' + x + '</span>'; }).join('') + '</div>' +
+    '<div class="sp-gal"><img src="' + s.img + '" alt=""><img src="' + s.gal[0] + '" alt=""><img src="' + s.gal[1] + '" alt=""></div></div>' +
+    '<div class="sp-card"><h3>방문 팁 & 리뷰</h3><ul class="sp-tips">' + s.tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' +
+    (s.revs || []).map(function (rv) { return '<blockquote class="sp-rev"><span>★★★★★</span>' + rv[0] + '<b>— ' + rv[1] + '</b></blockquote>'; }).join('') + '</div>' +
+    '</div><aside class="sp-sidecol">' +
+    '<div class="sp-card"><h3>운영 정보</h3><ul class="sp-info">' +
+    '<li><i>⏰</i><div><b>운영 시간</b><span>' + s.hours + '</span></div></li>' +
+    '<li><i>🗓️</i><div><b>휴무</b><span>' + s.closed + '</span></div></li>' +
+    '<li><i>💶</i><div><b>요금</b><span>' + s.fee + '</span></div></li>' +
+    '<li><i>📍</i><div><b>주소</b><span>' + s.addr + '</span></div></li></ul>' +
+    '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="' + (s.nv || 'https://map.naver.com/p/search/' + encodeURIComponent('울릉도 ' + s.n)) + '">네이버 지도 길찾기 →</a></div>' +
+    '<div class="sp-card"><h3>위치</h3><div class="sp-map"><img src="images/map.jpg" alt="울릉도 지도"><b class="crs-pin" style="left:' + s.x + '%;top:' + s.y + '%">📍</b></div><p class="rv-mapnote">지도의 위치는 대략적인 표기예요.</p></div>' +
+    '</aside></div>';
+  box.innerHTML = h;
+})();
