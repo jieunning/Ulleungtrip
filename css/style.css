@@ -1104,15 +1104,23 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 @media (max-width:640px){.wxs-div{display:none}.wxs-more{margin-left:0}}
 
 /* ---------- 먹거리 개편 (NOL st.) ---------- */
-.fd-rank-row{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-.fd-rk-img{position:relative;border-radius:14px;overflow:hidden}
-.fd-rk-img img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .3s}
+.fd-rank-row{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.fd-rk-img{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:3/4}
+.fd-rk-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
 .fd-rk:hover .fd-rk-img img{transform:scale(1.06)}
-.fd-rk-img b{position:absolute;left:8px;bottom:-6px;font-size:44px;font-weight:800;color:#fff;font-style:italic;text-shadow:0 3px 12px rgba(0,0,0,.45);line-height:1}
-.fd-rk h3{font-size:14.5px;font-weight:800;color:var(--ink);margin-top:12px}
+.fd-rk-no{position:absolute;top:10px;left:10px;font-style:normal;background:rgba(28,37,84,.85);color:#fff;border-radius:8px;padding:4px 10px;font-size:11.5px;font-weight:800;backdrop-filter:blur(3px)}
+.fd-rk h3{font-size:15px;font-weight:800;color:var(--ink);margin-top:12px}
 .fd-rk span{display:block;font-size:12px;color:var(--ink-3);font-weight:600;margin-top:3px}
-.fd-rk em{display:block;font-style:normal;font-size:12.5px;font-weight:800;color:var(--amber);margin-top:3px}
+.fd-rk-price{display:flex;align-items:baseline;gap:8px;margin-top:6px}
+.fd-rk-price em{font-style:normal;font-size:12.5px;font-weight:800;color:var(--amber)}
+.fd-rk-price b{font-size:14.5px;font-weight:800;color:var(--teal-dark)}
 @media (max-width:960px){.fd-rank-row{grid-template-columns:repeat(3,1fr)}}
+/* NOL풍 플랫 아이콘 행 */
+.xc-flat{gap:34px}
+.xc-flat span{width:58px;height:58px;border:none;background:none;box-shadow:none;border-radius:0}
+.xc-flat span svg{width:52px;height:52px;display:block}
+.xc-flat a:hover span{transform:translateY(-5px);box-shadow:none;border:none}
+.xc-flat b{font-size:13.5px}
 .fd-coupon{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:linear-gradient(115deg,#f5a623,#e0685f);border-radius:var(--r-xl);padding:30px 38px;color:#fff;box-shadow:var(--shadow)}
 .fd-cp-badge{display:inline-block;background:rgba(255,255,255,.25);border-radius:var(--r-pill);padding:4px 13px;font-size:11.5px;font-weight:800;letter-spacing:.06em;margin-bottom:8px}
 .fd-coupon h2{font-size:22px;font-weight:800}
