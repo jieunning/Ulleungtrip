@@ -1108,7 +1108,7 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .fd-rk-img{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:3/4}
 .fd-rk-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
 .fd-rk:hover .fd-rk-img img{transform:scale(1.06)}
-.fd-rk-no{position:absolute;top:10px;left:10px;font-style:normal;background:rgba(28,37,84,.85);color:#fff;border-radius:8px;padding:4px 10px;font-size:11.5px;font-weight:800;backdrop-filter:blur(3px)}
+.fd-rk-no2{position:absolute;left:12px;bottom:2px;font-size:52px;font-weight:800;font-style:italic;color:#fff;line-height:1;text-shadow:0 4px 14px rgba(0,0,0,.5)}
 .fd-rk h3{font-size:15px;font-weight:800;color:var(--ink);margin-top:12px}
 .fd-rk span{display:block;font-size:12px;color:var(--ink-3);font-weight:600;margin-top:3px}
 .fd-rk-price{display:flex;align-items:baseline;gap:8px;margin-top:6px}
@@ -1138,3 +1138,20 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .fd-buy{flex:0 0 auto;background:var(--navy);color:#fff;border-color:var(--navy);padding:10px 18px}
 .fd-buy:hover{background:var(--teal);border-color:var(--teal);color:#fff}
 @media (max-width:960px){.fd-shop{grid-template-columns:1fr}}
+
+/* 먹거리: 캐치테이블풍 맛집·카페 카드 */
+.ct-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.ct-img{position:relative;border-radius:16px;overflow:hidden}
+.ct-img img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .3s}
+.ct-card:hover .ct-img img{transform:scale(1.05)}
+.ct-benefit{position:absolute;left:0;right:0;bottom:0;background:rgba(240,101,60,.92);color:#fff;text-align:center;padding:9px 0;font-size:13px;font-weight:800}
+.ct-badge{margin-top:12px;font-size:12.5px;font-weight:800;color:#b0483a}
+.ct-body{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.ct-badge+.ct-body{margin-top:6px}
+.ct-body h3{font-size:16px;font-weight:800;color:var(--ink)}
+.ct-meta{display:block;font-size:12.5px;font-weight:600;color:var(--ink-3);margin-top:4px}
+.ct-meta em{font-style:normal;font-weight:800;color:var(--amber)}
+.ct-book{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line);border-radius:var(--r-pill);padding:9px 16px;font-size:13px;font-weight:800;color:var(--ink);transition:.15s}
+.ct-book b{color:#03c75a;font-weight:800}
+.ct-book:hover{border-color:#03c75a}
+@media (max-width:960px){.ct-grid{grid-template-columns:repeat(2,1fr)}}
