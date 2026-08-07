@@ -995,3 +995,8 @@ var NEAR_EAT = {
     document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { cl(); document.removeEventListener('keydown', esc); } });
   });
 })();
+
+// ── 인플루언서 팬하기 (데모) ──
+document.querySelectorAll('.inf-fan').forEach(function (b) {
+  b.addEventListener('click', function () { alert('아직 준비 중입니다.'); });
+});
