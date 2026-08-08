@@ -1000,3 +1000,162 @@ var NEAR_EAT = {
 document.querySelectorAll('.inf-fan').forEach(function (b) {
   b.addEventListener('click', function () { alert('아직 준비 중입니다.'); });
 });
+
+// ── 체험 상세 DB & 렌더 ──
+var ACT_DB = {
+  snorkel: { n:'스노클링 체험', eng:'Snorkeling', area:'학포 · 선창 · 통구미', img:'images/hero3.jpg', gal:['images/marine-sup.jpg','images/marine-kayak.jpg'], r:'4.8', tags:['#여름한정','#장비대여','#초보환영'],
+    desc:'에메랄드빛 울릉 바다는 시야가 좋기로 유명해요. 학포·선창·통구미 일대의 스노클링 포인트에서 열대어 못지않은 바닷속 풍경을 만날 수 있습니다. 장비 대여와 안전 교육이 포함되어 처음이어도 걱정 없어요.',
+    feats:['🤿 장비 풀세트 대여','👨‍🏫 안전 교육 포함','📷 수중 사진 촬영'],
+    price:'1인 40,000원~', dur:'약 2시간', season:'6월 ~ 9월', meet:'업체별 상이 (학포항 등)', book:'업체 전화 · 네이버 예약',
+    items:['수영복 · 여벌 옷','타월','방수팩','아쿠아슈즈'], mq:'울릉도 스노클링',
+    tips:['오전 시간대가 물이 맑아요','수온이 낮은 날은 슈트 대여를 추천해요'],
+    revs:[['물이 진짜 유리같아요. 울릉 와서 제일 잘한 일!','여행자 S']] },
+  kayak: { n:'투명카약', eng:'Clear Kayak', area:'저동 · 천부', img:'images/marine-kayak.jpg', gal:['images/hero3.jpg','images/marine-sup.jpg'], r:'4.7', tags:['#인생샷','#커플추천','#가족추천'],
+    desc:'바닥이 투명한 카약을 타고 울릉 바다 위를 미끄러져요. 발밑으로 바닷속이 훤히 들여다보여 아이들과 함께해도 좋고, 드론 촬영 서비스를 운영하는 업체도 있어요.',
+    feats:['🛶 2인승 투명카약','🦺 구명조끼 제공','📸 인생샷 스팟'],
+    price:'1인 30,000원~', dur:'약 1시간', season:'6월 ~ 9월', meet:'저동 · 천부 해변', book:'업체 전화 · 네이버 예약',
+    items:['여벌 옷','방수팩','선크림'], mq:'울릉도 투명카약',
+    tips:['바람 없는 오전이 초보자에게 편해요','휴대폰은 방수팩 필수!'],
+    revs:[['발 밑이 다 보여서 신기했어요. 사진도 예쁘게 나와요.','여행자 K']] },
+  sup: { n:'패들보드(SUP)', eng:'Stand Up Paddle', area:'천부 해변', img:'images/marine-sup.jpg', gal:['images/hero3.jpg','images/marine-kayak.jpg'], r:'4.6', tags:['#초보OK','#어드벤처','#절벽뷰'],
+    desc:'보드 위에 서서 노를 저으며 해안 절벽 아래까지 다가가 보세요. 균형 잡는 법부터 차근차근 알려주기 때문에 수영을 못해도 즐길 수 있어요.',
+    feats:['🏄 보드 · 패들 대여','👨‍🏫 입문 강습 포함','🌅 절벽 코스 투어'],
+    price:'1인 40,000원~', dur:'약 1시간 30분', season:'6월 ~ 9월', meet:'천부 해변', book:'업체 전화 · 네이버 예약',
+    items:['수영복 · 여벌 옷','타월','선크림'], mq:'울릉도 패들보드',
+    tips:['무릎으로 시작해 천천히 일어서면 쉬워요','일몰 시간대 코스가 특히 아름다워요'],
+    revs:[['절벽 밑까지 가는 코스가 압권이에요.','여행자 P']] },
+  fishing: { n:'선상 낚시', eng:'Boat Fishing', area:'저동항 · 도동항 출발', img:'images/marine-fishing.jpg', gal:['images/hero4.jpg','images/hero1.jpg'], r:'4.5', tags:['#손맛','#오징어','#야간출조'],
+    desc:'울릉 근해에서 즐기는 선상 낚시. 여름 밤에는 오징어 채낚기, 계절에 따라 방어·부시리까지 손맛이 다양해요. 잡은 고기는 회로 떠주는 선사도 있습니다.',
+    feats:['🎣 낚시대 · 미끼 제공','🌙 야간 오징어 출조','🔪 현장 손질 가능'],
+    price:'1인 60,000원~', dur:'약 3시간', season:'연중 (기상 영향)', meet:'저동항 · 도동항', book:'선사 전화 예약 (예약제)',
+    items:['멀미약','바람막이','모자'], mq:'울릉도 선상낚시',
+    tips:['출항 30분 전 멀미약을 미리 드세요','밤바다는 여름에도 쌀쌀해요 — 겉옷 필수'],
+    revs:[['오징어 배 불빛 아래서 잡는 손맛, 잊을 수 없어요.','여행자 J']] },
+  cruise: { n:'독도 크루즈 투어', eng:'Dokdo Cruise', area:'저동항 출발', img:'images/hero2.jpg', gal:['images/deal-cruise.jpg','images/hero4.jpg'], r:'4.6', tags:['#독도','#버킷리스트','#사전예매'],
+    desc:'울릉도 여행의 하이라이트, 독도 여객선 투어예요. 왕복 3~4시간 일정으로, 기상이 좋으면 접안해 20~30분간 독도 땅을 밟을 수 있습니다. 접안이 어려운 날엔 선회 관람으로 대체돼요.',
+    feats:['⛴️ 왕복 여객선','🏝️ 접안 시 상륙 20~30분','🇰🇷 독도명예주민증 발급 가능'],
+    price:'1인 55,000원~', dur:'왕복 3~4시간', season:'연중 (기상 영향 큼)', meet:'저동항 여객터미널', book:'사전 예매 필수 · 신분증 지참',
+    items:['신분증(필수)','멀미약','망원경'], mq:'울릉도 독도 여객선',
+    tips:['접안 성공률이 높지 않아요 — 일정 중반에 배치하고 예비일을 두세요','독도관리사무소에서 독도명예주민증을 발급받을 수 있어요'],
+    revs:[['접안 성공! 독도 땅 밟은 20분이 여행 전체의 하이라이트였어요.','여행자 A']] },
+};
+(function () {
+  var box = document.getElementById('actPage');
+  if (!box) return;
+  var id = new URLSearchParams(location.search).get('id');
+  var s = ACT_DB[id];
+  if (!s) { location.replace('experience.html'); return; }
+  document.title = s.n + ' — 울릉트립';
+  var emb='https://maps.google.com/maps?q='+encodeURIComponent(s.mq)+'&z=13&hl=ko&output=embed';
+  box.innerHTML = '<a class="sp-back" href="experience.html">← 즐길거리 목록으로</a>' +
+    '<div class="sp-crumb">🏄 울릉도 체험 · ' + s.area + '</div>' +
+    '<div class="sp-headrow"><div><h1>' + s.n + '</h1><span class="sp-eng">' + s.eng + '</span></div>' +
+    '<div class="sp-meta"><span class="rating big">★ ' + s.r + '</span>' + s.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('') + '</div></div>' +
+    '<div class="sp-gallery"><div class="sp-g-main"><img src="'+s.img+'" alt="'+s.n+'"></div><div class="sp-g-side"><img src="'+s.gal[0]+'" alt=""><img src="'+s.gal[1]+'" alt=""></div></div>' +
+    '<div class="sp-grid"><div class="sp-maincol">' +
+    '<div class="sp-card"><h3>체험 소개</h3><p>'+s.desc+'</p><div class="sp-feats">'+s.feats.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div></div>' +
+    '<div class="sp-card"><h3>준비물</h3><ul class="rv-list">'+s.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>' +
+    '<div class="sp-card"><h3>참여 팁 & 리뷰</h3><ul class="sp-tips">'+s.tips.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>' +
+    (s.revs||[]).map(function(rv){return '<blockquote class="sp-rev"><span>★★★★★</span>'+rv[0]+'<b>— '+rv[1]+'</b></blockquote>';}).join('') + '</div>' +
+    '</div><aside class="sp-sidecol">' +
+    '<div class="sp-card"><h3>이용 정보</h3><ul class="sp-info">' +
+    '<li><i>💶</i><div><b>요금</b><span>'+s.price+'</span></div></li>' +
+    '<li><i>⏱️</i><div><b>소요 시간</b><span>'+s.dur+'</span></div></li>' +
+    '<li><i>📅</i><div><b>운영 시기</b><span>'+s.season+'</span></div></li>' +
+    '<li><i>📍</i><div><b>집합 장소</b><span>'+s.meet+'</span></div></li>' +
+    '<li><i>📞</i><div><b>예약 방법</b><span>'+s.book+'</span></div></li></ul>' +
+    '<button type="button" class="btn btn-navy sp-book" style="width:100%;margin-bottom:10px">예약하기</button>' +
+    '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="https://map.naver.com/p/search/'+encodeURIComponent(s.mq)+'">네이버에서 업체 찾기 →</a></div>' +
+    '<div class="sp-card"><h3>위치</h3><div class="sp-gmap"><iframe src="'+emb+'" loading="lazy" title="지도"></iframe></div></div>' +
+    '</aside></div>';
+  var bk = box.querySelector('.sp-book');
+  if (bk) bk.addEventListener('click', function(){ alert('아직 준비 중입니다.'); });
+})();
+
+// ── 맛집·카페 상세 DB & 렌더 ──
+var PLACE_DB = {
+  sinbi: { n:'신비섬횟집', cat:'물회 · 전복죽', area:'도동', img:'images/hero3.jpg', r:'4.6',
+    desc:'물회가 입맛을 바꿔놓는다는 도동의 횟집. 예능에도 소개된 곳으로, 특물회와 전복죽이 대표 메뉴예요.',
+    menu:[['특물회','23,000원'],['전복죽','23,000원'],['모둠회(소)','60,000원']],
+    hours:'10:30 – 20:00', brk:'15:00 – 17:00 브레이크타임', closed:'비정기 휴무', feats:['🅿️ 주차 가능','📞 예약 가능'], mq:'울릉도 신비섬횟집',
+    tips:['성수기엔 오픈 직후 방문을 추천해요'], revs:[['물회 안 좋아했는데 여기서 입맛이 바뀌었어요.','여행자 L']] },
+  narichon: { n:'나리촌식당', cat:'산채요리', area:'나리분지', img:'images/food-sanchae.jpg', r:'4.7',
+    desc:'나리분지 산채요리의 대표 주자. 명이·부지깽이·삼나물이 한가득 오르는 산채비빔밥과 호박막걸리 궁합이 유명해요.',
+    menu:[['산채비빔밥','12,000원'],['더덕구이 정식','15,000원'],['호박막걸리','8,000원']],
+    hours:'09:00 – 18:00', brk:'', closed:'동절기 단축 운영', feats:['🅿️ 주차 가능','👥 단체석 보유'], mq:'울릉도 나리촌식당',
+    tips:['성인봉 등반 후 점심 코스로 최고예요'], revs:[['나물 향이 진짜 달라요. 막걸리 꼭 드세요.','여행자 N']] },
+  taeyang: { n:'태양식당', cat:'따개비칼국수', area:'저동', img:'images/food-ttagaebi.jpg', r:'4.5',
+    desc:'따개비 육수의 시원한 감칠맛으로 유명한 저동의 칼국수집. 뱃길에 지친 속을 달래는 첫 끼로 제격이에요.',
+    menu:[['따개비칼국수','10,000원'],['따개비밥','12,000원'],['해물파전','15,000원']],
+    hours:'08:00 – 19:00', brk:'', closed:'비정기 휴무', feats:['🥡 포장 가능'], mq:'울릉도 태양식당',
+    tips:['아침 일찍 문을 여니 입도 첫 끼로 좋아요'], revs:[['국물이 끝내줘요. 배에서 내리자마자 가세요.','여행자 T']] },
+  yakso: { n:'약소불고기 명가', cat:'한우구이', area:'도동', img:'images/food-yakso.jpg', r:'4.6',
+    desc:'산나물을 먹고 자란 울릉 약소는 육향이 다르다는 평. 저녁엔 예약이 몰리니 미리 전화해 두세요.',
+    menu:[['약소불고기(1인)','35,000원'],['약소육회','40,000원'],['된장찌개','3,000원']],
+    hours:'11:30 – 21:30', brk:'15:00 – 17:00 브레이크타임', closed:'비정기 휴무', feats:['📞 예약 필수','👥 단체석 보유'], mq:'울릉도 약소불고기',
+    tips:['2인 이상이면 불고기+육회 반반을 추천해요'], revs:[['육질이 달라요. 울릉 오면 무조건 한 번은 먹어야 해요.','여행자 Y']] },
+  honghap: { n:'도동 홍합밥집', cat:'향토음식', area:'도동 시가지', img:'images/food-honghap.jpg', r:'4.7',
+    desc:'자연산 홍합을 듬뿍 넣어 지은 밥에 간장 양념을 슥슥 비벼 먹는 울릉 대표 향토음식. 도동 골목에 전문점이 모여 있어요.',
+    menu:[['홍합밥','15,000원'],['홍합전','12,000원'],['산채모둠','10,000원']],
+    hours:'08:00 – 20:00', brk:'', closed:'가게별 상이', feats:['🥡 포장 가능'], mq:'울릉도 홍합밥',
+    tips:['홍합전까지 같이 시키면 후회 없어요'], revs:[['간장 비벼 먹는 그 맛… 아직도 생각나요.','여행자 H']] },
+  hoecenter: { n:'저동항 회센터', cat:'물회 · 활어회', area:'저동항', img:'images/hero4.jpg', r:'4.4',
+    desc:'울릉 근해에서 그날 잡은 오징어와 활어를 바로 맛보는 곳. 오징어물회가 여름 별미예요.',
+    menu:[['오징어물회','18,000원'],['모둠회(중)','80,000원'],['매운탕','10,000원']],
+    hours:'10:00 – 21:00', brk:'', closed:'기상 악화 시 휴무', feats:['🅿️ 주차 가능','👥 단체석 보유'], mq:'울릉도 저동항 회센터',
+    tips:['저녁엔 오징어잡이 배 불빛 뷰는 덤이에요'], revs:[['싱싱함이 다르네요. 물회 강추!','여행자 C']] },
+  theham: { n:'오션뷰 카페 더함', cat:'대형카페', area:'북면 죽암', img:'images/drive-taeha.jpg', r:'4.4',
+    desc:'북면 바닷가의 전망 카페 겸 펜션. 통창 너머로 펼쳐지는 바다와 포토존이 많아 드라이브 코스 중간에 들르기 좋아요.',
+    menu:[['아메리카노','7,000원'],['울릉 소금라떼','8,500원'],['크로플','9,000원']],
+    hours:'10:00 – 19:00', brk:'', closed:'비정기 휴무', feats:['🅿️ 주차 가능','📷 포토존'], mq:'울릉도 카페 더함',
+    tips:['일몰 시간대 창가 자리가 명당이에요'], revs:[['뷰 하나로 커피값 합니다.','여행자 D']] },
+  ulla: { n:'카페울라', cat:'오션뷰 대형카페', area:'천부', img:'images/crs-stroll-card.jpg', r:'4.5',
+    desc:'울릉도에서 가장 큰 규모의 오션뷰 카페. 천부 바다가 파노라마로 펼쳐지고, 울릉도 소금라떼가 시그니처예요.',
+    menu:[['울릉도소금라떼','8,500원'],['아메리카노','7,000원'],['호박식혜','6,000원']],
+    hours:'10:00 – 17:30', brk:'', closed:'비정기 휴무', feats:['🅿️ 주차 가능','🌊 오션뷰'], mq:'울릉도 카페울라',
+    tips:['바람 부는 날은 야외석보다 실내 창가를 추천해요'], revs:[['소금라떼 + 바다 뷰 조합 최고.','여행자 U']] },
+  jeodong: { n:'저동커피', cat:'로스터리 카페', area:'저동항', img:'images/hero1.jpg', r:'4.4',
+    desc:'저동항 앞 로스터리 카페. 독도 굿즈 소품샵 독도문방구와 한 건물이라 커피와 기념품을 한 번에 해결할 수 있어요.',
+    menu:[['아메리카노','5,500원'],['오징어먹물라떼','7,000원'],['독도 굿즈','5,000원~']],
+    hours:'10:00 – 18:00', brk:'', closed:'비정기 휴무', feats:['🎁 굿즈샵 병설','🥡 테이크아웃'], mq:'울릉도 저동커피',
+    tips:['독도문방구 굿즈는 선물용으로 인기예요'], revs:[['커피 마시고 굿즈 쇼핑까지, 동선 낭비가 없어요.','여행자 Z']] },
+  glim: { n:'카페글림', cat:'디저트 카페', area:'도동', img:'images/walk-haengnam.jpg', r:'4.5',
+    desc:'도동 골목의 아늑한 디저트 카페. 수제 디저트와 호박라떼가 인기라 산책 후 쉬어가기 좋아요.',
+    menu:[['아메리카노','5,000원'],['수제 디저트','7,500원'],['호박라떼','6,500원']],
+    hours:'11:00 – 20:00', brk:'', closed:'화요일 휴무', feats:['🍰 수제 디저트','☕ 골목 감성'], mq:'울릉도 카페글림',
+    tips:['행남산책로 다녀온 뒤 코스로 딱이에요'], revs:[['디저트가 기대 이상! 아늑해요.','여행자 G']] },
+  supknick: { n:'숲크닉커피', cat:'피크닉 카페', area:'현포', img:'images/spot-nari.jpg', r:'4.3',
+    desc:'숲과 바다 사이에서 즐기는 피크닉 콘셉트 카페. 돗자리·바구니 세트를 빌려 나만의 피크닉 스팟을 만들 수 있어요.',
+    menu:[['아메리카노','6,000원'],['피크닉세트 대여','25,000원'],['크림소다','7,500원']],
+    hours:'10:00 – 18:00', brk:'', closed:'우천 시 휴무', feats:['🧺 피크닉 세트','🅿️ 주차 가능'], mq:'울릉도 숲크닉',
+    tips:['맑은 날 예약하면 명당 스팟을 잡아줘요'], revs:[['사진이 다 화보가 돼요.','여행자 F']] },
+};
+(function () {
+  var box = document.getElementById('placePage');
+  if (!box) return;
+  var id = new URLSearchParams(location.search).get('id');
+  var s = PLACE_DB[id];
+  if (!s) { location.replace('food.html'); return; }
+  document.title = s.n + ' — 울릉트립';
+  var emb='https://maps.google.com/maps?q='+encodeURIComponent(s.mq)+'&z=15&hl=ko&output=embed';
+  box.innerHTML = '<a class="sp-back" href="food.html">← 먹거리 목록으로</a>' +
+    '<div class="sp-crumb">🍚 ' + s.cat + ' · ' + s.area + '</div>' +
+    '<div class="sp-headrow"><div><h1>' + s.n + '</h1></div>' +
+    '<div class="sp-meta"><span class="rating big">★ ' + s.r + '</span>' + s.feats.map(function(t){return '<span class="tag">'+t+'</span>';}).join('') + '</div></div>' +
+    '<div class="sp-hero"><img src="'+s.img+'" alt="'+s.n+'" style="height:340px"></div>' +
+    '<div class="sp-grid"><div class="sp-maincol">' +
+    '<div class="sp-card"><h3>소개</h3><p>'+s.desc+'</p></div>' +
+    '<div class="sp-card"><h3>대표 메뉴</h3><ul class="menu-tbl">'+s.menu.map(function(m){return '<li><b>'+m[0]+'</b><i></i><span>'+m[1]+'</span></li>';}).join('')+'</ul><p class="rv-mapnote">가격은 데모 표기이며 실제와 다를 수 있어요.</p></div>' +
+    '<div class="sp-card"><h3>방문 팁 & 리뷰</h3><ul class="sp-tips">'+s.tips.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>' +
+    (s.revs||[]).map(function(rv){return '<blockquote class="sp-rev"><span>★★★★★</span>'+rv[0]+'<b>— '+rv[1]+'</b></blockquote>';}).join('') + '</div>' +
+    '</div><aside class="sp-sidecol">' +
+    '<div class="sp-card"><h3>영업 정보</h3><ul class="sp-info">' +
+    '<li><i>⏰</i><div><b>영업 시간</b><span>'+s.hours+'</span></div></li>' +
+    (s.brk ? '<li><i>☕</i><div><b>브레이크타임</b><span>'+s.brk+'</span></div></li>' : '') +
+    '<li><i>🗓️</i><div><b>휴무</b><span>'+s.closed+'</span></div></li>' +
+    '<li><i>📍</i><div><b>위치</b><span>경북 울릉군 '+s.area+'</span></div></li></ul>' +
+    '<a class="ct-book" style="width:100%;justify-content:center;padding:13px 0;margin-bottom:10px" target="_blank" rel="noopener" href="https://map.naver.com/p/search/'+encodeURIComponent(s.mq)+'"><b>N</b> 네이버 플레이스 예약</a>' +
+    '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="https://map.naver.com/p/search/'+encodeURIComponent(s.mq)+'">길찾기 →</a></div>' +
+    '<div class="sp-card"><h3>위치</h3><div class="sp-gmap"><iframe src="'+emb+'" loading="lazy" title="지도"></iframe></div></div>' +
+    '</aside></div>';
+})();
