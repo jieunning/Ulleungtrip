@@ -1192,3 +1192,153 @@ var PLACE_DC = {
 document.addEventListener('click', function (e) {
   if (e.target.closest('.tel-btn')) alert('전화 연결 기능은 아직 준비 중입니다.');
 });
+
+// ── 울릉로그: 지도+일정 드래그 플래너 & 예산 관리 (플랜 A/B 분기) ──
+(function () {
+  var listEl = document.getElementById('ulList');
+  if (!listEl) return;
+  var POIS = [
+    ['도동항', 75, 65, '울릉읍'], ['저동항', 76, 55, '울릉읍'], ['행남해안산책로', 79, 61, '울릉읍'],
+    ['독도전망대 케이블카', 62, 64.5, '울릉읍'], ['독도박물관', 63, 66, '울릉읍'], ['봉래폭포', 57.5, 52, '울릉읍'],
+    ['내수전 옛길', 86, 44, '울릉읍'], ['나리분지', 53, 41, '북면'], ['성인봉', 50, 50, '북면'],
+    ['관음도', 84.5, 19, '북면'], ['삼선암', 60.5, 20.5, '북면'], ['예림원', 36, 36, '북면'],
+    ['카페울라', 50, 17, '북면'], ['태하향목 모노레일', 20, 41.5, '서면'], ['통구미 거북바위', 46.5, 79.5, '서면'],
+    ['학포해변', 15, 48, '서면'], ['독도 (여객선)', 87.5, 84.5, '독도'], ['사동항', 55, 72, '울릉읍']
+  ];
+  var WX = [
+    { A: '⛅ 26° · 파고 0.8m — 해안 코스 좋아요', B: '🌧️ 23° · 강수 80% — 실내 위주 추천' },
+    { A: '☀️ 27° · 파고 0.5m — 독도 접안 양호', B: '🌧️ 22° · 풍랑주의 — 여객선 결항 가능' },
+    { A: '☀️ 27° · 파고 0.6m — 서쪽 절경 맑음', B: '⛅ 24° · 오후 갬 — 오전 실내, 오후 야외' }
+  ];
+  var state = {
+    plan: 'A', day: 0,
+    plans: {
+      A: [[0, 2, 3], [7, 9, 10], [13, 11, 17]],
+      B: [[0, 4, 12], [1, 5, 3], [4, 15, 17]]
+    },
+    budget: 0, spends: []
+  };
+  try {
+    var saved = JSON.parse(localStorage.getItem('ulog2'));
+    if (saved && saved.plans) state = saved;
+    else {
+      var old = JSON.parse(localStorage.getItem('ulog1'));
+      if (old && old.days) { state.plans.A = old.days; state.budget = old.budget || 0; state.spends = old.spends || []; }
+    }
+  } catch (e) {}
+  function save() { localStorage.setItem('ulog2', JSON.stringify(state)); }
+  function cur() { return state.plans[state.plan][state.day]; }
+
+  var daysEl = document.getElementById('ulDays'), sel = document.getElementById('ulSelect');
+  var svg = document.getElementById('ulSvg'), pins = document.getElementById('ulPins'), stats = document.getElementById('ulStats');
+
+  function legKm(a, b) { return Math.sqrt(Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2)) * 0.35; }
+
+  function render() {
+    var planBtns = '<div class="ul-plans"><button type="button" class="ul-ptab' + (state.plan === 'A' ? ' on' : '') + '" data-p="A">☀️ 맑은 날 (1안)</button>' +
+      '<button type="button" class="ul-ptab' + (state.plan === 'B' ? ' on' : '') + '" data-p="B">🌧️ 궂은 날 (2안)</button></div>';
+    daysEl.innerHTML = planBtns + state.plans[state.plan].map(function (d, i) {
+      return '<button type="button" class="rv-day' + (i === state.day ? ' on' : '') + '" data-d="' + i + '">DAY ' + (i + 1) + ' <em>' + d.length + '</em></button>';
+    }).join('') + '<p class="ul-wx">' + WX[state.day][state.plan] + '</p>';
+
+    var day = cur(), html = '';
+    day.forEach(function (pi, k) {
+      var p = POIS[pi];
+      if (k > 0) {
+        var km = legKm(POIS[day[k - 1]], p);
+        html += '<li class="ul-leg">🚗 약 ' + Math.max(1, Math.round(km)) + 'km · ' + Math.max(5, Math.round(km * 2.2)) + '분</li>';
+      }
+      html += '<li draggable="true" data-k="' + k + '"><span class="ul-grip">⠿</span><i class="ul-no">' + (k + 1) + '</i><div><b>' + p[0] + '</b><span>' + p[3] + '</span></div><button type="button" class="ul-del" data-k="' + k + '">✕</button></li>';
+    });
+    listEl.innerHTML = html || '<p class="pv-empty" style="padding:20px 0">아직 장소가 없어요. 아래에서 추가해 보세요.</p>';
+    sel.innerHTML = POIS.map(function (p, i) {
+      return day.indexOf(i) > -1 ? '' : '<option value="' + i + '">' + p[0] + ' · ' + p[3] + '</option>';
+    }).join('');
+
+    var poly = day.map(function (pi) { return POIS[pi][1] + ',' + POIS[pi][2]; }).join(' ');
+    svg.innerHTML = '<polyline points="' + poly + '" fill="none" stroke="#008a97" stroke-width="0.6" stroke-dasharray="2 1.6" opacity="0.85"/>';
+    pins.innerHTML = day.map(function (pi, k) {
+      var p = POIS[pi];
+      return '<b class="crs-pin" style="left:' + p[1] + '%;top:' + p[2] + '%" title="' + p[0] + '">' + (k + 1) + '</b>';
+    }).join('');
+    var km = 0;
+    for (var i = 1; i < day.length; i++) km += legKm(POIS[day[i - 1]], POIS[day[i]]);
+    stats.innerHTML = '<span>📍 ' + day.length + '곳</span><span>🚗 이동 약 ' + Math.round(km) + 'km</span><span>' + (state.plan === 'A' ? '☀️ 1안' : '🌧️ 2안') + ' · DAY ' + (state.day + 1) + '</span>';
+    renderBudget();
+    save();
+  }
+  function renderBudget() {
+    var spent = state.spends.reduce(function (t, x) { return t + x[1]; }, 0);
+    document.getElementById('ulBudget').value = state.budget || '';
+    document.getElementById('ulSpent').textContent = '지출 ' + spent.toLocaleString() + '원';
+    var remainEl = document.getElementById('ulRemain');
+    remainEl.textContent = state.budget ? '남은 예산 ' + (state.budget - spent).toLocaleString() + '원' : '예산을 설정해 보세요';
+    remainEl.style.color = state.budget && spent > state.budget ? '#e0685f' : '';
+    var pct = state.budget ? Math.min(100, spent / state.budget * 100) : 0;
+    var g = document.getElementById('ulGauge');
+    g.style.width = pct + '%';
+    g.style.background = pct > 90 ? '#e0685f' : '';
+    document.getElementById('ulSpends').innerHTML = state.spends.map(function (x, i) {
+      return '<li><b>' + x[0] + '</b><span>' + x[1].toLocaleString() + '원</span><button type="button" class="ul-del" data-s="' + i + '">✕</button></li>';
+    }).join('');
+  }
+
+  daysEl.addEventListener('click', function (e) {
+    var pt = e.target.closest('.ul-ptab');
+    if (pt) { state.plan = pt.dataset.p; state.day = 0; render(); return; }
+    var t = e.target.closest('.rv-day'); if (t) { state.day = +t.dataset.d; render(); }
+  });
+  listEl.addEventListener('click', function (e) {
+    var d = e.target.closest('.ul-del'); if (d) { cur().splice(+d.dataset.k, 1); render(); }
+  });
+  document.getElementById('ulSpends').addEventListener('click', function (e) {
+    var d = e.target.closest('.ul-del'); if (d) { state.spends.splice(+d.dataset.s, 1); render(); }
+  });
+  document.getElementById('ulAddBtn').addEventListener('click', function () {
+    if (sel.value !== '') { cur().push(+sel.value); render(); }
+  });
+  document.getElementById('ulBudget').addEventListener('change', function () { state.budget = +this.value || 0; render(); });
+  document.getElementById('ulSpendBtn').addEventListener('click', function () {
+    var n = document.getElementById('ulSpendName').value.trim(), a = +document.getElementById('ulSpendAmt').value;
+    if (n && a > 0) { state.spends.push([n, a]); document.getElementById('ulSpendName').value = ''; document.getElementById('ulSpendAmt').value = ''; render(); }
+  });
+  document.getElementById('ulInvite').addEventListener('click', function () { alert('일행 초대(실시간 동시 편집) 기능은 아직 준비 중입니다.'); });
+  document.getElementById('ulPdf').addEventListener('click', function () { window.print(); });
+  var csvBtn = document.getElementById('ulCsv');
+  if (csvBtn) csvBtn.addEventListener('click', function () {
+    var rows = [['항목', '금액(원)']].concat(state.spends.map(function (x) { return [x[0], x[1]]; }));
+    var total = state.spends.reduce(function (t, x) { return t + x[1]; }, 0);
+    rows.push(['합계', total]);
+    var csv = '﻿' + rows.map(function (r) { return r.join(','); }).join('\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'ulleunglog-budget.csv';
+    a.click();
+  });
+
+  var dragK = null;
+  listEl.addEventListener('dragstart', function (e) {
+    var li = e.target.closest('li[draggable]'); if (!li) return;
+    dragK = +li.dataset.k; li.classList.add('dragging');
+  });
+  listEl.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    var li = e.target.closest('li[draggable]'); if (!li || +li.dataset.k === dragK) return;
+    li.classList.add('drag-over');
+  });
+  listEl.addEventListener('dragleave', function (e) {
+    var li = e.target.closest('li[draggable]'); if (li) li.classList.remove('drag-over');
+  });
+  listEl.addEventListener('drop', function (e) {
+    e.preventDefault();
+    var li = e.target.closest('li[draggable]'); if (!li || dragK === null) return;
+    var day = cur(), moved = day.splice(dragK, 1)[0];
+    day.splice(+li.dataset.k, 0, moved);
+    dragK = null; render();
+  });
+  listEl.addEventListener('dragend', function () {
+    dragK = null;
+    listEl.querySelectorAll('li').forEach(function (x) { x.classList.remove('dragging', 'drag-over'); });
+  });
+  render();
+})();
