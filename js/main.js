@@ -1130,32 +1130,58 @@ var PLACE_DB = {
     hours:'10:00 – 18:00', brk:'', closed:'우천 시 휴무', feats:['🧺 피크닉 세트','🅿️ 주차 가능'], mq:'울릉도 숲크닉',
     tips:['맑은 날 예약하면 명당 스팟을 잡아줘요'], revs:[['사진이 다 화보가 돼요.','여행자 F']] },
 };
+// 다이닝코드풍 부가 데이터 (랭킹·리뷰수·취향태그·좋았던 점)
+var PLACE_DC = {
+  sinbi:    { rk:'울릉도 물회 1위', rv:214, moods:['#혼밥','#가족모임','#웨이팅 있음'], likes:[['맛있어요',88],['재료가 신선해요',81],['친절해요',66]] },
+  narichon: { rk:'나리분지 맛집 1위', rv:187, moods:['#등산 후','#부모님과','#향토음식'], likes:[['맛있어요',85],['건강한 맛이에요',79],['양이 많아요',62]] },
+  taeyang:  { rk:'울릉도 칼국수 1위', rv:156, moods:['#아침식사','#해장','#현지인단골'], likes:[['국물이 시원해요',86],['가성비가 좋아요',72],['빨리 나와요',64]] },
+  yakso:    { rk:'울릉도 한식 2위', rv:203, moods:['#기념일','#가족모임','#예약추천'], likes:[['맛있어요',84],['고기 질이 좋아요',82],['친절해요',61]] },
+  honghap:  { rk:'울릉도 향토음식 1위', rv:174, moods:['#혼밥','#첫울릉도','#골목맛집'], likes:[['맛있어요',87],['울릉에서만 먹어요',80],['반찬이 알차요',58]] },
+  hoecenter:{ rk:'저동 횟집 2위', rv:98, moods:['#술모임','#바다뷰','#단체'], likes:[['재료가 신선해요',83],['양이 많아요',68],['뷰가 좋아요',60]] },
+  theham:   { rk:'북면 카페 2위', rv:87, moods:['#드라이브','#포토존','#오션뷰'], likes:[['뷰가 좋아요',89],['사진이 잘 나와요',77],['조용해요',55]] },
+  ulla:     { rk:'울릉도 카페 1위', rv:152, moods:['#오션뷰','#대형카페','#소금라떼'], likes:[['뷰가 좋아요',91],['시그니처가 있어요',74],['넓어요',67]] },
+  jeodong:  { rk:'저동 카페 1위', rv:76, moods:['#굿즈','#기념품','#테이크아웃'], likes:[['굿즈가 귀여워요',82],['커피가 맛있어요',70],['위치가 편해요',63]] },
+  glim:     { rk:'도동 카페 2위', rv:64, moods:['#디저트','#산책후','#아늑함'], likes:[['디저트가 맛있어요',84],['아늑해요',73],['친절해요',65]] },
+  supknick: { rk:'울릉도 카페 4위', rv:41, moods:['#피크닉','#커플','#맑은날'], likes:[['컨셉이 좋아요',86],['사진이 잘 나와요',78],['한적해요',59]] }
+};
 (function () {
   var box = document.getElementById('placePage');
   if (!box) return;
   var id = new URLSearchParams(location.search).get('id');
   var s = PLACE_DB[id];
   if (!s) { location.replace('food.html'); return; }
+  var d = PLACE_DC[id] || { rk:'', rv:0, moods:[], likes:[] };
   document.title = s.n + ' — 울릉트립';
-  var emb='https://maps.google.com/maps?q='+encodeURIComponent(s.mq)+'&z=15&hl=ko&output=embed';
+  var emb = 'https://maps.google.com/maps?q=' + encodeURIComponent(s.mq) + '&z=15&hl=ko&output=embed';
   box.innerHTML = '<a class="sp-back" href="food.html">← 먹거리 목록으로</a>' +
     '<div class="sp-crumb">🍚 ' + s.cat + ' · ' + s.area + '</div>' +
-    '<div class="sp-headrow"><div><h1>' + s.n + '</h1></div>' +
-    '<div class="sp-meta"><span class="rating big">★ ' + s.r + '</span>' + s.feats.map(function(t){return '<span class="tag">'+t+'</span>';}).join('') + '</div></div>' +
-    '<div class="sp-hero"><img src="'+s.img+'" alt="'+s.n+'" style="height:340px"></div>' +
+    '<div class="sp-headrow"><div><h1>' + s.n + '</h1>' +
+    (d.rk ? '<span class="dc-rank">🏆 ' + d.rk + '</span>' : '') + '</div>' +
+    '<div class="sp-meta"><span class="rating big">★ ' + s.r + '</span><span class="dc-rv">리뷰 ' + d.rv + '</span></div></div>' +
+    '<div class="dc-moods">' + d.moods.map(function (m) { return '<span class="dc-mood">' + m + '</span>'; }).join('') +
+    s.feats.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
+    '<div class="dc-photos"><img src="' + s.img + '" alt="' + s.n + '">' +
+    '<div class="dc-ph">📷<span>사진 준비 중</span></div>' +
+    '<div class="dc-ph dc-more">＋<span>사진 더보기</span></div></div>' +
     '<div class="sp-grid"><div class="sp-maincol">' +
-    '<div class="sp-card"><h3>소개</h3><p>'+s.desc+'</p></div>' +
-    '<div class="sp-card"><h3>대표 메뉴</h3><ul class="menu-tbl">'+s.menu.map(function(m){return '<li><b>'+m[0]+'</b><i></i><span>'+m[1]+'</span></li>';}).join('')+'</ul><p class="rv-mapnote">가격은 데모 표기이며 실제와 다를 수 있어요.</p></div>' +
-    '<div class="sp-card"><h3>방문 팁 & 리뷰</h3><ul class="sp-tips">'+s.tips.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>' +
-    (s.revs||[]).map(function(rv){return '<blockquote class="sp-rev"><span>★★★★★</span>'+rv[0]+'<b>— '+rv[1]+'</b></blockquote>';}).join('') + '</div>' +
+    '<div class="sp-card"><h3>이런 점이 좋았어요</h3><ul class="dc-likes">' +
+    d.likes.map(function (l) {
+      return '<li><span>' + l[0] + '</span><div class="dc-bar"><i style="width:' + l[1] + '%"></i></div><b>' + l[1] + '%</b></li>';
+    }).join('') + '<p class="rv-mapnote">방문자 리뷰 키워드 통계예요. (데모 데이터)</p></ul></div>' +
+    '<div class="sp-card"><h3>대표 메뉴</h3><ul class="menu-tbl">' + s.menu.map(function (m) { return '<li><b>' + m[0] + '</b><i></i><span>' + m[1] + '</span></li>'; }).join('') + '</ul><p class="rv-mapnote">가격은 데모 표기이며 실제와 다를 수 있어요.</p></div>' +
+    '<div class="sp-card"><h3>방문자 리뷰 <small class="dc-rvcnt">' + d.rv + '</small></h3>' +
+    (s.revs || []).map(function (rv) {
+      return '<div class="dc-review"><span class="dc-av">' + rv[1].charAt(rv[1].length - 1) + '</span><div><div class="dc-rhead"><b>' + rv[1] + '</b><em>★★★★★</em></div><p>' + rv[0] + '</p></div></div>';
+    }).join('') +
+    '<ul class="sp-tips" style="margin-top:14px">' + s.tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></div>' +
     '</div><aside class="sp-sidecol">' +
     '<div class="sp-card"><h3>영업 정보</h3><ul class="sp-info">' +
-    '<li><i>⏰</i><div><b>영업 시간</b><span>'+s.hours+'</span></div></li>' +
-    (s.brk ? '<li><i>☕</i><div><b>브레이크타임</b><span>'+s.brk+'</span></div></li>' : '') +
-    '<li><i>🗓️</i><div><b>휴무</b><span>'+s.closed+'</span></div></li>' +
-    '<li><i>📍</i><div><b>위치</b><span>경북 울릉군 '+s.area+'</span></div></li></ul>' +
-    '<a class="ct-book" style="width:100%;justify-content:center;padding:13px 0;margin-bottom:10px" target="_blank" rel="noopener" href="https://map.naver.com/p/search/'+encodeURIComponent(s.mq)+'"><b>N</b> 네이버 플레이스 예약</a>' +
-    '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="https://map.naver.com/p/search/'+encodeURIComponent(s.mq)+'">길찾기 →</a></div>' +
-    '<div class="sp-card"><h3>위치</h3><div class="sp-gmap"><iframe src="'+emb+'" loading="lazy" title="지도"></iframe></div></div>' +
+    '<li><i>⏰</i><div><b>영업 시간</b><span>' + s.hours + '</span></div></li>' +
+    (s.brk ? '<li><i>☕</i><div><b>브레이크타임</b><span>' + s.brk + '</span></div></li>' : '') +
+    '<li><i>🗓️</i><div><b>휴무</b><span>' + s.closed + '</span></div></li>' +
+    '<li><i>📍</i><div><b>위치</b><span>경북 울릉군 ' + s.area + '</span></div></li></ul>' +
+    '<a class="ct-book" style="width:100%;justify-content:center;padding:13px 0;margin-bottom:10px" target="_blank" rel="noopener" href="https://map.naver.com/p/search/' + encodeURIComponent(s.mq) + '"><b>N</b> 네이버 플레이스 예약</a>' +
+    '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="https://map.naver.com/p/search/' + encodeURIComponent(s.mq) + '">길찾기 →</a></div>' +
+    '<div class="sp-card"><h3>위치</h3><div class="sp-gmap"><iframe src="' + emb + '" loading="lazy" title="지도"></iframe></div></div>' +
     '</aside></div>';
 })();

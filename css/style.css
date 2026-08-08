@@ -1164,3 +1164,27 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .menu-tbl span{font-size:14.5px;font-weight:800;color:var(--teal-dark);flex:0 0 auto}
 .ct-img{display:block}
 .fd-rk{color:inherit;display:block}
+
+/* 맛집 상세: 다이닝코드풍 */
+.dc-rank{display:inline-block;margin-left:12px;background:#fff3e6;color:#e07b1f;border:1px solid #f5c99a;border-radius:var(--r-pill);padding:6px 15px;font-size:13px;font-weight:800;vertical-align:middle}
+.dc-rv{font-size:13.5px;font-weight:800;color:var(--ink-3)}
+.dc-moods{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 18px}
+.dc-mood{background:var(--teal-soft);color:var(--teal-dark);border-radius:var(--r-pill);padding:7px 14px;font-size:12.5px;font-weight:800}
+.dc-photos{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px;margin-bottom:8px}
+.dc-photos img{width:100%;height:185px;object-fit:cover;border-radius:14px;display:block}
+.dc-ph{height:185px;border-radius:14px;background:var(--band);border:1.5px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:24px;color:var(--ink-3)}
+.dc-ph span{font-size:12.5px;font-weight:700}
+.dc-likes{list-style:none;display:flex;flex-direction:column;gap:12px}
+.dc-likes li{display:flex;align-items:center;gap:14px}
+.dc-likes li>span{flex:0 0 130px;font-size:13.5px;font-weight:800;color:var(--ink)}
+.dc-bar{flex:1;height:9px;border-radius:99px;background:var(--band);overflow:hidden}
+.dc-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),#3a72e0)}
+.dc-likes b{flex:0 0 44px;text-align:right;font-size:13px;font-weight:800;color:var(--teal-dark)}
+.dc-rvcnt{font-size:12.5px;font-weight:800;color:var(--ink-3);margin-left:4px}
+.dc-review{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line)}
+.dc-av{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:grid;place-items:center}
+.dc-rhead{display:flex;align-items:center;gap:9px}
+.dc-rhead b{font-size:13.5px;font-weight:800}
+.dc-rhead em{font-style:normal;font-size:11px;color:var(--amber);letter-spacing:2px}
+.dc-review p{font-size:13.5px;color:var(--ink-2);margin-top:4px}
+@media (max-width:640px){.dc-photos{grid-template-columns:1fr 1fr}.dc-ph.dc-more{display:none}}
