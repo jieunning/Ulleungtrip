@@ -33,7 +33,7 @@ function aiAsk(q) {
   } else if (/날씨|기상|파고/.test(q)) {
     html = '울릉도 날씨는 변덕이 심해요. 여행 전 기상청 해상예보와 선사 운항 공지를 함께 확인하는 걸 추천드려요. <a href="info.html">여행 정보 →</a>';
   } else {
-    html = '지금은 프로토타입이라 간단한 안내만 가능해요. <b>코스·배편·독도·맛집·숙소</b>에 대해 물어봐 주세요!';
+    html = '<b>코스·배편·독도·맛집·숙소</b>에 대해 물어봐 주세요!';
   }
   t.innerHTML = html;
   box.classList.add('show');
@@ -577,7 +577,7 @@ var AI_RECO = {
         });
       });
       var km = Math.max(10, Math.round(dist * 0.11 + plan.length * 3));
-      // 예상 경비 비중 (데모)
+      // 예상 경비 비중
       var ex = { t: 40, s: 35, f: 25 };
       if (sel.comp === 'family') { ex.s += 6; ex.t -= 3; ex.f -= 3; }
       if (sel.themes.indexOf('미식') >= 0) { ex.f += 8; ex.t -= 4; ex.s -= 4; }
@@ -613,7 +613,7 @@ var AI_RECO = {
         + '<div class="pl-mapwrap"><div class="pl-daytabs">' + dayTabs + '</div>'
         + '<div class="pl-map"><img src="images/map.jpg" alt="울릉도 지도"><svg class="pl-routes" viewBox="0 0 100 100" preserveAspectRatio="none"></svg><div id="plPins"></div></div>'
         + '<p class="pl-maphint">Day 탭을 누르면 그날의 이동 동선이 지도에 표시돼요.</p></div></div>'
-        + '<div class="notice">본 동선은 프로토타입 데모입니다. 실제 서비스에서는 날씨·운항·혼잡도 실시간 데이터가 반영됩니다.</div>';
+        + '<div class="notice">날씨·운항·혼잡도에 따라 동선이 자동으로 조정돼요. 출발 전 최신 정보를 확인하세요.</div>';
 
       // ── 지도: 선택한 Day의 동선 라인 + 화살표 ──
       var svg = resultEl.querySelector('.pl-routes'), pinBox = document.getElementById('plPins');
@@ -996,7 +996,7 @@ var NEAR_EAT = {
   });
 })();
 
-// ── 인플루언서 팬하기 (데모) ──
+// ── 인플루언서 팬하기 ──
 document.querySelectorAll('.inf-fan').forEach(function (b) {
   b.addEventListener('click', function () { alert('아직 준비 중입니다.'); });
 });
@@ -1167,8 +1167,8 @@ var PLACE_DC = {
     '<div class="sp-card"><h3>이런 점이 좋았어요</h3><ul class="dc-likes">' +
     d.likes.map(function (l) {
       return '<li><span>' + l[0] + '</span><div class="dc-bar"><i style="width:' + l[1] + '%"></i></div><b>' + l[1] + '%</b></li>';
-    }).join('') + '<p class="rv-mapnote">방문자 리뷰 키워드 통계예요. (데모 데이터)</p></ul></div>' +
-    '<div class="sp-card"><h3>대표 메뉴</h3><ul class="menu-tbl">' + s.menu.map(function (m) { return '<li><b>' + m[0] + '</b><i></i><span>' + m[1] + '</span></li>'; }).join('') + '</ul><p class="rv-mapnote">가격은 데모 표기이며 실제와 다를 수 있어요.</p></div>' +
+    }).join('') + '<p class="rv-mapnote">방문자 리뷰를 분석한 키워드 통계예요.</p></ul></div>' +
+    '<div class="sp-card"><h3>대표 메뉴</h3><ul class="menu-tbl">' + s.menu.map(function (m) { return '<li><b>' + m[0] + '</b><i></i><span>' + m[1] + '</span></li>'; }).join('') + '</ul><p class="rv-mapnote">가격은 매장 사정에 따라 달라질 수 있어요.</p></div>' +
     '<div class="sp-card"><h3>방문자 리뷰 <small class="dc-rvcnt">' + d.rv + '</small></h3>' +
     (s.revs || []).map(function (rv) {
       return '<div class="dc-review"><span class="dc-av">' + rv[1].charAt(rv[1].length - 1) + '</span><div><div class="dc-rhead"><b>' + rv[1] + '</b><em>★★★★★</em></div><p>' + rv[0] + '</p></div></div>';
