@@ -972,8 +972,8 @@ var NEAR_EAT = {
     '<li><i>⏰</i><div><b>운영 시간</b><span>' + s.hours + '</span></div></li>' +
     '<li><i>🗓️</i><div><b>휴무</b><span>' + s.closed + '</span></div></li>' +
     '<li><i>💶</i><div><b>요금</b><span>' + s.fee + '</span></div></li>' +
-    '<li><i>📍</i><div><b>주소</b><span>' + s.addr + '</span></div></li></ul>' +
-    (SPOT_BOOK[id] ? '<div class="sp-price"><b>' + s.fee + '</b><span>예매 필요</span></div><button type="button" class="btn btn-navy sp-book" style="width:100%">예매하기</button>' : '') + '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="' + (s.nv || 'https://map.naver.com/p/search/' + encodeURIComponent('울릉도 ' + s.n)) + '">네이버 지도 길찾기 →</a></div>' +
+    '<li><i>📍</i><div><b>주소</b><span>' + s.addr + '</span></div></li>' + '<li><i>📞</i><div><b>연락처</b><span>054-791-**** <small style="color:var(--ink-3)">(공개 준비 중)</small></span></div></li>' + '</ul>' +
+    '<button type="button" class="btn btn-navy tel-btn" style="width:100%;margin-bottom:10px">📞 전화하기</button>' + (SPOT_BOOK[id] ? '<div class="sp-price"><b>' + s.fee + '</b><span>예매 필요</span></div><button type="button" class="btn btn-navy sp-book" style="width:100%">예매하기</button>' : '') + '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="' + (s.nv || 'https://map.naver.com/p/search/' + encodeURIComponent('울릉도 ' + s.n)) + '">네이버 지도 길찾기 →</a></div>' +
     (function(){ var mq = SPOT_MQ[id] || ('울릉군 ' + s.n); var emb = 'https://maps.google.com/maps?q=' + encodeURIComponent(mq) + '&z=15&hl=ko&output=embed'; return '<div class="sp-card"><h3>위치</h3><div class="sp-gmap"><iframe src="' + emb + '" loading="lazy" allowfullscreen title="지도"></iframe>' + '<button type="button" class="sp-map-zoom" id="spMapZoom" aria-label="지도 크게 보기" title="크게 보기">⛶</button></div>' + '<div class="sp-maplinks"><a target="_blank" rel="noopener" href="' + (s.nv || 'https://map.naver.com/p/search/' + encodeURIComponent(mq)) + '">네이버 지도 ↗</a>' + '<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mq) + '">구글 지도 ↗</a></div></div>'; })() +
     '</aside></div>';
   box.innerHTML = h;
@@ -1063,8 +1063,9 @@ var ACT_DB = {
     '<li><i>⏱️</i><div><b>소요 시간</b><span>'+s.dur+'</span></div></li>' +
     '<li><i>📅</i><div><b>운영 시기</b><span>'+s.season+'</span></div></li>' +
     '<li><i>📍</i><div><b>집합 장소</b><span>'+s.meet+'</span></div></li>' +
-    '<li><i>📞</i><div><b>예약 방법</b><span>'+s.book+'</span></div></li></ul>' +
+    '<li><i>🗓️</i><div><b>예약 방법</b><span>'+s.book+'</span></div></li>' + '<li><i>📮</i><div><b>업체 주소</b><span>업체별 상이 · 예약 시 안내</span></div></li>' + '<li><i>📞</i><div><b>연락처</b><span>054-791-**** <small style="color:var(--ink-3)">(공개 준비 중)</small></span></div></li>' + '</ul>' +
     '<button type="button" class="btn btn-navy sp-book" style="width:100%;margin-bottom:10px">예약하기</button>' +
+    '<button type="button" class="btn btn-navy tel-btn" style="width:100%;margin-bottom:10px">📞 전화하기</button>' +
     '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="https://map.naver.com/p/search/'+encodeURIComponent(s.mq)+'">네이버에서 업체 찾기 →</a></div>' +
     '<div class="sp-card"><h3>위치</h3><div class="sp-gmap"><iframe src="'+emb+'" loading="lazy" title="지도"></iframe></div></div>' +
     '</aside></div>';
@@ -1179,9 +1180,15 @@ var PLACE_DC = {
     '<li><i>⏰</i><div><b>영업 시간</b><span>' + s.hours + '</span></div></li>' +
     (s.brk ? '<li><i>☕</i><div><b>브레이크타임</b><span>' + s.brk + '</span></div></li>' : '') +
     '<li><i>🗓️</i><div><b>휴무</b><span>' + s.closed + '</span></div></li>' +
-    '<li><i>📍</i><div><b>위치</b><span>경북 울릉군 ' + s.area + '</span></div></li></ul>' +
+    '<li><i>📍</i><div><b>주소</b><span>경북 울릉군 ' + s.area + '</span></div></li>' + '<li><i>📞</i><div><b>연락처</b><span>054-791-**** <small style="color:var(--ink-3)">(공개 준비 중)</small></span></div></li>' + '</ul>' +
+    '<button type="button" class="btn btn-navy tel-btn" style="width:100%;margin-bottom:10px">📞 전화하기</button>' +
     '<a class="ct-book" style="width:100%;justify-content:center;padding:13px 0;margin-bottom:10px" target="_blank" rel="noopener" href="https://map.naver.com/p/search/' + encodeURIComponent(s.mq) + '"><b>N</b> 네이버 플레이스 예약</a>' +
     '<a class="btn btn-primary" style="width:100%;text-align:center" target="_blank" rel="noopener" href="https://map.naver.com/p/search/' + encodeURIComponent(s.mq) + '">길찾기 →</a></div>' +
     '<div class="sp-card"><h3>위치</h3><div class="sp-gmap"><iframe src="' + emb + '" loading="lazy" title="지도"></iframe></div></div>' +
     '</aside></div>';
 })();
+
+// ── 전화하기 (공통, 위임 핸들러) ──
+document.addEventListener('click', function (e) {
+  if (e.target.closest('.tel-btn')) alert('전화 연결 기능은 아직 준비 중입니다.');
+});
