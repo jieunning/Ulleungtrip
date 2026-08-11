@@ -1382,3 +1382,4 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .sg-links a{flex:1;text-align:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 0;font-size:13.5px;font-weight:800;color:var(--navy);box-shadow:var(--shadow-sm);transition:.15s}
 .sg-links a:hover{border-color:var(--teal);color:var(--teal-dark);transform:translateY(-2px)}
 @media (max-width:960px){.sg-wrap{grid-template-columns:1fr}}
+.ulog-promo-shot video{width:100%;display:block}
