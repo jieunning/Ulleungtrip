@@ -1299,8 +1299,12 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .sg-stay span{display:block;font-size:11.5px;font-weight:700;color:var(--ink-3);margin-top:2px}
 .sg-stay em{font-style:normal;font-size:13.5px;font-weight:800;color:var(--navy);flex:0 0 auto}
 .sg-stay em small{font-size:10.5px;color:var(--ink-3);font-weight:700}
-.sg-map{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);aspect-ratio:1.177/1;background:var(--band)}
-.sg-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.sg-map{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);aspect-ratio:1.177/1;
+background:linear-gradient(135deg,#eaf4fc,#dcedf9 55%,#d2e8f7);
+background-image:radial-gradient(circle,rgba(90,150,210,.18) 1px,transparent 1px),linear-gradient(135deg,#eaf4fc,#dcedf9 55%,#d2e8f7);background-size:16px 16px,cover}
+.sg-island{position:absolute;inset:6% 5%;width:90%;height:88%;filter:drop-shadow(0 14px 22px rgba(58,123,196,.28))}
+.sg-rgname{font-size:3.6px;font-weight:800;fill:#2b5c94;opacity:.75;font-family:inherit}
+.sg-peak{font-size:2.8px;font-weight:700;fill:#4a749e;font-family:inherit}
 .sg-pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 15px;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px rgba(28,37,84,.22);transition:.15s;z-index:2}
 .sg-pin::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#fff}
 .sg-pin b{font-size:13px;font-weight:800;color:var(--ink)}
