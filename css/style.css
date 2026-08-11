@@ -1327,3 +1327,58 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .chat-inrow input{background:#fff;border-color:#e2e8f4;border-radius:14px}
 .chat-inrow button{border-radius:14px;font-size:14px}
 .chat-msg.bot{box-shadow:var(--shadow-sm);border:none}
+
+/* ══ 유실 블록 복원 ══ */
+/* 라인 아이콘 사이즈 */
+.lic{width:16px;height:16px;display:inline-block;vertical-align:-3px;flex:0 0 auto}
+.ai-chip .lic,.chip .lic{margin-right:2px;vertical-align:-3.5px}
+.ph-chips .lic,.pl-chips2 .lic{vertical-align:-3.5px;margin-right:2px;width:15px;height:15px}
+.crs-mapbtn .lic{width:15px;height:15px}
+.btn .lic{vertical-align:-3px;margin-right:3px}
+.sg-links .lic{margin-right:4px;vertical-align:-3.5px}
+.sec-link .lic{vertical-align:-3px;margin-right:2px}
+.lic-lg{width:26px;height:26px}
+/* 울릉로그 소개 (AI 추천 코스 페이지) */
+.ulog-promo{display:grid;grid-template-columns:1fr 1.25fr;gap:38px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow);padding:44px 48px}
+.ulog-promo-txt h2{font-size:clamp(24px,2.8vw,32px);font-weight:800;color:var(--navy);line-height:1.3;letter-spacing:-.025em;margin-top:8px}
+.ulog-promo-txt>p{margin-top:12px;font-size:14.5px;color:var(--ink-2);line-height:1.7}
+.ulog-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin:20px 0 26px}
+.ulog-feats li b{display:block;font-size:14.5px;font-weight:800;color:var(--ink)}
+.ulog-feats li span{display:block;font-size:13px;color:var(--ink-3);margin-top:2px}
+.ulog-promo-shot{display:block;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
+.ulog-promo-shot:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.ulog-promo-shot img{width:100%;display:block}
+.ulog-promo-shot span{position:absolute;left:12px;bottom:12px;background:rgba(28,37,84,.85);color:#fff;border-radius:var(--r-pill);padding:7px 16px;font-size:12px;font-weight:800;backdrop-filter:blur(3px)}
+@media (max-width:960px){.ulog-promo{grid-template-columns:1fr;padding:28px 24px}}
+/* 숙박: 지도 기반 지역 가이드 */
+.sg-wrap{display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start}
+.sg-panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:26px 26px}
+.sg-head{display:flex;align-items:center;gap:13px}
+.sg-ico{width:54px;height:54px;border-radius:15px;background:var(--band);display:grid;place-items:center}
+.sg-ico svg{width:38px;height:38px}
+.sg-head b{display:block;font-size:20px;font-weight:800;color:var(--navy)}
+.sg-head span{display:block;font-size:12.5px;font-weight:700;color:var(--teal-dark);margin-top:2px}
+.sg-desc{margin-top:14px;font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.sg-sub{margin:18px 0 10px;font-size:12.5px;font-weight:800;color:var(--ink-3)}
+.sg-stay{display:flex;align-items:center;gap:12px;background:var(--band);border-radius:13px;padding:10px 13px;margin-bottom:9px}
+.sg-stay img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex:0 0 auto}
+.sg-stay>div{flex:1;min-width:0}
+.sg-stay b{display:block;font-size:14px;font-weight:800;color:var(--ink)}
+.sg-stay span{display:block;font-size:11.5px;font-weight:700;color:var(--ink-3);margin-top:2px}
+.sg-stay em{font-style:normal;font-size:13.5px;font-weight:800;color:var(--navy);flex:0 0 auto}
+.sg-stay em small{font-size:10.5px;color:var(--ink-3);font-weight:700}
+.sg-map{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.sg-map.sg-map3{aspect-ratio:1/1;background:#cfe3ea}
+.sg-map3>img{position:absolute;inset:4.5%;width:91%;height:91%;object-fit:contain;border-radius:14px}
+.sg-pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 15px;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px rgba(28,37,84,.22);transition:.15s;z-index:2}
+.sg-pin::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#fff}
+.sg-pin b{font-size:13px;font-weight:800;color:var(--ink)}
+.sg-pin span{font-size:11px;font-weight:800;color:var(--teal-dark)}
+.sg-pin:hover{transform:translate(-50%,-100%) scale(1.07)}
+.sg-pin.on{background:var(--navy);border-color:var(--navy)}
+.sg-pin.on b,.sg-pin.on span{color:#fff}
+.sg-pin.on::after{border-top-color:var(--navy)}
+.sg-links{display:flex;gap:10px;margin-top:12px}
+.sg-links a{flex:1;text-align:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 0;font-size:13.5px;font-weight:800;color:var(--navy);box-shadow:var(--shadow-sm);transition:.15s}
+.sg-links a:hover{border-color:var(--teal);color:var(--teal-dark);transform:translateY(-2px)}
+@media (max-width:960px){.sg-wrap{grid-template-columns:1fr}}

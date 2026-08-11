@@ -1357,3 +1357,36 @@ document.addEventListener('click', function (e) {
   });
   render();
 })();
+
+// ── 숙박: 지도 기반 지역별 가이드 (복원) ──
+(function () {
+  var panel = document.getElementById('sgPanel');
+  if (!panel) return;
+  var SG = {
+    dodong: { n: '도동', tag: '울릉 여행의 중심', ico: '<svg viewBox="0 0 48 48"><defs><linearGradient id="sg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb7f6"/><stop offset="1" stop-color="#4a86f0"/></linearGradient></defs><rect x="8" y="18" width="13" height="23" rx="3" fill="url(#sg1)"/><rect x="25" y="9" width="15" height="32" rx="3" fill="#7fd8e2"/><rect x="12" y="23" width="5" height="4" rx="1" fill="#fff" opacity=".9"/><rect x="12" y="30" width="5" height="4" rx="1" fill="#fff" opacity=".9"/><rect x="29" y="14" width="7" height="4" rx="1" fill="#fff" opacity=".9"/><rect x="29" y="21" width="7" height="4" rx="1" fill="#fff" opacity=".9"/><rect x="29" y="28" width="7" height="4" rx="1" fill="#fff" opacity=".9"/></svg>', desc: '케이블카·독도박물관·맛집 골목이 모두 도보권. 첫 울릉도라면 가장 무난한 선택이에요',
+      stays: [['살로메스테이', '스테이', '4.5', '100,000', 'images/stay-salome.jpg'], ['섬바디 관광호텔', '호텔', '4.5', '100,000', 'images/stay-sombody.jpg']] },
+    jeodong: { n: '저동', tag: '항구 곁 어촌 정취', ico: '<svg viewBox="0 0 48 48"><defs><linearGradient id="sg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd8e2"/><stop offset="1" stop-color="#2eb4c4"/></linearGradient></defs><circle cx="24" cy="11" r="4.5" fill="none" stroke="url(#sg2)" stroke-width="3.4"/><path d="M24 15v22M24 37c-8 0-13-5-14-11l5 2M24 37c8 0 13-5 14-11l-5 2M16 22h16" stroke="url(#sg2)" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>', desc: '독도 여객선과 회센터가 가까워요. 새벽 오징어배 불빛과 촛대바위 일출이 매력이에요',
+      stays: [['울릉, 빈틈', '스테이', '4.7', '230,000', 'images/stay-binteum.jpg'], ['울릉 부티크 아우라', '스테이', '4.6', '170,000', 'images/stay-aura.jpg']] },
+    sadong: { n: '사동', tag: '크루즈 여행의 관문', ico: '<svg viewBox="0 0 48 48"><defs><linearGradient id="sg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb7f6"/><stop offset="1" stop-color="#3a72e0"/></linearGradient></defs><rect x="16" y="8" width="16" height="7" rx="2" fill="#fff" stroke="#cfe0ea" stroke-width="1.6"/><rect x="12" y="15" width="24" height="7" rx="2" fill="#7fd8e2"/><path d="M8 24h32l-5 12H13z" fill="url(#sg3)"/><path d="M6 41c3 2.2 6 2.2 9 0s6-2.2 9 0 6 2.2 9 0 6-2.2 9 0" stroke="#9fd4ee" stroke-width="3" fill="none" stroke-linecap="round"/></svg>', desc: '사동항(크루즈 터미널) 인근. 비교적 신축 숙소가 많고 공항 예정지와도 가까워요',
+      stays: [['라페루즈 리조트', '리조트', '4.7', '300,000', 'images/stay-lafeluz.jpg'], ['울릉 대아리조트', '리조트', '4.5', '150,000', 'images/stay-daea.jpg']] },
+    bukmyeon: { n: '북면 · 나리', tag: '자연 속 하룻밤', ico: '<svg viewBox="0 0 48 48"><defs><linearGradient id="sg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd8a0"/><stop offset="1" stop-color="#2f9e56"/></linearGradient></defs><path d="M24 42C14 36 9 28 12 18c8-1 12 2 12 10 0-11 5-15 14-15 2 13-4 24-14 29z" fill="url(#sg4)"/><path d="M24 40V26" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".8"/></svg>', desc: '오션뷰 펜션과 산촌 민박. 차량이 있다면 가장 울릉다운 풍경 속에 머물 수 있어요',
+      stays: [['코스모스 울릉도', '리조트', '4.9', '1,000,000', 'images/stay-kosmos.jpg'], ['스테이 너와', '스테이', '4.8', '200,000', 'images/stay-neowa.jpg']] }
+  };
+  function render(key) {
+    var r = SG[key];
+    panel.innerHTML = '<div class="sg-head"><span class="sg-ico">' + r.ico + '</span><div><b>' + r.n + '</b><span>' + r.tag + '</span></div></div>' +
+      '<p class="sg-desc">' + r.desc + '</p>' +
+      '<div class="sg-sub">이 지역 인기 숙소</div>' +
+      r.stays.map(function (st) {
+        return '<div class="sg-stay"><img src="' + st[4] + '" alt="' + st[0] + '" loading="lazy"><div><b>' + st[0] + '</b><span>' + st[1] + ' · ★ ' + st[2] + '</span></div><em>₩' + st[3] + '<small>/박~</small></em></div>';
+      }).join('') +
+      '<a class="btn btn-navy" style="width:100%;text-align:center;margin-top:14px" href="#stayAll">' + r.n + ' 포함 전체 숙소 보기 ↓</a>';
+  }
+  document.querySelectorAll('.sg-pin').forEach(function (pin) {
+    pin.addEventListener('click', function () {
+      document.querySelectorAll('.sg-pin').forEach(function (x) { x.classList.toggle('on', x === pin); });
+      render(pin.dataset.r);
+    });
+  });
+  render('dodong');
+})();
