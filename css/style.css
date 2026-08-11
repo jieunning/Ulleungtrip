@@ -1383,3 +1383,24 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .sg-links a:hover{border-color:var(--teal);color:var(--teal-dark);transform:translateY(-2px)}
 @media (max-width:960px){.sg-wrap{grid-template-columns:1fr}}
 .ulog-promo-shot video{width:100%;display:block}
+
+/* 특산물: 기획전 · 실사진 · 구매처 */
+.fd-gift{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px}
+.fd-gift-card{display:block;border-radius:var(--r-lg);padding:24px 26px;color:#fff;transition:transform .2s,box-shadow .2s}
+.fd-gift-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.fd-gift-card small{display:inline-block;background:rgba(255,255,255,.22);border-radius:var(--r-pill);padding:4px 12px;font-size:11px;font-weight:800;margin-bottom:10px}
+.fd-gift-card b{display:block;font-size:18px;font-weight:800}
+.fd-gift-card p{font-size:12.5px;opacity:.92;margin-top:5px}
+.fd-gift-card span{display:block;margin-top:10px;font-size:15px;font-weight:800}
+.fd-gift-card.g1{background:linear-gradient(135deg,#f5a623,#e0885f)}
+.fd-gift-card.g2{background:linear-gradient(135deg,#18a558,#0a8f6c)}
+.fd-gift-card.g3{background:linear-gradient(135deg,#1c2554,#3a4a8c)}
+.fd-photo{width:72px;height:72px;border-radius:16px;object-fit:cover;flex:0 0 auto}
+.fd-buy{display:inline-block;background:var(--navy);color:#fff;border-radius:var(--r-pill);padding:10px 18px;font-size:12.5px;font-weight:800;flex:0 0 auto;transition:.15s;text-align:center}
+.fd-buy:hover{background:var(--teal)}
+.fd-where{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:17px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.fd-where b{font-size:14px;font-weight:800;color:var(--navy)}
+.fd-where-row{display:flex;gap:8px;flex-wrap:wrap}
+.fd-where-row a{border:1.5px solid var(--line);border-radius:var(--r-pill);padding:8px 15px;font-size:12.5px;font-weight:800;color:var(--ink-2);transition:.15s}
+.fd-where-row a:hover{border-color:var(--teal);color:var(--teal-dark)}
+@media (max-width:960px){.fd-gift{grid-template-columns:1fr}}
