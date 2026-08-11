@@ -43,10 +43,10 @@
 
 <div class="search-wrap"><div class="ai-card">
 <div class="ai-tabs">
-<button class="ai-chip" onclick="aiAsk('추천 여행코스 알려줘')"><svg class="lic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg> 추천 여행코스 알려줘</button>
-<button class="ai-chip" onclick="aiAsk('배편 시간표 확인')"><svg class="lic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 15V8h10v7"/><path d="M12 8V5"/><path d="M4 15h16l-1.6 4H5.6z"/></svg> 배편 시간표 확인</button>
-<button class="ai-chip" onclick="aiAsk('오늘 독도 갈 수 있어?')"><svg class="lic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.2-6-9.8a6 6 0 1 1 12 0C18 15.8 12 21 12 21z"/><circle cx="12" cy="11" r="2.2"/></svg> 오늘 독도 갈 수 있어?</button>
-<button class="ai-chip" onclick="aiAsk('맛집 추천해줘')"><svg class="lic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16a8 8 0 0 1-16 0z"/><path d="M9 8V6M13 8V6"/></svg> 맛집 추천해줘</button>
+<button class="ai-chip" onclick="aiAsk('추천 여행코스 알려줘')"><svg class="mic" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="m1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd8e2"/><stop offset="1" stop-color="#2eb4c4"/></linearGradient></defs><path d="M9 4 4 5.6v14L9 18l6 1.6 5-1.6v-14L15 5.6z" fill="url(#m1)" opacity=".9"/><path d="M9 4v14M15 5.6v14" stroke="#fff" stroke-width="1.2"/></svg> 추천 여행코스 알려줘</button>
+<button class="ai-chip" onclick="aiAsk('배편 시간표 확인')"><svg class="mic" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="m2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb7f6"/><stop offset="1" stop-color="#3a72e0"/></linearGradient></defs><rect x="8.5" y="4.5" width="7" height="4.5" rx="1.2" fill="#cfe0f5"/><path d="M4 11h16l-2 6H6z" fill="url(#m2)"/><path d="M4 20c1.6 1 3.2 1 4.8 0s3.2-1 4.8 0 3.2 1 4.8 0" stroke="#9fd4ee" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg> 배편 시간표 확인</button>
+<button class="ai-chip" onclick="aiAsk('오늘 독도 갈 수 있어?')"><svg class="mic" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="m3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd8a0"/><stop offset="1" stop-color="#2f9e56"/></linearGradient></defs><path d="M4 18 11 6l4.4 7.6L17 11l3 7z" fill="url(#m3)"/><circle cx="18.5" cy="5.5" r="2.2" fill="#ffd08a"/></svg> 오늘 독도 갈 수 있어?</button>
+<button class="ai-chip" onclick="aiAsk('맛집 추천해줘')"><svg class="mic" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="m4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc46e"/><stop offset="1" stop-color="#f0864c"/></linearGradient></defs><path d="M4 11h16a8 8 0 0 1-16 0z" fill="url(#m4)"/><ellipse cx="12" cy="11" rx="7" ry="2.4" fill="#fff" opacity=".85"/></svg> 맛집 추천해줘</button>
 </div>
 <div class="ai-input-row">
 <input id="aiInput" type="text" placeholder="궁금한 걸 물어보세요 — 예: 내일 배 뜨나요?">
@@ -283,9 +283,23 @@
 </div></div>
 
 <div class="chat-win" id="chatWin" aria-hidden="true">
-<div class="chat-head"><span class="chat-av"><svg class="lic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="14" height="10" rx="3"/><path d="M12 9V5M9 5h6"/><path d="M9 14h.01M15 14h.01"/></svg></span><div><b>울릉 AI 비서</b><span><i class="chat-live"></i>바로 답해드려요</span></div><button type="button" class="chat-close" id="chatClose" aria-label="닫기">✕</button></div>
-<div class="chat-body" id="chatBody"></div>
-<div class="chat-inrow"><input id="chatInput" type="text" placeholder="궁금한 걸 물어보세요"><button type="button" id="chatSend"><svg class="lic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></button></div>
+<div class="chat-head2"><span class="chat-spark">✦</span><b>울릉 AI 비서</b><button type="button" class="chat-close2" id="chatClose" aria-label="닫기">✕</button></div>
+<div class="chat-body" id="chatBody">
+<div class="chat-empty" id="chatEmpty">
+<svg viewBox="0 0 96 96" class="chat-mascot" aria-hidden="true"><defs><linearGradient id="cbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#37c8d6"/><stop offset="1" stop-color="#3a72e0"/></linearGradient></defs><rect x="14" y="26" width="62" height="44" rx="15" fill="#fff" stroke="url(#cbg)" stroke-width="6"/><path d="M70 64 86 80l-4-18z" fill="url(#cbg)"/><circle cx="36" cy="48" r="5" fill="#1c2554"/><circle cx="55" cy="48" r="5" fill="#1c2554"/></svg>
+<b>무엇을 도와드릴까요?</b>
+<span>아래 추천 질문을 누르거나<br>직접 입력해 보세요</span>
+</div>
+</div>
+<div class="chat-sugs"><small>추천 질문</small>
+<div class="chat-sug-row">
+<button type="button" class="chat-sug" data-q="추천 여행코스 알려줘">추천 여행코스</button>
+<button type="button" class="chat-sug" data-q="배편 시간표 확인">배편 시간표</button>
+<button type="button" class="chat-sug" data-q="오늘 독도 갈 수 있어?">오늘 독도 갈 수 있어?</button>
+<button type="button" class="chat-sug" data-q="맛집 추천해줘">맛집 추천</button>
+</div>
+</div>
+<div class="chat-inrow"><input id="chatInput" type="text" placeholder="울릉 AI에게 무엇이든 물어보세요"><button type="button" id="chatSend">➤</button></div>
 </div>
 
 <div class="dokdo-fab-wrap">

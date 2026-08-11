@@ -33,12 +33,7 @@ function chatMsg(role, html) {
   return d;
 }
 function chatOpen() {
-  var w = document.getElementById('chatWin');
-  w.classList.add('on');
-  if (!chatOpened) {
-    chatOpened = true;
-    chatMsg('bot', '안녕하세요, 울릉 AI 비서예요 👋<br>코스·배편·독도·맛집·숙소·날씨, 뭐든 물어보세요!');
-  }
+  document.getElementById('chatWin').classList.add('on');
   document.getElementById('chatInput').focus();
 }
 function aiAsk(q) {
@@ -48,6 +43,8 @@ function aiAsk(q) {
   if (home) home.value = '';
   document.getElementById('chatInput').value = '';
   if (!q) return;
+  var em = document.getElementById('chatEmpty');
+  if (em) em.remove();
   chatMsg('user', q);
   var tp = chatMsg('bot', '<span class="chat-typing"><i></i><i></i><i></i></span>');
   setTimeout(function () { tp.innerHTML = aiReply(q); tp.parentNode && (tp.parentNode.scrollTop = tp.parentNode.scrollHeight); }, 700);
@@ -59,6 +56,7 @@ function aiAsk(q) {
   document.getElementById('chatSend').addEventListener('click', function () { aiAsk(); });
   document.getElementById('chatInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') aiAsk(); });
   document.getElementById('chatClose').addEventListener('click', function () { document.getElementById('chatWin').classList.remove('on'); });
+  document.querySelectorAll('.chat-sug').forEach(function (b) { b.addEventListener('click', function () { aiAsk(b.dataset.q); }); });
 })();
 
 // ── 액티비티 영상 슬라이더 ──
