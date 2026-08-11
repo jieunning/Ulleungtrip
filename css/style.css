@@ -1281,3 +1281,31 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .ulog-promo-shot img{width:100%;display:block}
 .ulog-promo-shot span{position:absolute;left:12px;bottom:12px;background:rgba(28,37,84,.85);color:#fff;border-radius:var(--r-pill);padding:7px 16px;font-size:12px;font-weight:800;backdrop-filter:blur(3px)}
 @media (max-width:960px){.ulog-promo{grid-template-columns:1fr;padding:28px 24px}}
+
+/* 숙박: 지도 기반 지역 가이드 */
+.sg-wrap{display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:stretch}
+.sg-panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:26px 26px}
+.sg-head{display:flex;align-items:center;gap:13px}
+.sg-ico{width:52px;height:52px;border-radius:15px;background:var(--teal-soft);font-size:25px;display:grid;place-items:center}
+.sg-head b{display:block;font-size:20px;font-weight:800;color:var(--navy)}
+.sg-head span{display:block;font-size:12.5px;font-weight:700;color:var(--teal-dark);margin-top:2px}
+.sg-desc{margin-top:14px;font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.sg-sub{margin:18px 0 10px;font-size:12.5px;font-weight:800;color:var(--ink-3)}
+.sg-stay{display:flex;align-items:center;gap:12px;background:var(--band);border-radius:13px;padding:10px 13px;margin-bottom:9px}
+.sg-stay img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex:0 0 auto}
+.sg-stay>div{flex:1;min-width:0}
+.sg-stay b{display:block;font-size:14px;font-weight:800;color:var(--ink)}
+.sg-stay span{display:block;font-size:11.5px;font-weight:700;color:var(--ink-3);margin-top:2px}
+.sg-stay em{font-style:normal;font-size:13.5px;font-weight:800;color:var(--navy);flex:0 0 auto}
+.sg-stay em small{font-size:10.5px;color:var(--ink-3);font-weight:700}
+.sg-map{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);min-height:480px}
+.sg-map>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sg-pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 15px;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px rgba(28,37,84,.22);transition:.15s;z-index:2}
+.sg-pin::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#fff}
+.sg-pin b{font-size:13px;font-weight:800;color:var(--ink)}
+.sg-pin span{font-size:11px;font-weight:800;color:var(--teal-dark)}
+.sg-pin:hover{transform:translate(-50%,-100%) scale(1.07)}
+.sg-pin.on{background:var(--navy);border-color:var(--navy)}
+.sg-pin.on b,.sg-pin.on span{color:#fff}
+.sg-pin.on::after{border-top-color:var(--navy)}
+@media (max-width:960px){.sg-wrap{grid-template-columns:1fr}.sg-map{min-height:340px;order:-1}}
