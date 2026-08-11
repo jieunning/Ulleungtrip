@@ -1269,68 +1269,38 @@ details.faq .faq-body{padding:0 22px 17px;font-size:14px;color:var(--ink-2)}
 .ul-links a{flex:1;text-align:center;border:1.5px solid var(--line);border-radius:10px;padding:9px 0;font-size:12px;font-weight:800;color:var(--ink-2);transition:.15s}
 .ul-links a:hover{border-color:var(--teal);color:var(--teal-dark)}
 
-/* 울릉로그 소개 섹션 (AI 추천 코스 페이지) */
-.ulog-promo{display:grid;grid-template-columns:1fr 1.25fr;gap:38px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow);padding:44px 48px}
-.ulog-promo-txt h2{font-size:clamp(24px,2.8vw,32px);font-weight:800;color:var(--navy);line-height:1.3;letter-spacing:-.025em;margin-top:8px}
-.ulog-promo-txt>p{margin-top:12px;font-size:14.5px;color:var(--ink-2);line-height:1.7}
-.ulog-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin:20px 0 26px}
-.ulog-feats li b{display:block;font-size:14.5px;font-weight:800;color:var(--ink)}
-.ulog-feats li span{display:block;font-size:13px;color:var(--ink-3);margin-top:2px}
-.ulog-promo-shot{display:block;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
-.ulog-promo-shot:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-.ulog-promo-shot img{width:100%;display:block}
-.ulog-promo-shot span{position:absolute;left:12px;bottom:12px;background:rgba(28,37,84,.85);color:#fff;border-radius:var(--r-pill);padding:7px 16px;font-size:12px;font-weight:800;backdrop-filter:blur(3px)}
-@media (max-width:960px){.ulog-promo{grid-template-columns:1fr;padding:28px 24px}}
-
-/* 숙박: 지도 기반 지역 가이드 */
-.sg-wrap{display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start}
-.sg-panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:26px 26px}
-.sg-head{display:flex;align-items:center;gap:13px}
-.sg-ico{width:54px;height:54px;border-radius:15px;background:var(--band);display:grid;place-items:center}
-.sg-ico svg{width:38px;height:38px}
-.sg-head b{display:block;font-size:20px;font-weight:800;color:var(--navy)}
-.sg-head span{display:block;font-size:12.5px;font-weight:700;color:var(--teal-dark);margin-top:2px}
-.sg-desc{margin-top:14px;font-size:13.5px;color:var(--ink-2);line-height:1.7}
-.sg-sub{margin:18px 0 10px;font-size:12.5px;font-weight:800;color:var(--ink-3)}
-.sg-stay{display:flex;align-items:center;gap:12px;background:var(--band);border-radius:13px;padding:10px 13px;margin-bottom:9px}
-.sg-stay img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex:0 0 auto}
-.sg-stay>div{flex:1;min-width:0}
-.sg-stay b{display:block;font-size:14px;font-weight:800;color:var(--ink)}
-.sg-stay span{display:block;font-size:11.5px;font-weight:700;color:var(--ink-3);margin-top:2px}
-.sg-stay em{font-style:normal;font-size:13.5px;font-weight:800;color:var(--navy);flex:0 0 auto}
-.sg-stay em small{font-size:10.5px;color:var(--ink-3);font-weight:700}
-.sg-map{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);aspect-ratio:1.177/1;
-background:linear-gradient(135deg,#eaf4fc,#dcedf9 55%,#d2e8f7);
-background-image:radial-gradient(circle,rgba(90,150,210,.18) 1px,transparent 1px),linear-gradient(135deg,#eaf4fc,#dcedf9 55%,#d2e8f7);background-size:16px 16px,cover}
-.sg-island{position:absolute;inset:6% 5%;width:90%;height:88%;filter:drop-shadow(0 14px 22px rgba(58,123,196,.28))}
-.sg-rgname{font-size:3.6px;font-weight:800;fill:#2b5c94;opacity:.75;font-family:inherit}
-.sg-peak{font-size:2.8px;font-weight:700;fill:#4a749e;font-family:inherit}
-.sg-pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 15px;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px rgba(28,37,84,.22);transition:.15s;z-index:2}
-.sg-pin::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#fff}
-.sg-pin b{font-size:13px;font-weight:800;color:var(--ink)}
-.sg-pin span{font-size:11px;font-weight:800;color:var(--teal-dark)}
-.sg-pin:hover{transform:translate(-50%,-100%) scale(1.07)}
-.sg-pin.on{background:var(--navy);border-color:var(--navy)}
-.sg-pin.on b,.sg-pin.on span{color:#fff}
-.sg-pin.on::after{border-top-color:var(--navy)}
-@media (max-width:960px){.sg-wrap{grid-template-columns:1fr}.sg-map{min-height:340px;order:-1}}
-
-/* 홈 인라인 아이콘 (svg) */
-.wxs-item .ic{width:22px;height:22px;display:block}
+/* 날씨 스트립 강조 */
+.wx-strip{border:1.5px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(100deg,var(--teal),#3a72e0) border-box;box-shadow:0 8px 24px rgba(0,174,189,.14)}
+.wxs-live{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;border-radius:var(--r-pill);padding:5px 13px;font-size:11px;font-weight:800;letter-spacing:.06em}
+.wxs-live i{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:wxPulse 1.6s ease-in-out infinite}
+@keyframes wxPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.wxs-more{background:var(--teal);color:#fff;border-radius:var(--r-pill);padding:9px 18px;font-size:13px;transition:.2s}
+.wx-strip:hover .wxs-more{background:var(--teal-dark)}
+/* AI 비서 챗봇 */
+.chat-win{position:fixed;right:26px;bottom:96px;z-index:400;width:360px;max-width:calc(100vw - 40px);background:#fff;border-radius:18px;box-shadow:0 24px 64px rgba(15,20,44,.35);display:none;flex-direction:column;overflow:hidden;border:1px solid var(--line)}
+.chat-win.on{display:flex;animation:destFade .25s ease}
+.chat-head{display:flex;align-items:center;gap:11px;background:linear-gradient(100deg,var(--navy),#0d5c6b);color:#fff;padding:14px 16px}
+.chat-av{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.15);display:grid;place-items:center}
+.chat-av .lic{width:20px;height:20px}
+.chat-head b{display:block;font-size:14.5px;font-weight:800}
+.chat-head span{display:flex;align-items:center;gap:5px;font-size:11.5px;color:#9fe0e8;font-weight:700}
+.chat-live{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:wxPulse 1.6s ease-in-out infinite}
+.chat-close{margin-left:auto;background:none;border:none;color:#c6cdea;font-size:15px;cursor:pointer;padding:6px}
+.chat-close:hover{color:#fff}
+.chat-body{height:320px;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:10px;background:var(--band)}
+.chat-msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.6}
+.chat-msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;color:var(--ink)}
+.chat-msg.user{align-self:flex-end;background:var(--teal);color:#fff;border-bottom-right-radius:4px}
+.chat-msg.bot a{color:var(--teal-dark);font-weight:800}
+.chat-typing{display:inline-flex;gap:4px;padding:3px 0}
+.chat-typing i{width:6px;height:6px;border-radius:50%;background:var(--ink-3);animation:ctType 1.1s infinite}
+.chat-typing i:nth-child(2){animation-delay:.18s}
+.chat-typing i:nth-child(3){animation-delay:.36s}
+@keyframes ctType{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.chat-inrow{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:#fff}
+.chat-inrow input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;font-family:inherit;font-size:13.5px;outline:none}
+.chat-inrow input:focus{border-color:var(--teal)}
+.chat-inrow button{background:var(--teal);border:none;color:#fff;border-radius:12px;width:46px;cursor:pointer;display:grid;place-items:center}
+.chat-inrow button:hover{background:var(--teal-dark)}
+@media (max-width:640px){.chat-win{right:12px;bottom:84px}}
 .dokdo-fab .ic{width:22px;height:22px;display:inline-block;vertical-align:-5px;margin-right:2px}
-/* 숙박 지도: 일러스트 지도 (여유 있게) */
-.sg-map.sg-map3{aspect-ratio:1/1;background:#cfe3ea}
-.sg-map3>img{position:absolute;inset:4.5%;width:91%;height:91%;object-fit:contain;border-radius:14px}
-.sg-links{display:flex;gap:10px;margin-top:12px}
-.sg-links a{flex:1;text-align:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 0;font-size:13.5px;font-weight:800;color:var(--navy);box-shadow:var(--shadow-sm);transition:.15s}
-.sg-links a:hover{border-color:var(--teal);color:var(--teal-dark);transform:translateY(-2px)}
-
-/* 라인 아이콘 시스템 (Okta st.) */
-.lic{width:16px;height:16px;display:inline-block;vertical-align:-3px;flex:0 0 auto}
-.ai-chip .lic,.chip .lic{margin-right:2px;vertical-align:-3.5px}
-.ph-chips .lic,.pl-chips2 .lic{vertical-align:-3.5px;margin-right:2px}
-.crs-mapbtn .lic{width:15px;height:15px}
-.btn .lic{vertical-align:-3px;margin-right:3px}
-.sg-links .lic{margin-right:4px;vertical-align:-3.5px}
-.sec-link .lic{vertical-align:-3px;margin-right:2px}
-.lic-lg{width:26px;height:26px}
