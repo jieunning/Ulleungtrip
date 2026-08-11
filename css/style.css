@@ -1324,3 +1324,13 @@ background-image:radial-gradient(circle,rgba(90,150,210,.18) 1px,transparent 1px
 .sg-links{display:flex;gap:10px;margin-top:12px}
 .sg-links a{flex:1;text-align:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 0;font-size:13.5px;font-weight:800;color:var(--navy);box-shadow:var(--shadow-sm);transition:.15s}
 .sg-links a:hover{border-color:var(--teal);color:var(--teal-dark);transform:translateY(-2px)}
+
+/* 라인 아이콘 시스템 (Okta st.) */
+.lic{width:16px;height:16px;display:inline-block;vertical-align:-3px;flex:0 0 auto}
+.ai-chip .lic,.chip .lic{margin-right:2px;vertical-align:-3.5px}
+.ph-chips .lic,.pl-chips2 .lic{vertical-align:-3.5px;margin-right:2px}
+.crs-mapbtn .lic{width:15px;height:15px}
+.btn .lic{vertical-align:-3px;margin-right:3px}
+.sg-links .lic{margin-right:4px;vertical-align:-3.5px}
+.sec-link .lic{vertical-align:-3px;margin-right:2px}
+.lic-lg{width:26px;height:26px}
